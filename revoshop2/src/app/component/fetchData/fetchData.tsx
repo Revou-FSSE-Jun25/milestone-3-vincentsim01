@@ -20,7 +20,12 @@ export default function ProductsClient() {
         setLoading(true);
         setError(null);
 
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
         const response = await fetch("https://dummyjson.com/users");
+
+
+        
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
