@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white'>
           <div className='flex justify-evenly items-center w-[40%]'>
             <Link href='/'><span>Home</span></Link>
             <Link href='/About/'><span>About</span></Link>
@@ -39,7 +39,7 @@ export default function RootLayout({
             <img className='w-[100px]' src='https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png'></img>
           </div>
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
-            <span>User</span>
+            <Link href='/User/'><span>User</span></Link>
             <span>Register</span>
           </div>
 
