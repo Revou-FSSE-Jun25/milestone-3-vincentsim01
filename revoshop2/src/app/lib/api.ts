@@ -1,5 +1,5 @@
 "use client"
-import {Product,ProductsResponse} from '../types/product';
+import {Product,ProductsResponse,ProductFormData} from '../types/product';
 import axios from 'axios';
 
 const DUMMY_URL = 'https://api.escuelajs.co/api/v1/'
@@ -24,5 +24,70 @@ export async function getProduct(id:number):Promise<Product>{
         console.error("Error Fetching Product", error);
         throw new Error('Failed to fetch product');
 
+    }
+}
+
+export async function createProduct(data:ProductFormData):Promise<Product>{
+    try{
+        const productData = {
+            title: data.title,
+            slug: data.title,
+            price: Number(data.price),
+            description: data.description,
+            category: "acategory",
+            images: data.images? "image.png".
+
+
+        };
+
+        const response = await axios.post(`${DUMMY_URL}/products/add`, productData);
+        return response.data;
+
+    }catch(error){
+        console.error('Error Creating Product', error);
+        throw new Error('Failed to create product');
+    }
+
+}
+
+
+export async function updateProduct(id: number, data: Partial<ProductFormData>): Promise<Product> {
+  try {
+    const productData = {
+        title: data.title,
+        slug: data.title,
+        price: Number(data.price),
+        description: data.description,
+        category: "acategory",
+        images: data.images? "image.png".
+    };
+
+    const response = await axios.put(`${DUMMY_URL}/products/${id}`, productData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw new Error('Failed to update product');
+  }
+}
+
+export async function deleteProduct(id:number): Promise<void>{
+    try{
+        await axios.delete(`${DUMMY_URL}/products/${id}`);
+        console.log('product deleted');
+
+    }catch(error){
+        console.error('Error deleting a product',error);
+        throw new Error('failed to delete a product');
+    }
+}
+
+export async function searchProducts(query:string):Promise<ProductsResponse>{
+    try{
+        const response = await axios.get(`${DUMMY_URL}/products/search?q=${encodeURIComponent(query)}`);
+        return response.data;
+
+    }catch(error){
+        console.error('Error Searching Product:', error);
+        throw new Error ('Failed to search products');
     }
 }
