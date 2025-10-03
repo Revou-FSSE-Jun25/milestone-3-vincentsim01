@@ -12,7 +12,7 @@ interface ProductListProps{
     searchQuery?: string;
 }
 
-export default function productList(
+export default function ProductList(
     {
         showActions = false,
         searchResults = null,
