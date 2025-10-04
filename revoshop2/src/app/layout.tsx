@@ -33,6 +33,7 @@ export default function RootLayout({
           <div className='flex justify-evenly items-center w-[40%]'>
             <Link href='/'><span>Home</span></Link>
             <Link href='/About/'><span>About</span></Link>
+            <Link href='/products/'><span>Products</span></Link>
             <Link href='/Contact/'><span>Contact</span></Link>
           </div>
           <div className='w-[10%]'>

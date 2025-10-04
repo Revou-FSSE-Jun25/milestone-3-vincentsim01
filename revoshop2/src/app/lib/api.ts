@@ -9,6 +9,7 @@ export async function getProducts():Promise<ProductsResponse>{
     try{
         const response = await axios.get(`${DUMMY_URL}products`)
         return response.data;
+        console.log(response.data);
     }catch (error){
         console.error('Error Fetching Products:', error);
         throw new Error('failed to fetch products');
@@ -35,10 +36,10 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
             price: Number(data.price),
             description: data.description,
             category: "acategory",
-            images: data.images? "image.png".
+            images: "image.png"
 
 
-        };
+        }
 
         const response = await axios.post(`${DUMMY_URL}/products/add`, productData);
         return response.data;
@@ -59,7 +60,7 @@ export async function updateProduct(id: number, data: Partial<ProductFormData>):
         price: Number(data.price),
         description: data.description,
         category: "acategory",
-        images: data.images? "image.png".
+        images: "image.png"
     };
 
     const response = await axios.put(`${DUMMY_URL}/products/${id}`, productData);

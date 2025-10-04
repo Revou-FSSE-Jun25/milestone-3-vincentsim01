@@ -17,14 +17,16 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
         }
     };
     return(
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="relative h-48 bg-gray-700">
-                This is Product Card
+        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-2">
+            <div className="relative h-70 bg-gray-700 p-5 rounded-md">
+                
                 <Image
                     src={product.images[0]}
                     alt={product.title}
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    width="100"
+                    height="100"
                     onError={
                         (e) => {
                             (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x200?text=No+Image';
@@ -38,7 +40,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                         <div className="flex items-center justify-between mb-3">
                             <span className="text-white font-bold">${product.price.toFixed(2)}</span>
                         </div>
-                        {showActions ? (
+                        {/* {showActions ? (
                             <div className="flex gap-2">
                                 <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Edit
@@ -51,7 +53,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                             <Link href={`/products/${product.id}`} className="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-center text-sm font-medium block">
                                 View Details
                             </Link>
-                        )}
+                        )} */}
                 </div>
             </div>
         </div>

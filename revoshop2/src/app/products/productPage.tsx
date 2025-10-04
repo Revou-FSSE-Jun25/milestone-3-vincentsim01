@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
-import ProductList from '../productList';
-import { searchProducts } from '@/lib/api';
+import ProductList from '../component/productList';
+import { searchProducts } from '@/app/lib/api';
 import { Product } from '../types/product';
 
 export default function ProductsPage() {
@@ -25,7 +25,7 @@ export default function ProductsPage() {
     setIsSearching(true);
     try {
       const results = await searchProducts(searchQuery);
-      setSearchResults(results.products);
+      setSearchResults(results);
     } catch (error) {
       console.error('Search failed:', error);
       setSearchResults([]);
@@ -34,10 +34,10 @@ export default function ProductsPage() {
     }
   };
 
-  const handleClearSearch = () => {
-    setSearchQuery('');
-    setSearchResults(null);
-  };
+  // const handleClearSearch = () => {
+  //   setSearchQuery('');
+  //   setSearchResults(null);
+  // };
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -64,7 +64,7 @@ export default function ProductsPage() {
             <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors">
               Search
             </button>
-            {searchQuery && (
+            {/* {searchQuery && (
               <button
                 type="button"
                 onClick={handleClearSearch}
@@ -72,11 +72,18 @@ export default function ProductsPage() {
               >
                 Clear
               </button>
-            )}
+            )} */}
           </form>
         </div>
 
         <div className="mb-6 flex justify-between items-center">
+
+          {/* <div className="text-gray-400">
+            {isSearching && `Searching for "${searchQuery}"...`}
+            {searchResults && !isSearching && `Found ${searchResults.length} results for "${searchQuery}"`}
+            {searchResults === null && !isSearching && 'All Products'}
+          </div> */}
+          {/* 
           <div className="text-gray-400">
             {isSearching && `Searching for "${searchQuery}"...`}
             {searchResults && !isSearching && `Found ${searchResults.length} results for "${searchQuery}"`}
@@ -90,15 +97,22 @@ export default function ProductsPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
             Create Product
-          </button>
+          </button> */}
         </div>
 
         {/* TODO 15: Add ProductList component with proper props */}
-        <ProductList
+        {/* <ProductList
           showActions={true}
           searchResults={searchResults}
           isSearching={isSearching}
           searchQuery={searchQuery}
+        /> */}
+
+        <ProductList
+          showActions={true}
+          searchResults={searchResults}
+          isSearching={isSearching}
+          // searchQuery={searchQuery}
         />
 
         <div className="mt-12 text-center">
