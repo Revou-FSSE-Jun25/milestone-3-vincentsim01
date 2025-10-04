@@ -36,6 +36,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         {/* TODO 17: Add ProductDetail component */}
         {/* This component will handle all product display logic */}
         {/* <ProductDetail /> */}
+        This is Product {productId}
       </div>
     </div>
   )
