@@ -13,7 +13,8 @@ const nextConfig: NextConfig = {
           'www.bing.com',
           'tse3.mm.bing.net',
           'images.tokopedia.net',
-          'test.url'
+          'test.url',
+          'pravatar.cc'
         ],
 
     remotePatterns: [

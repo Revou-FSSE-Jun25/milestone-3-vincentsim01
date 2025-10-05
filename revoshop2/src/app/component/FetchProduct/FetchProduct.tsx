@@ -21,7 +21,7 @@ const FetchProduct = () => {
         {data.map((item)=>{
             return(
                 <div className='inline'>
-                    <div className='inline-block w-[30%] h-[60vh] border border-black rounded-md shadow-2xl m-3 p-5 flex flex-col items-center'>
+                    <div className='inline-block w-[30%] h-[60vh] border border-black rounded-md shadow-2xl m-3 p-5 flex flex-col items-center' key={item.id}>
                         <div className='text-center text-md font-bold'><h1>{item.title}</h1></div>
                         <div className='text-center text-sm'>${item.price}</div>
                         <br></br>
