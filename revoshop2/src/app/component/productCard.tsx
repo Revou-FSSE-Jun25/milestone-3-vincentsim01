@@ -17,7 +17,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
     //     }
     // };
     return(
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-1">
+        <div className="bg-gray-800 rounded-lg shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
             <div className="relative h-100 bg-white p-5 rounded-md flex flex-col items-center">
             <Link href={`http://localhost:3000/products/${product.id}`}>
                 <Image
