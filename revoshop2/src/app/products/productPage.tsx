@@ -40,14 +40,14 @@ export default function ProductsPage() {
   // };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Products</h1>
           <p className="text-gray-400">Browse and manage our product catalog</p>
         </div>
 
-        <div className="bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <form onSubmit={handleSearchSubmit} className="flex space-x-4">
             <div className="flex-1 relative">
               <input

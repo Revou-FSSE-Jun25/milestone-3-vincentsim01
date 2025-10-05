@@ -17,9 +17,9 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
     //     }
     // };
     return(
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-2">
-            <div className="relative h-100 bg-gray-700 p-5 rounded-md flex flex-col items-center">
-                
+        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-1">
+            <div className="relative h-100 bg-white p-5 rounded-md flex flex-col items-center">
+            <Link href={`http://localhost:3000/products/${product.id}`}>
                 <Image
                     src={product.images[0]}
                     alt={product.title}
@@ -34,14 +34,20 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                     }
 
                 />
+            
+            </Link>
+
 
                 <div className="p-4">
                     <Link href={`http://localhost:3000/products/${product.id}`}>
-                        <h3 className="text-lg font-semibold text-white mb-1 line-clamp-2">{product.title}</h3>
+                        <h3 className="text-lg font-semibold text-black mb-1 line-clamp-2">{product.title}</h3>
                         <div className="flex items-center justify-between mb-3">
-                            <span className="text-white font-bold">${product.price.toFixed(2)}</span>
+                            <span className="text-black font-bold">${product.price.toFixed(2)}</span>
                         </div>
                     </Link>
+
+                    <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button>
+                    <button className='border border-black rounded-md ml-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Detailed Page</button>
 
                         {/* {showActions ? (
                             <div className="flex gap-2">

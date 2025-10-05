@@ -8,7 +8,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     // const fetchedData = await getProduct(Number(productId));
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <nav className="mb-8">
           <ol className="flex items-center space-x-2 text-sm">
@@ -20,7 +20,7 @@ const page = async ({ params }: { params: { id: string } }) => {
               <a href="/products" className="text-gray-400 hover:text-white transition-colors">Products</a>
             </li>
             <li className="text-gray-600">/</li>
-            <li className="text-white truncate max-w-xs">Product {productId}</li>
+            <li className="text-gray-800 truncate max-w-xs">Product {productId}</li>
           </ol>
         </nav>
 
@@ -28,6 +28,8 @@ const page = async ({ params }: { params: { id: string } }) => {
             <h1 className='text-4xl font-bold'>Produt Title</h1>
             <p>Rp 50.000</p>
             <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Woman%27s_shirt_from_Kutch%2C_Gujarat%2C_India%2C_IMA_55114.jpg/640px-Woman%27s_shirt_from_Kutch%2C_Gujarat%2C_India%2C_IMA_55114.jpg' className='rounded-md border border-black'></img>
+              <br></br><br></br>
+              <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button>
         </div>
         {/* {fetchedData.title}
         {fetchedData.price}
