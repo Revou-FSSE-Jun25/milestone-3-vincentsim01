@@ -14,7 +14,8 @@ const nextConfig: NextConfig = {
           'tse3.mm.bing.net',
           'images.tokopedia.net',
           'test.url',
-          'pravatar.cc'
+          'pravatar.cc',
+          'via.placeholder.com'
         ],
 
     remotePatterns: [
