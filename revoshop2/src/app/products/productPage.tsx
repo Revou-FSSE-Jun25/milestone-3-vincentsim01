@@ -41,15 +41,15 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Products</h1>
+          <h1 className="text-3xl font-bold text-black mb-2">OUR COLLECTIONS</h1>
           <p className="text-gray-400">Browse and manage our product catalog</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <form onSubmit={handleSearchSubmit} className="flex space-x-4">
-            <div className="flex-1 relative">
+        {/* <div className="bg-white rounded-lg shadow-lg p-6 mb-8"> */}
+          {/* <form onSubmit={handleSearchSubmit} className="flex space-x-4"> */}
+            {/* <div className="flex-1 relative">
               <input
                 type="text"
                 value={searchQuery}
@@ -63,7 +63,7 @@ export default function ProductsPage() {
             </div>
             <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors">
               Search
-            </button>
+            </button> */}
             {/* {searchQuery && (
               <button
                 type="button"
@@ -73,8 +73,8 @@ export default function ProductsPage() {
                 Clear
               </button>
             )} */}
-          </form>
-        </div>
+          {/* </form> */}
+        {/* </div> */}
 
         <div className="mb-6 flex justify-between items-center">
 
