@@ -12,7 +12,8 @@ export default function ProductsPage() {
   // TODO 14: Add search functionality
   // Handle search input changes and form submission
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+
+    setSearchQuery(e.target.value.replaceAll(" ","-"));
   };
 
   const handleSearchSubmit = async (e: React.FormEvent) => {
@@ -25,6 +26,7 @@ export default function ProductsPage() {
     setIsSearching(true);
     try {
       const results = await searchProducts(searchQuery);
+      console.log('this is search results '+results)
       setSearchResults(results);
     } catch (error) {
       console.error('Search failed:', error);
@@ -34,10 +36,10 @@ export default function ProductsPage() {
     }
   };
 
-  // const handleClearSearch = () => {
-  //   setSearchQuery('');
-  //   setSearchResults(null);
-  // };
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setSearchResults(null);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -47,9 +49,9 @@ export default function ProductsPage() {
           <p className="text-gray-400">Browse and manage our product catalog</p>
         </div>
 
-        {/* <div className="bg-white rounded-lg shadow-lg p-6 mb-8"> */}
-          {/* <form onSubmit={handleSearchSubmit} className="flex space-x-4"> */}
-            {/* <div className="flex-1 relative">
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <form onSubmit={handleSearchSubmit} className="flex space-x-4">
+            <div className="flex-1 relative">
               <input
                 type="text"
                 value={searchQuery}
@@ -63,8 +65,8 @@ export default function ProductsPage() {
             </div>
             <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors">
               Search
-            </button> */}
-            {/* {searchQuery && (
+            </button>
+            {searchQuery && (
               <button
                 type="button"
                 onClick={handleClearSearch}
@@ -72,18 +74,18 @@ export default function ProductsPage() {
               >
                 Clear
               </button>
-            )} */}
-          {/* </form> */}
-        {/* </div> */}
+            )}
+          </form>
+        </div>
 
         <div className="mb-6 flex justify-between items-center">
 
-          {/* <div className="text-gray-400">
+          <div className="text-gray-400">
             {isSearching && `Searching for "${searchQuery}"...`}
             {searchResults && !isSearching && `Found ${searchResults.length} results for "${searchQuery}"`}
             {searchResults === null && !isSearching && 'All Products'}
-          </div> */}
-          {/* 
+          </div>
+          
           <div className="text-gray-400">
             {isSearching && `Searching for "${searchQuery}"...`}
             {searchResults && !isSearching && `Found ${searchResults.length} results for "${searchQuery}"`}
@@ -97,7 +99,7 @@ export default function ProductsPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
             Create Product
-          </button> */}
+          </button>
         </div>
 
         {/* TODO 15: Add ProductList component with proper props */}
@@ -112,7 +114,7 @@ export default function ProductsPage() {
           showActions={true}
           searchResults={searchResults}
           isSearching={isSearching}
-          // searchQuery={searchQuery}
+          searchQuery={searchQuery}
         />
 
         <div className="mt-12 text-center">

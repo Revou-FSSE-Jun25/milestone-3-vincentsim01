@@ -15,7 +15,10 @@ const nextConfig: NextConfig = {
           'images.tokopedia.net',
           'test.url',
           'pravatar.cc',
-          'via.placeholder.com'
+          'via.placeholder.com',
+          'rymportatiles.com.pe',
+          'th.bing.com',
+          'dhdhdh.jpeg'
         ],
 
     remotePatterns: [

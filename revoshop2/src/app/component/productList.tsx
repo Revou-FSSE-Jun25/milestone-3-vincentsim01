@@ -9,7 +9,7 @@ interface ProductListProps{
     showActions?: boolean;
     searchResults?: Product[] | null;
     isSearching?: boolean;
-    // searchQuery?: string;
+    searchQuery?: string;
 }
 
 export default function ProductList(
@@ -17,7 +17,7 @@ export default function ProductList(
         showActions = false,
         searchResults = null,
         isSearching = false
-        // ,searchQuery = ''
+        ,searchQuery = ''
     }:ProductListProps
 
 )
@@ -48,11 +48,11 @@ export default function ProductList(
             fetchProducts();
         },[]);
 
-        // useEffect(()=>{
-        //     if(searchResults!==null){
-        //         setLoading(false);
-        //     }
-        // },[searchResults]);
+        useEffect(()=>{
+            if(searchResults!==null){
+                setLoading(false);
+            }
+        },[searchResults]);
 
 
         // const handleDelete = async (id:number) =>{
@@ -66,13 +66,13 @@ export default function ProductList(
         // }
 
           // Show loading spinner when searching
-        // if (isSearching) {
-        //     return (
-        //     <div className="flex justify-center items-center h-64">
-        //         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-        //     </div>
-        //     );
-        // }
+        if (isSearching) {
+            return (
+            <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+            </div>
+            );
+        }
 
         // Show loading spinner when initially loading
         if (loading) {
@@ -96,17 +96,17 @@ export default function ProductList(
             }
 
             // Determine which products to display
-            // const displayProducts = searchResults !== null ? searchResults : products;
-            const displayProducts = products;
+            const displayProducts = searchResults !== null ? searchResults : products;
+            // const displayProducts = products;
 
               // Show no results message for search
-            // if (searchResults !== null && searchResults.length === 0) {
-            //     return (
-            //     <div className="text-center py-12">
-            //         <p className="text-gray-400">No products found for "{searchQuery}".</p>
-            //     </div>
-            //     );
-            // }
+            if (searchResults !== null && searchResults.length === 0) {
+                return (
+                <div className="text-center py-12">
+                    <p className="text-gray-400">No products found for "{searchQuery}".</p>
+                </div>
+                );
+            }
 
             // Show no products message for empty catalog
             // if (displayProducts.length === 0||null) {

@@ -42,7 +42,7 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
 
         }
 
-        const response = await axios.post(`${DUMMY_URL}/products/add`, productData);
+        const response = await axios.post(`${DUMMY_URL}/products/`, productData);
         return response.data;
 
     }catch(error){
@@ -85,7 +85,7 @@ export async function deleteProduct(id:number): Promise<void>{
 
 export async function searchProducts(query:string):Promise<ProductsResponse>{
     try{
-        const response = await axios.get(`${DUMMY_URL}/products/search?q=${encodeURIComponent(query)}`);
+        const response = await axios.get(`${DUMMY_URL}/products/slug/${encodeURIComponent(query)}`);
         return response.data;
 
     }catch(error){

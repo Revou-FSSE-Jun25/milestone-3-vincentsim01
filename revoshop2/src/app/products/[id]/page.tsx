@@ -36,7 +36,7 @@ function page ({ params }: { params: { id: string } }):any {
              setLoading(true)
              const fetchedData = await getProduct(numberId);
               // const fetchedData = await axios.get(`https://api.escuelajs.co/api/v1/products/${numberId}`);
-            console.log(fetchedData);
+
              setProducts(fetchedData);
 
            }
@@ -124,7 +124,7 @@ function page ({ params }: { params: { id: string } }):any {
         {/* TODO 17: Add ProductDetail component */}
         {/* This component will handle all product display logic */}
         {/* <ProductDetail /> */}
-        This is Product {id}
+        {/* This is Product {id} */}
       </div>
     </div>
   )
