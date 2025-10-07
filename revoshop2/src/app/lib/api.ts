@@ -17,17 +17,17 @@ export async function getProducts():Promise<ProductsResponse>{
     }
 }
 
-// export async function getProduct(id:number):Promise<Product>{
-//     try{
-//         const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
-//         console.log("from getproductid"+response)
-//         return response.data;
-//     }catch(error){
-//         console.error("Error Fetching Product", error);
-//         throw new Error('Failed to fetch product');
+export async function getProduct(id:number):Promise<Product>{
+    try{
+        const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
+        console.log("from getproductid"+response)
+        return response.data;
+    }catch(error){
+        console.error("Error Fetching Product", error);
+        throw new Error('Failed to fetch product');
 
-//     }
-// }
+    }
+}
 
 export async function createProduct(data:ProductFormData):Promise<Product>{
     try{

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-// import {getProduct} from '../../lib/api';
+import {getProduct} from '../../lib/api';
 import {useState,useEffect} from 'react';
 import { Product } from '../../types/product';
 import { setTimeout } from 'timers';
@@ -34,10 +34,10 @@ function page ({ params }: { params: { id: string } }):any {
     
            async function makeLoading(){
              setLoading(true)
-            //  const fetchedData = await getProduct(Number(numberId));
-              const fetchedData = await axios.get(`https://api.escuelajs.co/api/v1/products/${numberId}`);
+             const fetchedData = await getProduct(numberId);
+              // const fetchedData = await axios.get(`https://api.escuelajs.co/api/v1/products/${numberId}`);
             console.log(fetchedData);
-             setProducts(fetchedData.data);
+             setProducts(fetchedData);
 
            }
 
