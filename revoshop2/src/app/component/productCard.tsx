@@ -6,16 +6,16 @@ import Image from 'next/image';
 
 interface ProductCardProps{
     product: Product;
-    // onDelete?: (id:number) => void;
+    onDelete?: (id:number) => void;
     // showActions?: boolean;
 }
 
 export default function ProductCard({product, onDelete, showActions = false}: ProductCardProps){
-    // const handleDelete = () =>{
-    //     if(window.confirm("Are you sure you want to delete this product?")){
-    //         onDelete?.(product.id);
-    //     }
-    // };
+    const handleDelete = () =>{
+        if(window.confirm("Are you sure you want to delete this product?")){
+            onDelete?.(product.id);
+        }
+    };
     return(
         <div className="bg-gray-800 rounded-lg shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
             <div className="relative h-100 bg-white p-5 rounded-md flex flex-col items-center">
@@ -49,11 +49,11 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                     <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button>
                     <button className='border border-black rounded-md ml-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Detailed Page</button>
 
-                        {/* {showActions ? (
+                        {showActions ? (
                             <div className="flex gap-2">
-                                <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium text-center">
+                                {/* <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Edit
-                                </Link>
+                                </Link> */}
                                 <button onClick={handleDelete} className="flex-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Delete
                                 </button>
@@ -62,7 +62,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                             <Link href={`/products/${product.id}`} className="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-center text-sm font-medium block">
                                 View Details
                             </Link>
-                        )} */}
+                        )}
                 </div>
             </div>
         </div>

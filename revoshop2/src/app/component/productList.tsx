@@ -32,9 +32,7 @@ export default function ProductList(
                 setLoading(true);
                 setError(null);
                 const response = await getProducts();
-                // console.log('this is response fetchproducts'+response+ 'and the type of '+typeof(response))
                 setProducts(response);
-                // console.log(response);
             }catch(error){
                 setError('Failed to fetch products. Please try again')
                 console.error('Error fetching products:', err);
@@ -56,15 +54,15 @@ export default function ProductList(
         },[searchResults]);
 
 
-        // const handleDelete = async (id:number) =>{
-        //     try{
-        //         await deleteProduct(id);
-        //         setProducts(products.filter(product => product.id !== id));
-        //     }catch(err){
-        //         setError('Failed to delete product. Please try again.');
-        //         console.error('Error deleting product:', err);
-        //     }
-        // }
+        const handleDelete = async (id:number) =>{
+            try{
+                await deleteProduct(id);
+                setProducts(products.filter(product => product.id !== id));
+            }catch(err){
+                setError('Failed to delete product. Please try again.');
+                console.error('Error deleting product:', err);
+            }
+        }
 
           // Show loading spinner when searching
         if (isSearching) {
@@ -104,8 +102,6 @@ export default function ProductList(
             const displayProducts = searchResults !== null ? [searchResults] : products;
             // const displayProducts = products;
 
-            console.log('this is displayproduc  ts' + displayProducts)
-
               // Show no results message for search
             if (searchResults !== null && searchResults.length === 0) {
                 return (
@@ -116,13 +112,13 @@ export default function ProductList(
             }
 
             // Show no products message for empty catalog
-            // if (displayProducts.length === 0||null) {
-            //     return (
-            //     <div className="text-center py-12">
-            //         <p className="text-gray-400">No products available.</p>
-            //     </div>
-            //     );
-            // }
+            if (displayProducts.length === 0||null) {
+                return (
+                <div className="text-center py-12">
+                    <p className="text-gray-400">No products available.</p>
+                </div>
+                );
+            }
 
             return(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -152,7 +148,7 @@ export default function ProductList(
                                 <div key={item.id}>
                                     <ProductCard key={item.id}
                                     product={item}
-                                    // onDelete={handleDelete}
+                                    onDelete={handleDelete}
                                     showActions={showActions}
                                     />
                                 </div>

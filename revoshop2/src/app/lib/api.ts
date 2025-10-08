@@ -75,7 +75,7 @@ export async function updateProduct(id: number, data: Partial<ProductFormData>):
 
 export async function deleteProduct(id:number): Promise<void>{
     try{
-        await axios.delete(`${DUMMY_URL}/products/${id}`);
+        await axios.delete(`${DUMMY_URL}products/${id}`);
         console.log('product deleted');
 
     }catch(error){
