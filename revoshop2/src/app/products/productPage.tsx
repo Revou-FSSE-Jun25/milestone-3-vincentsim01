@@ -12,8 +12,8 @@ export default function ProductsPage() {
   // TODO 14: Add search functionality
   // Handle search input changes and form submission
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    setSearchQuery(e.target.value.replaceAll(" ","-"));
+    const hyphened = e.target.value.replaceAll(" ","-")
+    setSearchQuery(hyphened);
   };
 
   const handleSearchSubmit = async (e: React.FormEvent) => {
@@ -26,7 +26,7 @@ export default function ProductsPage() {
     setIsSearching(true);
     try {
       const results = await searchProducts(searchQuery);
-      console.log('this is search results '+results)
+      // console.log('this is search results '+results.title)
       setSearchResults(results);
     } catch (error) {
       console.error('Search failed:', error);

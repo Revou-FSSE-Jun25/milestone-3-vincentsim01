@@ -32,6 +32,7 @@ export default function ProductList(
                 setLoading(true);
                 setError(null);
                 const response = await getProducts();
+                // console.log('this is response fetchproducts'+response+ 'and the type of '+typeof(response))
                 setProducts(response);
                 // console.log(response);
             }catch(error){
@@ -69,7 +70,8 @@ export default function ProductList(
         if (isSearching) {
             return (
             <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+                {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div> */}
+                LOADING...
             </div>
             );
         }
@@ -96,8 +98,10 @@ export default function ProductList(
             }
 
             // Determine which products to display
-            const displayProducts = searchResults !== null ? searchResults : products;
+            const displayProducts = searchResults !== null ? Object.values(searchResults) : products;
             // const displayProducts = products;
+
+            console.log('this is displayproducts' + displayProducts)
 
               // Show no results message for search
             if (searchResults !== null && searchResults.length === 0) {
@@ -142,13 +146,13 @@ export default function ProductList(
 
                     {displayProducts.map((item)=>{
                         return(
-                        
-                                    <ProductCard
-                                    key={item.id}
+                                <div key={item.id}>
+                                    <ProductCard key={item.id}
                                     product={item}
                                     // onDelete={handleDelete}
                                     showActions={showActions}
                                     />
+                                </div>
                             
                         )
                     })}

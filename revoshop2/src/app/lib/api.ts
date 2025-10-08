@@ -8,8 +8,9 @@ const DUMMY_URL = 'https://api.escuelajs.co/api/v1/'
 export async function getProducts():Promise<ProductsResponse>{
     try{
         const response = await axios.get(`${DUMMY_URL}products`)
+        console.log('this is response.data getproducts'+response.data);
         return response.data;
-        console.log(response.data);
+
     }catch (error){
         console.error('Error Fetching Products:', error);
         throw new Error('failed to fetch products');
@@ -85,7 +86,7 @@ export async function deleteProduct(id:number): Promise<void>{
 
 export async function searchProducts(query:string):Promise<ProductsResponse>{
     try{
-        const response = await axios.get(`${DUMMY_URL}/products/slug/${encodeURIComponent(query)}`);
+        const response = await axios.get(`${DUMMY_URL}products/slug/${query}`);
         return response.data;
 
     }catch(error){
