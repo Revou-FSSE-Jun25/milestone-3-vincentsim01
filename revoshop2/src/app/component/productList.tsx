@@ -97,11 +97,14 @@ export default function ProductList(
                 );
             }
 
+   
+
             // Determine which products to display
-            const displayProducts = searchResults !== null ? Object.values(searchResults) : products;
+            // console.log('the searcresult is' + searchResults + 'and the type is '+searchResults);
+            const displayProducts = searchResults !== null ? [searchResults] : products;
             // const displayProducts = products;
 
-            console.log('this is displayproducts' + displayProducts)
+            console.log('this is displayproduc  ts' + displayProducts)
 
               // Show no results message for search
             if (searchResults !== null && searchResults.length === 0) {
