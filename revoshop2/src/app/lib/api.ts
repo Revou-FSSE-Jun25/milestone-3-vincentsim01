@@ -57,15 +57,16 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
 export async function updateProduct(id: number, data: Partial<ProductFormData>): Promise<Product> {
   try {
     const productData = {
+        // id: id,
         title: data.title,
         // slug: data.title,
-        price: Number(data.price),
+         price: data.price ? Number(data.price) : undefined,
         description: data.description,
-        categoryId: data.categoryId,
-        images: ['image.png']
+        categoryId: data.categoryId ? Number(data.categoryId) : undefined,
+        images: ['https://placeimg.com/640/480/any']
     };
 
-    const response = await axios.put(`${DUMMY_URL}/products/${id}`, productData);
+    const response = await axios.put(`${DUMMY_URL}products/${id}`, productData);
     return response.data;
   } catch (error) {
     console.error('Error updating product:', error);

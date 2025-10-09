@@ -52,9 +52,9 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
 
                         {showActions ? (
                             <div className="flex gap-2">
-                                {/* <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium text-center">
+                                <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Edit
-                                </Link> */}
+                                </Link>
                                 <button onClick={handleDelete} className="flex-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Delete
                                 </button>

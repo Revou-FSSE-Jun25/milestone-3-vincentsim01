@@ -49,11 +49,11 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
 
       const productData = {
         // id: 1,
-        title: data.title,
+        title: data?.title || '',
         // slug: data.slug,
-        price: Number(data.price),
-        description: data.description,
-        categoryId: data.categoryId,
+        price: Number(data.price) || 0,
+        description: data?.description || '',
+        categoryId: data?.categoryId || '',
         // images: 'https://i.imgur.com/QkIa5tT.jpeg'
       };
 
@@ -105,11 +105,11 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             <label className="block text-sm font-medium text-gray-300 mb-2">Product Title *</label>
             <input
               {...register('title', {
-                required: 'Title is required',
+                // required: 'Title is required',
                 minLength: { value: 3, message: 'Title must be at least 3 characters' }
               })}
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter product title"
+              placeholder="Enter product title" 
             />
             {errors.title && <p className="text-red-400 text-sm mt-1">{errors.title.message}</p>}
           </div>
@@ -132,7 +132,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             <label className="block text-sm font-medium text-gray-300 mb-2">Description *</label>
             <textarea
               {...register('description', {
-                required: 'description is required',
+                // required: 'description is required',
                 minLength: { value: 10, message: 'Description must be at least 10 characters' }
               })}
               rows={4}
@@ -148,7 +148,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
               type="number"
               step="0.01"
               {...register('price', {
-                required: 'Price is required',
+                // required: 'Price is required',
                 min: { value: 0, message: 'Price must be positive' }
               })}
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -163,7 +163,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
               type="number"
        
               {...register('categoryId', {
-                required: 'categoryId is required',
+                // required: 'categoryId is required',
                 min: { value: 0, message: 'id must be positive' }
               })}
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
