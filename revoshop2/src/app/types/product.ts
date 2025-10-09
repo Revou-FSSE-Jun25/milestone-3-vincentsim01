@@ -4,7 +4,7 @@ export interface Product{
     slug:string;
     price:number;
     description:string;
-    category:{[key: string]: any } ;
+    categoryId:number ;
     images:string[];
 }
 
@@ -22,6 +22,6 @@ export interface ProductFormData {
     slug:string;
     price:number;
     description:string;
-    category:{[key: string]: any } ;
+    categoryId:number ;
     images:string[];
 }

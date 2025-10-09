@@ -34,16 +34,16 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
     try{
         const productData = {
             title: data.title,
-            slug: data.title,
+            // slug: data.title,
             price: Number(data.price),
             description: data.description,
-            category: "acategory",
-            images: "image.png"
+            categoryId: data.id,
+            images: Array.isArray(data.images) ? data.images : [data.images],
 
 
         }
 
-        const response = await axios.post(`${DUMMY_URL}/products/`, productData);
+        const response = await axios.post(`${DUMMY_URL}products/`, productData);
         return response.data;
 
     }catch(error){
@@ -58,11 +58,11 @@ export async function updateProduct(id: number, data: Partial<ProductFormData>):
   try {
     const productData = {
         title: data.title,
-        slug: data.title,
+        // slug: data.title,
         price: Number(data.price),
         description: data.description,
-        category: "acategory",
-        images: "image.png"
+        categoryId: data.categoryId,
+        images: ['image.png']
     };
 
     const response = await axios.put(`${DUMMY_URL}/products/${id}`, productData);

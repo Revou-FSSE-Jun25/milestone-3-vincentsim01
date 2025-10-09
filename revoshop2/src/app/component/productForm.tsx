@@ -26,13 +26,13 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
     reset,
   } = useForm<ProductFormData>({
     defaultValues: {
-        id: product?.id || 0,
+        // id: product?.id || 0,
         title: product?.title || '',
-        slug: product?.slug || '',
+        // slug: product?.slug || '',
         price: product?.price || 0,
         description: product?.description || '',
-        category: product?.category || '',
-        images: product?.images?.join(', ') || '',
+        categoryId: product?.categoryId || '',
+        images: [product?.images?.join(', ') || '']
     },
   });
 
@@ -48,14 +48,19 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
       setError(null);
 
       const productData = {
-        id: data.id,
+        // id: 1,
         title: data.title,
-        slug: data.slug,
+        // slug: data.slug,
         price: Number(data.price),
         description: data.description,
-        category: data.category,
-        images: data.images,
+        categoryId: data.categoryId,
+        images: 'https://i.imgur.com/QkIa5tT.jpeg'
       };
+
+      let arrayproductdata = Object.entries(productData);
+      
+
+      console.log('productData categoryId is this '+arrayproductdata);
 
       let result: Product;
       if (product) {
@@ -109,24 +114,25 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             {errors.title && <p className="text-red-400 text-sm mt-1">{errors.title.message}</p>}
           </div>
 
-        <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Description *</label>
+        {/* <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">ID *</label>
             <textarea
-              {...register('slug', {
-                minLength: { value: 10, message: 'Description must be at least 10 characters' }
+              {...register('id', {
+
+                 required: 'id is required',
               })}
               rows={4}
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter product description"
+              placeholder="Enter product id"
             />
-            {errors.slug && <p className="text-red-400 text-sm mt-1">{errors.slug.message}</p>}
-          </div>
+            {errors.id && <p className="text-red-400 text-sm mt-1">{errors.id.message}</p>}
+          </div> */}
 
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-300 mb-2">Description *</label>
             <textarea
               {...register('description', {
-                required: 'Description is required',
+                required: 'description is required',
                 minLength: { value: 10, message: 'Description must be at least 10 characters' }
               })}
               rows={4}
@@ -151,8 +157,23 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             {errors.price && <p className="text-red-400 text-sm mt-1">{errors.price.message}</p>}
           </div>
 
+                    <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">CategoryId *</label>
+            <input
+              type="number"
+       
+              {...register('categoryId', {
+                required: 'categoryId is required',
+                min: { value: 0, message: 'id must be positive' }
+              })}
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="0"
+            />
+            {errors.categoryId && <p className="text-red-400 text-sm mt-1">{errors.categoryId.message}</p>}
+          </div>
 
-          <div className="md:col-span-2">
+
+          {/* <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-300 mb-2">Additional Images (comma-separated URLs)</label>
             <textarea
               {...register('images')}
@@ -160,7 +181,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-end space-x-4">
