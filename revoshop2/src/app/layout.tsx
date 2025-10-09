@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from 'next/link';
+import Script from "next/script";
 // import HeaderComponent from "./component/header/headercomponent"
 import "./globals.css";
 
@@ -26,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://kit.fontawesome.com/b7f46329c5.js" crossorigin="anonymous"></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -41,7 +45,7 @@ export default function RootLayout({
           </div>
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
             <Link href='/User/'><span>User</span></Link>
-            <span>Register</span>
+            <Link href='/AddToCart/'><span><i class="fa-solid fa-cart-shopping"></i></span></Link>
           </div>
 
         </div>
