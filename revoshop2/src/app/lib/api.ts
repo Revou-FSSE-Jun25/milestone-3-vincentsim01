@@ -37,13 +37,13 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
             // slug: data.title,
             price: Number(data.price),
             description: data.description,
-            categoryId: data.id,
-            images: Array.isArray(data.images) ? data.images : [data.images],
+            categoryId: data.categoryId,
+            images: ["https://placeimg.com/640/480/any"],
 
 
         }
 
-        const response = await axios.post(`${DUMMY_URL}products/`, productData);
+        const response = await axios.post(`https://api.escuelajs.co/api/v1/products/`, productData);
         return response.data;
 
     }catch(error){

@@ -54,7 +54,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         price: Number(data.price),
         description: data.description,
         categoryId: data.categoryId,
-        images: 'https://i.imgur.com/QkIa5tT.jpeg'
+        // images: 'https://i.imgur.com/QkIa5tT.jpeg'
       };
 
       let arrayproductdata = Object.entries(productData);
