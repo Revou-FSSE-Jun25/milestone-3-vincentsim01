@@ -60,7 +60,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
       let arrayproductdata = Object.entries(productData);
       
 
-      console.log('productData categoryId is this '+arrayproductdata);
+    //   console.log('productData categoryId is this '+arrayproductdata);
 
       let result: Product;
       if (product) {

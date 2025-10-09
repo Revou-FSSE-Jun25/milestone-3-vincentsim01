@@ -6,6 +6,7 @@ import { Product } from '../../types/product';
 import { setTimeout } from 'timers';
 import axios from 'axios';
 import Image from "next/image";
+import AddToCartButton from '@/app/component/addToCartButton';
 
 // const page = async ({ params }: { params: { id: string } }) => {
 function page ({ params }: { params: { id: string } }):any {
@@ -105,6 +106,7 @@ function page ({ params }: { params: { id: string } }):any {
               <br></br><br></br>
               <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button>
         </div>
+        <AddToCartButton product={products} />
         {/* {products.title}
         {products.price}
         {products.description} */}
