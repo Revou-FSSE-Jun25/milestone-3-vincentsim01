@@ -18,7 +18,10 @@ const nextConfig: NextConfig = {
           'via.placeholder.com',
           'rymportatiles.com.pe',
           'th.bing.com',
-          'dhdhdh.jpeg'
+          'dhdhdh.jpeg',
+          'placeimg.com',
+          'i.pravatar.cc',
+          'i.ebayimg.com'
         ],
 
     remotePatterns: [

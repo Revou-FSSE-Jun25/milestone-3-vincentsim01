@@ -25,6 +25,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                     alt={product.title}
                     className="object-cover rounded-md"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    unoptimized
                     width="170"
                     height="170"
                     onError={
