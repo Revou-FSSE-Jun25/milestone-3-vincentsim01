@@ -36,9 +36,9 @@ export default function RootLayout({
         <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white z-50'>
           <div className='flex justify-evenly items-center w-[40%]'>
             <Link href='/'><span>Home</span></Link>
-            <Link href='/About/'><span>About</span></Link>
+            <Link href='/FAQ/'><span>FAQ</span></Link>
             <Link href='/products/'><span>Products</span></Link>
-            <Link href='/Contact/'><span>Contact</span></Link>
+            <Link href='/Promotion/'><span>Promotion</span></Link>
           </div>
           <div className='w-[10%]'>
             <img className='w-[100px]' src='https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png'></img>
