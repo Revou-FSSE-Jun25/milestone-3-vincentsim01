@@ -5,10 +5,9 @@ import axios from 'axios';
 const DUMMY_URL = 'https://api.escuelajs.co/api/v1/'
 
 
-export async function getProducts():Promise<ProductsResponse>{
+export async function getProducts(offset: number):Promise<ProductsResponse>{
     try{
-        const response = await axios.get(`${DUMMY_URL}products`)
-        // console.log('this is response.data getproducts'+response.data);
+        const response = await axios.get(`${DUMMY_URL}products?offset=${offset}&limit=12`)
         return response.data;
 
     }catch (error){

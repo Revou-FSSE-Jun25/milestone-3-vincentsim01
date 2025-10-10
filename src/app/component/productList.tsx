@@ -25,12 +25,14 @@ export default function ProductList(
         const [products, setProducts] = useState<Product[]>([]);
         const [loading, setLoading] = useState<boolean>(true);
         const [error, setError] = useState<string|null>(null);
+        let [offset, setOffset] = useState<number>(0);
+        const limit = 12;
 
-        const fetchProducts = async () =>{
+        const fetchProducts = async (num: number) =>{
             try{
                 setLoading(true);
                 setError(null);
-                const response = await getProducts();
+                const response = await getProducts(num);
                 setProducts(response);
             }catch(error){
                 setError('Failed to fetch products. Please try again')
@@ -41,7 +43,7 @@ export default function ProductList(
         }
 
         useEffect(() => {
-            fetchProducts();
+            fetchProducts(0);
             // givePrompt();
         },[]);
 
@@ -61,6 +63,22 @@ export default function ProductList(
                 } else {
                 alert("Please type either 'user' or 'customer'");
                 }
+        }
+
+        async function nextTwelve(){
+            setOffset(offset + limit);
+            fetchProducts(offset);
+        }
+
+        async function previousTwelve(){
+            if(offset>=limit){
+                setOffset(offset - limit);
+                fetchProducts(offset);
+            }else{
+                setOffset(0);
+                fetchProducts(0);
+            }
+
         }
 
         const handleDelete = async (id:number) =>{
@@ -132,6 +150,20 @@ export default function ProductList(
 
             return(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="flex justify-between col-span-full mt-4">
+                        <button
+                            onClick={previousTwelve}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+                        >
+                            Previous
+                        </button>
+                        <button
+                            onClick={nextTwelve}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+                        >
+                            Next
+                        </button>
+                    </div>
                     {displayProducts.map((item)=>{
                         return(
                                 <div key={item.id}>
@@ -143,6 +175,20 @@ export default function ProductList(
                                 </div>
                         )
                     })}
+                    <div className="flex justify-between col-span-full mt-4">
+                        <button
+                            onClick={previousTwelve}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+                        >
+                            Previous
+                        </button>
+                        <button
+                            onClick={nextTwelve}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
             )
 
