@@ -26,7 +26,7 @@ const FetchProduct = () => {
             return(
                 <div className='inline' key={item.id}>
 
-                    <div className='inline-block w-[30%] h-[60vh] border border-black rounded-md shadow-2xl m-3 p-5 flex flex-col items-center' key={item.id}>
+                    <div className='inline-block w-[30%] h-[60vh] border border-black rounded-md shadow-2xl m-3 p-5 flex flex-col items-center w-[95%] md:w-[30%]' key={item.id}>
                         <Link href={`../products/${item.id}`}>
                             <div className='text-center text-md font-bold'><h1>{item.title}</h1></div>
                             <div className='text-center text-sm'>${item.price}</div>
