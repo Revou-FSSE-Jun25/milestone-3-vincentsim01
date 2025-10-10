@@ -3,6 +3,7 @@ import { Product } from '@/app/types/product';
 import Link from 'next/link';
 import Image from 'next/image';
 import AddToCartButton from './addToCartButton';
+import {useState} from 'react';
 
 interface ProductCardProps{
     product: Product;
@@ -11,6 +12,25 @@ interface ProductCardProps{
 }
 
 export default function ProductCard({product, onDelete, showActions = false}: ProductCardProps){
+
+    const [imgIndex, setimgIndex] = useState<number>(0);
+    function nextImgIndex(){
+        if(imgIndex<product.images.length-1){
+            setimgIndex(imgIndex+1);
+        }else{
+            setimgIndex(product.images.length-1);
+        }
+        
+    }
+    function prevImgIndex(){
+        if(imgIndex>1){
+            setimgIndex(imgIndex-1)
+        }else{
+            setimgIndex(0);
+        }
+
+    }
+
     const handleDelete = () =>{
         if(window.confirm("Are you sure you want to delete this product?")){
             onDelete?.(product.id);
@@ -18,11 +38,13 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
     };
 
     return(
-        <div className="bg-gray-800 rounded-lg shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="relative h-120 bg-white p-5 rounded-md flex flex-col items-center">
+        <div className="bg-gray-800 rounded-lg relative shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
+            <div className="absolute cursor-pointer hover:scale-110 w-[30px] top-[50%] right-[0px] z-50" onClick={nextImgIndex}><i className="fa-solid fa-chevron-right"></i></div>
+             <div className="absolute cursor-pointer hover:scale-110 w-[30px] top-[50%] left-[0px] z-50" onClick={prevImgIndex}><i className="fa-solid fa-chevron-left"></i></div>
+            <div className="relative h-140 bg-white p-5 rounded-md flex flex-col items-center">
             <Link href={`http://localhost:3000/products/${product.id}`}>
                 <Image
-                    src={product.images[0]}
+                    src={product.images[imgIndex]}
                     alt={product.title}
                     className="object-cover rounded-md"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
