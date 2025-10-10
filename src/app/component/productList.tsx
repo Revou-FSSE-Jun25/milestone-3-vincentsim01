@@ -138,7 +138,7 @@ export default function ProductList(
             console.log('showActions value in ProductList:', showActions);
 
             return(
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                     <div className="flex justify-between col-span-full mt-4">
                         <button
                             onClick={previousTwelve}
@@ -155,11 +155,12 @@ export default function ProductList(
                     </div>
                     {displayProducts.map((item)=>{
                         return(
-                                <div key={item.id}>
+                                <div key={item.id} className='inline'>
                                     <ProductCard key={item.id}
                                     product={item}
                                     onDelete={handleDelete}
                                     showActions={showActions}
+                       
                                     />
                                 </div>
                         )

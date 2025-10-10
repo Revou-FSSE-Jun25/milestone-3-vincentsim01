@@ -133,6 +133,7 @@ export default function ProductsPage() {
           searchResults={searchResults}
           isSearching={isSearching}
           searchQuery={searchQuery}
+          className='border hover:scale-110'
         />
 
         <div className="mt-12 text-center">
