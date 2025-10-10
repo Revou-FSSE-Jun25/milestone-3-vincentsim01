@@ -19,10 +19,7 @@ export default function ProductList(
         isSearching = false
         ,searchQuery = ''
     }:ProductListProps
-
 )
-
-
 
     {
         const [products, setProducts] = useState<Product[]>([]);
@@ -38,18 +35,14 @@ export default function ProductList(
             }catch(error){
                 setError('Failed to fetch products. Please try again')
                 console.error('Error fetching products:', err);
-
             }finally{
                 setLoading(false);
-
             }
         }
 
         useEffect(() => {
             fetchProducts();
-
-
-
+            // givePrompt();
         },[]);
 
         useEffect(()=>{
@@ -58,7 +51,8 @@ export default function ProductList(
             }
         },[searchResults]);
 
-                        const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
+        function givePrompt(){
+                const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
 
                 if (answer === "admin") {
                 showActions=true;
@@ -67,7 +61,7 @@ export default function ProductList(
                 } else {
                 alert("Please type either 'user' or 'customer'");
                 }
-
+        }
 
         const handleDelete = async (id:number) =>{
             try{
@@ -83,7 +77,7 @@ export default function ProductList(
         if (isSearching) {
             return (
             <div className="flex justify-center items-center h-64">
-                {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div> */}
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
                 LOADING...
             </div>
             );
@@ -93,7 +87,7 @@ export default function ProductList(
         if (loading) {
             return (
             <div className="flex justify-center items-center h-64">
-                {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div> */}
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
                 LOADING...
             </div>
             );
@@ -112,8 +106,7 @@ export default function ProductList(
 
    
 
-            // Determine which products to display
-            // console.log('the searcresult is' + searchResults + 'and the type is '+searchResults);
+            // Determine which products to displaysults);
             const displayProducts = searchResults !== null ? [searchResults] : products;
             // const displayProducts = products;
 
@@ -134,47 +127,11 @@ export default function ProductList(
                 </div>
                 );
             }
-            // showActions = false;
-                // useEffect(() => {
-
-                // const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
-
-                // if (answer === "admin") {
-                // showActions=true;
-                // } else if (answer === "customer") {
-                // showActions=false;
-                // } else {
-                // alert("Please type either 'user' or 'customer'");
-                // }
-                // },[]);
-
-
 
             console.log('showActions value in ProductList:', showActions);
 
             return(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {/* {displayProducts.map((product) => 
-
-
-                    (
-                        <ProductCard
-                        key={product.id}
-                        product={product}
-                        // onDelete={handleDelete}
-                        showActions={showActions}
-                        />
-                   
-
-                    
-
-                    )
-                    
-                    
-                    
-                    
-                    )} */}
-
                     {displayProducts.map((item)=>{
                         return(
                                 <div key={item.id}>
@@ -184,11 +141,9 @@ export default function ProductList(
                                     showActions={showActions}
                                     />
                                 </div>
-                            
                         )
                     })}
                 </div>
-
             )
 
 };
