@@ -25,7 +25,7 @@ function page ({ params }: { params: { id: string } }):any {
              setProducts(fetchedData);
            }
 
-                      function nextPage(){
+            function nextPage(){
             const newPage = Number(currentPage)+1;
             setCurrentPage(newPage);
             window.location.href = `/products/${newPage}`;
@@ -39,8 +39,6 @@ function page ({ params }: { params: { id: string } }):any {
             }
           }
 
-
-
            function removeLoading(){
             setLoading(false)
            }
@@ -49,11 +47,7 @@ function page ({ params }: { params: { id: string } }):any {
               makeLoading();
               const userType = JSON.parse(localStorage.getItem("userType"));
 
-              console.log('usertype has type of' + typeof userType)
-
               setshowAct(userType);
-
-
            },[])
 
           setTimeout(removeLoading,1000);
@@ -70,7 +64,6 @@ function page ({ params }: { params: { id: string } }):any {
 
         }
 
-                    console.log('showAct is '+showAct+ "typeof showAct is "+ typeof showAct);
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -123,12 +116,9 @@ function page ({ params }: { params: { id: string } }):any {
 
         </div>
         <div className="mb-6">
-          <a
-            href="/products"
-            className="text-gray-400 hover:text-white transition-colors inline-flex items-center"
-          >
+
             <div className='m-3 p-3'>
-                        <button onClick={prevPage} disabled={currentPage <= 1} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
+        <button onClick={prevPage} disabled={currentPage <= 1} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
           Previous
         </button>
         <button onClick={nextPage} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
@@ -137,6 +127,10 @@ function page ({ params }: { params: { id: string } }):any {
             </div>
 
     <br></br>
+              <a
+            href="/products"
+            className="text-gray-400 hover:text-white transition-colors inline-flex items-center"
+          >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>

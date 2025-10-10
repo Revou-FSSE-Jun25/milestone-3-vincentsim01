@@ -50,18 +50,18 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
 
 
                         {showActions ? (
-                            <div className="flex gap-2">
-                                <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium text-center">
+                            <div className="flex gap-2 mt-3">
+                                <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Edit
                                 </Link>
-                                <button onClick={handleDelete} className="flex-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                <button onClick={handleDelete} className="flex-1 bg-red-600 hover:bg-red-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium">
                                 Delete
                                 </button>
                             </div>
                             ) : 
                             
                             (
-                            <Link href={`../products/${product.id}`} className="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-center text-sm font-medium block">
+                            <Link href={`../products/${product.id}`} className="mt-3 bg-gray-700 hover:bg-gray-600 text-white px-2 py-2 rounded-md text-center text-sm font-medium block cursor-pointer hover:scale-110 active:scale-90">
                                 View Details
                             </Link>
                         )
