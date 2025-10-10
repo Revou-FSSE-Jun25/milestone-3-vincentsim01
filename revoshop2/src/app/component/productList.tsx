@@ -22,6 +22,8 @@ export default function ProductList(
 
 )
 
+
+
     {
         const [products, setProducts] = useState<Product[]>([]);
         const [loading, setLoading] = useState<boolean>(true);
@@ -45,6 +47,9 @@ export default function ProductList(
 
         useEffect(() => {
             fetchProducts();
+
+
+
         },[]);
 
         useEffect(()=>{
@@ -52,6 +57,16 @@ export default function ProductList(
                 setLoading(false);
             }
         },[searchResults]);
+
+                        const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
+
+                if (answer === "admin") {
+                showActions=true;
+                } else if (answer === "customer") {
+                showActions=false;
+                } else {
+                alert("Please type either 'user' or 'customer'");
+                }
 
 
         const handleDelete = async (id:number) =>{
@@ -119,6 +134,23 @@ export default function ProductList(
                 </div>
                 );
             }
+            // showActions = false;
+                // useEffect(() => {
+
+                // const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
+
+                // if (answer === "admin") {
+                // showActions=true;
+                // } else if (answer === "customer") {
+                // showActions=false;
+                // } else {
+                // alert("Please type either 'user' or 'customer'");
+                // }
+                // },[]);
+
+
+
+            console.log('showActions value in ProductList:', showActions);
 
             return(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

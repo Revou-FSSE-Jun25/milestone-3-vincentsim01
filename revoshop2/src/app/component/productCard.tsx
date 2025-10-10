@@ -52,7 +52,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
 
                     {/* <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button> */}
                     <AddToCartButton product={product} />
-                    <button className='border border-black rounded-md ml-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Detailed Page</button>
+                    {/* <button className='border border-black rounded-md ml-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Detailed Page</button> */}
 
                         {showActions ? (
                             <div className="flex gap-2">
@@ -63,11 +63,14 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                                 Delete
                                 </button>
                             </div>
-                            ) : (
+                            ) : 
+                            
+                            (
                             <Link href={`../products/${product.id}`} className="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-center text-sm font-medium block">
                                 View Details
                             </Link>
-                        )}
+                        )
+                        }
                 </div>
             </div>
         </div>
