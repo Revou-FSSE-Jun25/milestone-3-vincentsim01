@@ -44,7 +44,7 @@ export default function ProductList(
 
         useEffect(() => {
             fetchProducts(0);
-            // givePrompt();
+    
         },[]);
 
         useEffect(()=>{
