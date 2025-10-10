@@ -2,6 +2,7 @@
 
 import React, {useState, useEffect} from 'react'
 import Link from 'next/link';
+import AddToCartButton from '../addToCartButton';
 
 const FetchProduct = () => {
 
@@ -36,8 +37,10 @@ const FetchProduct = () => {
                         </Link>
                         <br></br>
                         <div className='flex justify-center'>
-                            <button className='border border-black rounded-md m-3 p-3 cursor-pointer hover:scale-110 active:scale-95'>Add To Cart</button>
-                            <button className='border border-black rounded-md m-3 p-3 cursor-pointer hover:scale-110 active:scale-95'>Checkout</button>
+                            {/* <button className='border border-black rounded-md m-3 p-3 cursor-pointer hover:scale-110 active:scale-95'>Add To Cart</button> */}
+                            {/* <button className='border border-black rounded-md m-3 p-3 cursor-pointer hover:scale-110 active:scale-95'>Checkout</button> */}
+                            <AddToCartButton product={item}/>
+
                         </div>
 
                     </div>

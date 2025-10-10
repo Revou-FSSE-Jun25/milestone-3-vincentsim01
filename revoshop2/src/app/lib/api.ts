@@ -8,7 +8,7 @@ const DUMMY_URL = 'https://api.escuelajs.co/api/v1/'
 export async function getProducts():Promise<ProductsResponse>{
     try{
         const response = await axios.get(`${DUMMY_URL}products`)
-        console.log('this is response.data getproducts'+response.data);
+        // console.log('this is response.data getproducts'+response.data);
         return response.data;
 
     }catch (error){

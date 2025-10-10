@@ -44,7 +44,7 @@ export default function RootLayout({
             <img className='w-[100px]' src='https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png'></img>
           </div>
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
-            <Link href='/User/'><span>User</span></Link>
+            {/* <Link href='/User/'><span>User</span></Link> */}
             <Link href='/AddToCart/'><span><i class="fa-solid fa-cart-shopping"></i></span></Link>
           </div>
 

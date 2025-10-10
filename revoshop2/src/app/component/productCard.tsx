@@ -8,7 +8,7 @@ import AddToCartButton from './addToCartButton';
 interface ProductCardProps{
     product: Product;
     onDelete?: (id:number) => void;
-    // showActions?: boolean;
+    showActions?: boolean;
 }
 
 export default function ProductCard({product, onDelete, showActions = false}: ProductCardProps){
@@ -17,6 +17,8 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
             onDelete?.(product.id);
         }
     };
+
+
     return(
         <div className="bg-gray-800 rounded-lg shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
             <div className="relative h-100 bg-white p-5 rounded-md flex flex-col items-center">
@@ -62,7 +64,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                                 </button>
                             </div>
                             ) : (
-                            <Link href={`/products/${product.id}`} className="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-center text-sm font-medium block">
+                            <Link href={`../products/${product.id}`} className="w-full bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-center text-sm font-medium block">
                                 View Details
                             </Link>
                         )}
