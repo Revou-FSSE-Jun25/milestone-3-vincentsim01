@@ -22,7 +22,7 @@ const ToggleButton = () => {
     </button>
 
       {isOpen && (
-    <div className={`w-[60%] md:hidden h-[70vh] rounded-md bg-white p-5 flex flex-col justify-start items-center absolute top-10 z-50`} id='mobile-menu'>
+    <div className={`w-[90%] md:hidden h-[70vh] rounded-md bg-white p-5 border flex flex-col justify-start items-center absolute top-10 z-50`} id='mobile-menu'>
 
         <>
           <Link href='/'><span className='hover:underline m-4'>Home</span></Link>

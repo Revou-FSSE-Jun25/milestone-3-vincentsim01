@@ -22,6 +22,6 @@ export interface ProductFormData {
     slug:string;
     price:number;
     description:string;
-    categoryId:number ;
+    categoryId:number;
     images:string[];
 }

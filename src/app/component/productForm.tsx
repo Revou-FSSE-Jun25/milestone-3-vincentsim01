@@ -10,14 +10,6 @@ interface ProductFormProps {
   onCancel?: () => void;
 }
 
-    // id:number;
-    // title:string;
-    // slug:string;
-    // price:number;
-    // description:string;
-    // category:{[key: string]: any } ;
-    // images:string[];
-
 export default function ProductForm({ product, onSuccess, onCancel }: ProductFormProps) {
   const {
     register,
@@ -57,10 +49,6 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         // images: 'https://i.imgur.com/QkIa5tT.jpeg'
       };
 
-      let arrayproductdata = Object.entries(productData);
-      
-
-    //   console.log('productData categoryId is this '+arrayproductdata);
 
       let result: Product;
       if (product) {
