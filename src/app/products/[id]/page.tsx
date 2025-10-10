@@ -12,27 +12,14 @@ import AddToCartButton from '@/app/component/addToCartButton';
 function page ({ params }: { params: { id: string } }):any {
     const { id } = React.use(params);
     const numberId = Number(id);
+    const [showAct, setshowAct] = useState<boolean>(true)
     // alert(id);
     // const productId = params.id;
     const isValidId = /^\d+$/.test(id);
     const [loading, setLoading] = useState<boolean>(false);
     const [products,setProducts] = useState<Product[]>([]);
-    // const fetchedData = getProduct(Number(productId));
-            // const fetchProducts = async () =>{
-            //     try{
-            //         setLoading(true);
-            //         // setError(null);
-            //         const response = await getProduct(Number(productId));
-            //         setProducts(response);
-            //         // console.log(response);
-            //     }catch(error){
-            //         // setError('Failed to fetch products. Please try again')
-            //         console.error('Error fetching products:', err);
-    
-            //     }finally{
-            //         setLoading(false);
-            //     }
-    
+
+
            async function makeLoading(){
              setLoading(true)
              const fetchedData = await getProduct(numberId);
@@ -42,12 +29,19 @@ function page ({ params }: { params: { id: string } }):any {
 
            }
 
+
+
            function removeLoading(){
             setLoading(false)
            }
 
            useEffect(()=>{
               makeLoading();
+              const userType = JSON.parse(localStorage.getItem("userType"));
+
+              console.log('usertype has type of' + typeof userType)
+
+              setshowAct(userType);
 
 
            },[])
@@ -62,7 +56,11 @@ function page ({ params }: { params: { id: string } }):any {
                 LOADING...
             </div>
             );
+
+
         }
+
+                    console.log('showAct is '+showAct+ "typeof showAct is "+ typeof showAct);
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -79,15 +77,6 @@ function page ({ params }: { params: { id: string } }):any {
             <li className="text-gray-800 truncate max-w-xs">Product {id}</li>
           </ol>
         </nav>
-
-        {/* <div className='m-2 p-5 border border-black shadow-lg rounded-lg flex flex-col items-center'>
-            <h1 className='text-4xl font-bold'>Product Title</h1>
-            <p>Rp 50.000</p>
-            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Woman%27s_shirt_from_Kutch%2C_Gujarat%2C_India%2C_IMA_55114.jpg/640px-Woman%27s_shirt_from_Kutch%2C_Gujarat%2C_India%2C_IMA_55114.jpg' className='rounded-md border border-black'></img>
-              <br></br><br></br>
-              <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button>
-        </div> */}
-
 
           <div className='m-2 p-5 border border-black shadow-lg rounded-lg flex flex-col items-center'>
             <h1 className='text-4xl font-bold'>        {products.title}</h1>
@@ -106,12 +95,10 @@ function page ({ params }: { params: { id: string } }):any {
               <br></br><br></br>
               {/* <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button> */}
               <AddToCartButton product={products} />
+              {showAct ? (
+                <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90' onClick={() => window.location.href = `/products/${id}/edit`}>Edit Product</button>
+              ) : null}
         </div>
-
-        {/* {products.title}
-        {products.price}
-        {products.description} */}
-        {/* <img src={fetchedData.images[0]}></img> */}
         <div className="mb-6">
           <a
             href="/products"

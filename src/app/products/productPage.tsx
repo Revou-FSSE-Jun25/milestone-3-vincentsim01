@@ -43,7 +43,13 @@ export default function ProductsPage() {
   };
 
   useEffect(()=>{
-    givePrompt();
+    // givePrompt();
+    if(!localStorage.getItem("userType")){
+      givePrompt();
+    }
+    const userType =  JSON.parse(localStorage.getItem("userType"));
+    
+    setshowAct(userType);
   },[])
 
   function givePrompt(){

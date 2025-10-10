@@ -144,13 +144,13 @@ export default function EditProductPage() {
         <div className="mt-8 flex justify-between">
           <button
             onClick={() => router.push(`/products/${productId}`)}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-md transition-colors"
+            className="bg-white hover:scale-105 text-gray-900 px-6 py-2 rounded-md transition-colors"
           >
             ← Back to Product
           </button>
           <button
             onClick={() => router.push('/products')}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-md transition-colors"
+            className="bg-white hover:scale-105 text-gray-900 px-6 py-2 rounded-md transition-colors"
           >
             Products List →
           </button>
