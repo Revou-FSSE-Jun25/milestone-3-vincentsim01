@@ -37,7 +37,7 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
             price: Number(data.price),
             description: data.description,
             categoryId: data.categoryId,
-            images: ["https://placeimg.com/640/480/any"],
+            images: ["https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png"],
 
 
         }

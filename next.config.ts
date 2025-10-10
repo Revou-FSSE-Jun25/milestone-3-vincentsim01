@@ -21,7 +21,8 @@ const nextConfig: NextConfig = {
           'dhdhdh.jpeg',
           'placeimg.com',
           'i.pravatar.cc',
-          'i.ebayimg.com'
+          'i.ebayimg.com',
+          'i.ibb.co'
         ],
 
     remotePatterns: [

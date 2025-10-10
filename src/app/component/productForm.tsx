@@ -18,9 +18,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
     reset,
   } = useForm<ProductFormData>({
     defaultValues: {
-        // id: product?.id || 0,
         title: product?.title || '',
-        // slug: product?.slug || '',
         price: product?.price || 0,
         description: product?.description || '',
         categoryId: product?.categoryId || '',
@@ -40,13 +38,10 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
       setError(null);
 
       const productData = {
-        // id: 1,
         title: data?.title || '',
-        // slug: data.slug,
         price: Number(data.price) || 0,
         description: data?.description || '',
         categoryId: data?.categoryId || '',
-        // images: 'https://i.imgur.com/QkIa5tT.jpeg'
       };
 
 
@@ -68,11 +63,6 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
       setLoading(false);
     }
   };
-
-//   const categoryOptions = [
-//     'Electronics', 'Clothing', 'Home & Garden', 'Sports & Outdoors',
-//     'Books', 'Toys & Games', 'Health & Beauty', 'Automotive', 'Food & Beverages', 'Other',
-//   ];
 
   return (
     <div className="bg-gray-800 rounded-lg shadow-lg p-6">
@@ -101,20 +91,6 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             />
             {errors.title && <p className="text-red-400 text-sm mt-1">{errors.title.message}</p>}
           </div>
-
-        {/* <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-300 mb-2">ID *</label>
-            <textarea
-              {...register('id', {
-
-                 required: 'id is required',
-              })}
-              rows={4}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter product id"
-            />
-            {errors.id && <p className="text-red-400 text-sm mt-1">{errors.id.message}</p>}
-          </div> */}
 
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-300 mb-2">Description *</label>
@@ -145,7 +121,9 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             {errors.price && <p className="text-red-400 text-sm mt-1">{errors.price.message}</p>}
           </div>
 
-                    <div>
+        </div>
+
+                            <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">CategoryId *</label>
             <input
               type="number"
@@ -159,18 +137,6 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             />
             {errors.categoryId && <p className="text-red-400 text-sm mt-1">{errors.categoryId.message}</p>}
           </div>
-
-
-          {/* <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Additional Images (comma-separated URLs)</label>
-            <textarea
-              {...register('images')}
-              rows={2}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
-            />
-          </div> */}
-        </div>
 
         <div className="flex justify-end space-x-4">
           {onCancel && (
