@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
           'placeimg.com',
           'i.pravatar.cc',
           'i.ebayimg.com',
-          'i.ibb.co'
+          'i.ibb.co',
+          'loremflickr.com'
         ],
 
     remotePatterns: [

@@ -13,21 +13,31 @@ function page ({ params }: { params: { id: string } }):any {
     const { id } = React.use(params);
     const numberId = Number(id);
     const [showAct, setshowAct] = useState<boolean>(true)
-    // alert(id);
-    // const productId = params.id;
     const isValidId = /^\d+$/.test(id);
     const [loading, setLoading] = useState<boolean>(false);
     const [products,setProducts] = useState<Product[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(id);
 
 
            async function makeLoading(){
              setLoading(true)
              const fetchedData = await getProduct(numberId);
-              // const fetchedData = await axios.get(`https://api.escuelajs.co/api/v1/products/${numberId}`);
-
              setProducts(fetchedData);
-
            }
+
+                      function nextPage(){
+            const newPage = Number(currentPage)+1;
+            setCurrentPage(newPage);
+            window.location.href = `/products/${newPage}`;
+           }
+
+           function prevPage(){
+            if(currentPage > 1){
+              const newPage = currentPage - 1;
+              setCurrentPage(newPage);
+              window.location.href = `/products/${newPage}`;
+            }
+          }
 
 
 
@@ -52,7 +62,7 @@ function page ({ params }: { params: { id: string } }):any {
           if (loading) {
             return (
             <div className="flex justify-center items-center h-64">
-                {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div> */}
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
                 LOADING...
             </div>
             );
@@ -77,6 +87,17 @@ function page ({ params }: { params: { id: string } }):any {
             <li className="text-gray-800 truncate max-w-xs">Product {id}</li>
           </ol>
         </nav>
+        <button onClick={prevPage} disabled={currentPage <= 1} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
+          Previous
+        </button>
+        <button onClick={nextPage} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
+          Next
+        </button>
+        <div className="mt-8 flex flex-col items-center">
+        {isValidId ? null : (
+            <p className="text-red-400 mb-4">Invalid product ID. Please enter a valid numeric ID.</p>
+          )}
+        </div>
 
           <div className='m-2 p-5 border border-black shadow-lg rounded-lg flex flex-col items-center'>
             <h1 className='text-4xl font-bold'>        {products.title}</h1>
@@ -91,19 +112,31 @@ function page ({ params }: { params: { id: string } }):any {
                 height={400}
                 priority
               />
-            {/* <img src={products.images[0]}></img> */}
+  
               <br></br><br></br>
-              {/* <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button> */}
-              <AddToCartButton product={products} />
-              {showAct ? (
-                <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90' onClick={() => window.location.href = `/products/${id}/edit`}>Edit Product</button>
-              ) : null}
+              <div className='flex justify-center items-center'>              
+                <AddToCartButton product={products} />
+                  {showAct ? (
+                <button className='border border-black rounded-md m-2 text-sm p-2 shadow-xl cursor-pointer hover:scale-110 active:scale-90 transition-transform' onClick={() => window.location.href = `/products/${id}/edit`}>Edit Product</button>
+                ) : null}
+              </div>
+
         </div>
         <div className="mb-6">
           <a
             href="/products"
             className="text-gray-400 hover:text-white transition-colors inline-flex items-center"
           >
+            <div className='m-3 p-3'>
+                        <button onClick={prevPage} disabled={currentPage <= 1} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
+          Previous
+        </button>
+        <button onClick={nextPage} className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
+          Next
+        </button>
+            </div>
+
+    <br></br>
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -113,11 +146,10 @@ function page ({ params }: { params: { id: string } }):any {
 
         {/* TODO 17: Add ProductDetail component */}
         {/* This component will handle all product display logic */}
-        {/* <ProductDetail /> */}
-        {/* This is Product {id} */}
       </div>
     </div>
   )
 }
+// }
 
 export default page
