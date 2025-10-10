@@ -65,16 +65,16 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-white mb-6">
+    <div className="bg-white rounded-lg shadow-lg p-6">
+      <h2 className="text-2xl font-bold text-black mb-6">
         {product ? 'Edit Product' : 'Create New Product'}
       </h2>
 
       {error && (
-        <div className="bg-red-600 text-white p-4 rounded-md mb-4">{error}</div>
+        <div className="bg-red-600 text-black p-4 rounded-md mb-4">{error}</div>
       )}
       {successMessage && (
-        <div className="bg-green-600 text-white p-4 rounded-md mb-4">{successMessage}</div>
+        <div className="bg-green-600 text-black p-4 rounded-md mb-4">{successMessage}</div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -86,7 +86,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
                 // required: 'Title is required',
                 minLength: { value: 3, message: 'Title must be at least 3 characters' }
               })}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter product title" 
             />
             {errors.title && <p className="text-red-400 text-sm mt-1">{errors.title.message}</p>}
@@ -100,7 +100,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
                 minLength: { value: 10, message: 'Description must be at least 10 characters' }
               })}
               rows={4}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter product description"
             />
             {errors.description && <p className="text-red-400 text-sm mt-1">{errors.description.message}</p>}
@@ -115,7 +115,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
                 // required: 'Price is required',
                 min: { value: 0, message: 'Price must be positive' }
               })}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="0.00"
             />
             {errors.price && <p className="text-red-400 text-sm mt-1">{errors.price.message}</p>}
@@ -132,7 +132,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
                 // required: 'categoryId is required',
                 min: { value: 0, message: 'id must be positive' }
               })}
-              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="0"
             />
             {errors.categoryId && <p className="text-red-400 text-sm mt-1">{errors.categoryId.message}</p>}
@@ -143,7 +143,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             <button
               type="button"
               onClick={onCancel}
-              className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors"
+              className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors cursor-pointer"
             >
               Cancel
             </button>

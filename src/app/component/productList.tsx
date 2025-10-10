@@ -53,17 +53,6 @@ export default function ProductList(
             }
         },[searchResults]);
 
-        function givePrompt(){
-                const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
-
-                if (answer === "admin") {
-                showActions=true;
-                } else if (answer === "customer") {
-                showActions=false;
-                } else {
-                alert("Please type either 'user' or 'customer'");
-                }
-        }
 
         async function nextTwelve(){
             setOffset(offset + limit);
@@ -126,7 +115,7 @@ export default function ProductList(
 
             // Determine which products to displaysults);
             const displayProducts = searchResults !== null ? [searchResults] : products;
-            // const displayProducts = products;
+    
 
               // Show no results message for search
             if (searchResults !== null && searchResults.length === 0) {

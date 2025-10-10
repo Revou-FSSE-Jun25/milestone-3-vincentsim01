@@ -62,7 +62,7 @@ export async function updateProduct(id: number, data: Partial<ProductFormData>):
          price: data.price ? Number(data.price) : undefined,
         description: data.description,
         categoryId: data.categoryId ? Number(data.categoryId) : undefined,
-        images: ['https://placeimg.com/640/480/any']
+        images: ['https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png']
     };
 
     const response = await axios.put(`${DUMMY_URL}products/${id}`, productData);

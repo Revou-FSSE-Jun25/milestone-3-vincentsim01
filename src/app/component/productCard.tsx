@@ -46,9 +46,8 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                         </div>
                     </Link>
 
-                    {/* <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button> */}
                     <AddToCartButton product={product} />
-                    {/* <button className='border border-black rounded-md ml-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Detailed Page</button> */}
+
 
                         {showActions ? (
                             <div className="flex gap-2">
