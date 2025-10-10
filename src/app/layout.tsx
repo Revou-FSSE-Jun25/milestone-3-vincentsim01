@@ -28,24 +28,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* <script src="https://kit.fontawesome.com/b7f46329c5.js" crossorigin="anonymous"></script> */}
+        <script src="https://kit.fontawesome.com/b7f46329c5.js"></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white z-50'>
-          <div className='flex justify-evenly items-center w-[40%]'>
-            <Link href='/'><span>Home</span></Link>
-            <Link href='/FAQ/'><span>FAQ</span></Link>
-            <Link href='/products/'><span>Products</span></Link>
-            <Link href='/Promotion/'><span>Promotion</span></Link>
+          <div className='flex justify-evenly items-center w-[40%] '>
+            <Link href='/'><span className='hover:underline'>Home</span></Link>
+            <Link href='/products/'><span className='hover:underline'>Products</span></Link>
+            <Link href='/FAQ/'><span className='hover:underline'>FAQ</span></Link>
+            <Link href='/Promotion/'><span className='hover:underline'>Promotion</span></Link>
           </div>
           <div className='w-[10%]'>
-            <img className='w-[100px]' src='https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png'></img>
+            <Link href='/'>
+                <img className='w-[100px] hover:scale-110' src='https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png'></img>
+            </Link>
+            
           </div>
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
             {/* <Link href='/User/'><span>User</span></Link> */}
-            <Link href='/AddToCart/'>Cart</Link>
+            <Link href='/AddToCart/'><i className="fa-solid fa-cart-shopping"></i></Link>
           </div>
 
         </div>

@@ -47,7 +47,7 @@ export default function CartPage() {
             </div>
             <button
               onClick={() => handleRemove(item.id)}
-              className="text-red-500 hover:text-red-700"
+              className="text-white hover:scale-110 active:scale-90 bg-blue-800 p-5 rounded-lg cursor-pointer"
             >
               Remove
             </button>

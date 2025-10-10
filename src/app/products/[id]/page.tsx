@@ -104,9 +104,10 @@ function page ({ params }: { params: { id: string } }):any {
               />
             {/* <img src={products.images[0]}></img> */}
               <br></br><br></br>
-              <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button>
+              {/* <button className='border border-black rounded-md mr-1 text-sm p-1 shadow-xl cursor-pointer hover:scale-110 active:scale-90'>Add To Cart</button> */}
+              <AddToCartButton product={products} />
         </div>
-        <AddToCartButton product={products} />
+
         {/* {products.title}
         {products.price}
         {products.description} */}
