@@ -6,6 +6,7 @@ import Link from 'next/link';
 import ToggleButton from "./component/toggleButton";
 import Script from "next/script";
 import "./globals.css";
+import { AuthProvider} from '@/app/context/AuthContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,7 +57,7 @@ export default function RootLayout({
           </div>
 
         </div>
-        {children}
+                <AuthProvider>{children}</AuthProvider>
         <div className='border border-t border-black bg-white z-50 h-[10vh] flex justify-center items-center mt-5'>
             &copy; Vincent 2025
         </div>
