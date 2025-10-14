@@ -1,7 +1,6 @@
 "use client"
 
 import Banner from "./component/banner";
-import ProductsClient from "./component/fetchData/fetchData";
 import FetchProduct from './component/FetchProduct/FetchProduct';
 import { useState, useEffect } from 'react';
 
@@ -11,6 +10,7 @@ export default function Home() {
 
   useEffect(()=>{
     givePrompt();
+      localStorage.setItem("userType", JSON.stringify(showAct));
   },[])
 
   function givePrompt(){
@@ -25,7 +25,7 @@ export default function Home() {
     }
   }
 
-  localStorage.setItem("userType", JSON.stringify(showAct));
+
   return (
     <div>
       <Banner></Banner>

@@ -17,11 +17,11 @@ export interface ProductsResponse {
 
 
 export interface ProductFormData {
-    id:number;
+    // id:number;
     title:string;
-    slug:string;
+    // slug:string;
     price:number;
     description:string;
     categoryId:number;
-    images:string[];
+    // images:string[];
 }

@@ -6,7 +6,7 @@ import { Product } from '../types/product';
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<Product[] | null>(null);
+  const [searchResults, setSearchResults] = useState<Product | null>(null);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [showAct, setshowAct] = useState<boolean>(true)
 
@@ -28,10 +28,10 @@ export default function ProductsPage() {
     try {
       const results = await searchProducts(searchQuery);
       // console.log('this is search results '+results.title)
-      setSearchResults(results);
+      setSearchResults(results.products[0]);
     } catch (error) {
       console.error('Search failed:', error);
-      setSearchResults([]);
+      setSearchResults(null);
     } finally {
       setIsSearching(false);
     }
@@ -47,7 +47,7 @@ export default function ProductsPage() {
     if(!localStorage.getItem("userType")){
       givePrompt();
     }
-    const userType =  JSON.parse(localStorage.getItem("userType"));
+    const userType =  JSON.parse(localStorage.getItem("userType") || "false");
     
     setshowAct(userType);
   },[])
@@ -105,13 +105,13 @@ export default function ProductsPage() {
 
           <div className="text-gray-400">
             {isSearching && `Searching for "${searchQuery}"...`}
-            {searchResults && !isSearching && `Found ${searchResults.length} results for "${searchQuery}"`}
+            {searchResults && !isSearching && `Found ${searchResults} results for "${searchQuery}"`}
             {searchResults === null && !isSearching && 'All Products'}
           </div>
           
           <div className="text-gray-400">
             {isSearching && `Searching for "${searchQuery}"...`}
-            {searchResults && !isSearching && `Found ${searchResults.length} results for "${searchQuery}"`}
+            {searchResults && !isSearching && `Found ${searchResults} results for "${searchQuery}"`}
             {searchResults === null && !isSearching && 'All Products'}
           </div>
           <button
@@ -130,10 +130,10 @@ export default function ProductsPage() {
 
         <ProductList
           showActions={showAct}
-          searchResults={searchResults}
+          searchResults={searchResults ? [searchResults] : []}
           isSearching={isSearching}
           searchQuery={searchQuery}
-          className='border hover:scale-110'
+     
         />
 
         <div className="mt-12 text-center">

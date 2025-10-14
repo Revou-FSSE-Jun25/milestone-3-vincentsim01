@@ -7,10 +7,15 @@ import AddToCartButton from '../addToCartButton';
 const FetchProduct = () => {
 
     type productProp = {
-
+        id: number;
+        title:string;
+        price:number;
+        description:string;
+        categoryId:number;
+        images:string[];
     }
 
-    const [data,setData] = useState([]);
+    const [data,setData] = useState<productProp[]>([]);
 
     useEffect(()=>{
         fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=9')

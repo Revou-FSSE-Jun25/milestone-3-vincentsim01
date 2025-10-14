@@ -1,6 +1,6 @@
 "use client"
 import {useState,useEffect} from 'react';
-import { Product } from '@/types/product';
+import { Product } from '@/app/types/product';
 import { getProducts, deleteProduct } from '@/app/lib/api';
 import React from 'react';
 import ProductCard from './productCard';
@@ -34,9 +34,10 @@ export default function ProductList(
                 setError(null);
                 const response = await getProducts(num);
                 setProducts(response);
+                // console.log('Fetched products:', response);
             }catch(error){
                 setError('Failed to fetch products. Please try again')
-                console.error('Error fetching products:', err);
+                console.error('Error fetching products:', error);
             }finally{
                 setLoading(false);
             }
@@ -104,21 +105,23 @@ export default function ProductList(
                 return (
                 <div className="text-center py-12">
                     <p className="text-red-400 mb-4">{error}</p>
-                    <button onClick={fetchProducts} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+                    <button onClick={() => fetchProducts(0)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
                     Retry
                     </button>
                 </div>
                 );
             }
 
-   
+            console.log('Search Results:', searchResults);
 
             // Determine which products to displaysults);
-            const displayProducts = searchResults !== null ? [searchResults] : products;
+            const displayProducts:Product[] = searchResults && searchResults.length > 0  ? searchResults : products;
+
+            console.log('Displaying products:', displayProducts);
     
 
-              // Show no results message for search
-            if (searchResults !== null && searchResults.length === 0) {
+            //   Show no results message for search
+            if (!searchResults ) {
                 return (
                 <div className="text-center py-12">
                     <p className="text-gray-400">No products found for "{searchQuery}".</p>
@@ -134,8 +137,6 @@ export default function ProductList(
                 </div>
                 );
             }
-
-            console.log('showActions value in ProductList:', showActions);
 
             return(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">

@@ -10,13 +10,13 @@ import AddToCartButton from '@/app/component/addToCartButton';
 
 // const page = async ({ params }: { params: { id: string } }) => {
 function page ({ params }: { params: { id: string } }):any {
-    const { id } = React.use(params);
+    const { id } = params;
     const numberId = Number(id);
     const [showAct, setshowAct] = useState<boolean>(true)
     const isValidId = /^\d+$/.test(id);
     const [loading, setLoading] = useState<boolean>(false);
-    const [products,setProducts] = useState<Product[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(id);
+    const [products,setProducts] = useState<Product>();
+    const [currentPage, setCurrentPage] = useState<number>(Number(id));
 
 
            async function makeLoading(){
@@ -45,7 +45,7 @@ function page ({ params }: { params: { id: string } }):any {
 
            useEffect(()=>{
               makeLoading();
-              const userType = JSON.parse(localStorage.getItem("userType"));
+              const userType = JSON.parse(localStorage.getItem("userType") || "false");
 
               setshowAct(userType);
            },[])
@@ -93,10 +93,10 @@ function page ({ params }: { params: { id: string } }):any {
         </div>
 
           <div className='m-2 p-5 border border-black shadow-lg rounded-lg flex flex-col items-center'>
-            <h1 className='text-4xl font-bold'>        {products.title}</h1>
-            <p>       ${products.price}</p>
+            <h1 className='text-4xl font-bold'>        {products?.title}</h1>
+            <p>       ${products?.price}</p>
             <br></br>
-            <p>       {products.description}</p>
+            <p>       {products?.description}</p>
             <br></br>
             <Image
                 src={products?.images?.[0] || "/placeholder.png"} // fallback image
@@ -108,7 +108,7 @@ function page ({ params }: { params: { id: string } }):any {
   
               <br></br><br></br>
               <div className='flex justify-center items-center'>              
-                <AddToCartButton product={products} />
+                {products && <AddToCartButton product={products} />}
                   {showAct ? (
                 <button className='border border-black rounded-md m-2 text-sm p-2 shadow-xl cursor-pointer hover:scale-110 active:scale-90 transition-transform' onClick={() => window.location.href = `/products/${id}/edit`}>Edit Product</button>
                 ) : null}

@@ -21,8 +21,8 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         title: product?.title || '',
         price: product?.price || 0,
         description: product?.description || '',
-        categoryId: product?.categoryId || '',
-        images: [product?.images?.join(', ') || '']
+        categoryId: product?.categoryId || 0,
+        // images: [product?.images?.join(', ') || '']
     },
   });
 
@@ -41,7 +41,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         title: data?.title || '',
         price: Number(data.price) || 0,
         description: data?.description || '',
-        categoryId: data?.categoryId || '',
+        categoryId: Number(data?.categoryId) || 0,
       };
 
 
