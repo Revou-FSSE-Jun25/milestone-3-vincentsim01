@@ -28,7 +28,7 @@ export default function AuthCheck({
         Loading...
       </div>
     )
-
+  }
 
       if (!isAuthenticated) {
     router.push('/login')
@@ -42,3 +42,7 @@ export default function AuthCheck({
 
 
   }
+
+  return <>{children}</>
+
+}

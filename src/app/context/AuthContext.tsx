@@ -9,8 +9,26 @@ interface AuthContextType {
     logout: () => void;
 };
 
+interface User {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+  avatar: string;
+}
+
 interface AuthProviderProps {
   children: ReactNode;
+}
+
+
+interface AuthContextType{
+  user:User | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  userRole: 'admin' | 'user' | null;
+  logout: () => void;
 }
 
 const getCookie = (name: string): string | null => {
@@ -72,3 +90,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 
 }
+
+
+export function useAuth(): AuthContextType {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
+
+
+export default AuthContext;
