@@ -3,34 +3,33 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface AuthContextType {
-    isAuthenticated: boolean;
-    login: () => void;
-    logout: () => void;
-};
-
+// Simple user interface
 interface User {
   id: number;
+  username: string;
   email: string;
-  password: string;
-  name: string;
-  role: string;
-  avatar: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  image: string;
 }
+
+interface AuthContextType {
+  user: User | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  userRole: 'admin' | 'user' | null;
+  logout: () => void;
+  refreshUser: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-
-interface AuthContextType{
-  user:User | null;
-  isLoading: boolean;
-  isAuthenticated: boolean;
-  userRole: 'admin' | 'user' | null;
-  logout: () => void;
-}
-
+// Simple cookie helpers
 const getCookie = (name: string): string | null => {
   if (typeof document === 'undefined') return null;
   return document.cookie
@@ -39,7 +38,14 @@ const getCookie = (name: string): string | null => {
     ?.split('=')[1] || null;
 };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const deleteCookie = (name: string) => {
+  if (typeof document === 'undefined') return;
+  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+};
+
+const getUserRole = (username?: string): 'admin' | 'user' => {
+  return username === 'emilys' ? 'admin' : 'user';
+};
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
@@ -87,10 +93,45 @@ export function AuthProvider({ children }: AuthProviderProps) {
     checkAuth();
   }, [token, username]);
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  const logout = (): void => {
+    // Clear all auth cookies
+    deleteCookie('auth-token');
+    deleteCookie('username');
+    deleteCookie('user-role');
+    deleteCookie('user-data');
+    setUser(null);
+    router.push('/login');
+  };
 
+  const refreshUser = (): void => {
+    const userDataCookie = getCookie('user-data');
+    if (userDataCookie) {
+      try {
+        setUser(JSON.parse(userDataCookie));
+      } catch (error) {
+        console.error('Failed to parse user data:', error);
+        logout();
+      }
+    } else {
+      logout();
+    }
+  };
+
+  const value: AuthContextType = {
+    user,
+    isLoading,
+    isAuthenticated,
+    userRole,
+    logout,
+    refreshUser,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
-
 
 export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
@@ -100,5 +141,4 @@ export function useAuth(): AuthContextType {
   return context;
 }
 
-
-export default AuthContext;
+      

@@ -57,9 +57,9 @@ export default function RootLayout({
           </div>
 
         </div>
-                {/* <AuthProvider> */}
+                <AuthProvider>
                   {children}
-                  {/* </AuthProvider> */}
+                  </AuthProvider>
         <div className='border border-t border-black bg-white z-50 h-[10vh] flex justify-center items-center mt-5'>
             &copy; Vincent 2025
         </div>
