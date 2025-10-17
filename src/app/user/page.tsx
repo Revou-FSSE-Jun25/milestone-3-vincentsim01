@@ -1,17 +1,30 @@
 'use client'
 
-import { useAuth } from '@/context/AuthContext'
-import AuthCheck from '@/components/auth-check'
+import { useAuth } from '@/app/context/AuthContext'
+// import AuthCheck from '@/app/components/auth-check'
 
 export default function UserPage() {
   const { user, userRole, logout } = useAuth()
 
+    const getCookie = (name: string): string | null => {
+  if (typeof document === 'undefined') return null;
+  return document.cookie
+    .split('; ')
+    .find(row => row.startsWith(`${name}=`))
+    ?.split('=')[1] || null;
+};
+
+  const userDataCookie = getCookie('user-data');
+
+  const user2 = JSON.parse(userDataCookie)
+
+
   return (
-    <AuthCheck requiredRole="user">
+    // <AuthCheck requiredRole="user">
       <div style={{ padding: '20px', textAlign: 'center' }}>
         <h1>User Dashboard</h1>
 
-        {user && (
+        {/* {user && (
           <div style={{
             backgroundColor: '#f0f9ff',
             padding: '20px',
@@ -23,10 +36,9 @@ export default function UserPage() {
           }}>
             <h3>User Profile</h3>
             <p><strong>ID:</strong> {user.id}</p>
-            <p><strong>Username:</strong> {user.username}</p>
+
             <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Name:</strong> {user.firstName} {user.lastName}</p>
-            <p><strong>Gender:</strong> {user.gender}</p>
+
             <p><strong>Role:</strong> <span style={{
               color: userRole === 'admin' ? '#d97706' : '#059669',
               fontWeight: 'bold'
@@ -37,7 +49,49 @@ export default function UserPage() {
             {user.image && (
               <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <img
-                  src={user.image}
+                  src={user.avatar}
+                  alt="Profile"
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: userRole === 'admin' ? '3px solid #d97706' : '3px solid #059669'
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        )} */}
+
+                {user2 && (
+          <div style={{
+            backgroundColor: '#f0f9ff',
+            padding: '20px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            textAlign: 'left',
+            maxWidth: '600px',
+            margin: '0 auto 20px'
+          }}>
+            <h3>User Profile</h3>
+            <p><strong>ID:</strong> {user2.id}</p>
+            {/* <p><strong>Username:</strong> {user.username}</p> */}
+            <p><strong>Email:</strong> {user2.email}</p>'            
+            <p><strong>Name:</strong> {user2.name}</p>'
+            {/* <p><strong>Name:</strong> {user.firstName} {user.lastName}</p> */}
+            {/* <p><strong>Gender:</strong> {user.gender}</p> */}
+            <p><strong>Role:</strong> <span style={{
+              color: userRole === 'admin' ? '#d97706' : '#059669',
+              fontWeight: 'bold'
+            }}>
+              {userRole?.toUpperCase()}
+            </span></p>
+
+            {user2.avatar && (
+              <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                <img
+                  src={user2.avatar}
                   alt="Profile"
                   style={{
                     width: '80px',
@@ -120,6 +174,6 @@ export default function UserPage() {
           <p>👤 Logged in as: {user?.username} ({userRole})</p>
         </div>
       </div>
-    </AuthCheck>
+    // </AuthCheck>
   )
 }

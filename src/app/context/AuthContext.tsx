@@ -6,12 +6,17 @@ import { useRouter } from 'next/navigation';
 // Simple user interface
 interface User {
   id: number;
-  username: string;
+
   email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  image: string;
+  password: string;
+  name: string;
+  role: string;
+  // firstName: string;
+  // lastName: string;
+  // gender: string;
+  avatar: string;
+  creationAt: string;
+  updatedAt: string;
 }
 
 interface AuthContextType {
