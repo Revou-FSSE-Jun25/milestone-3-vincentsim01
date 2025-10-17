@@ -29,6 +29,8 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+
+
 // Simple cookie helpers
 const getCookie = (name: string): string | null => {
   if (typeof document === 'undefined') return null;
@@ -43,25 +45,35 @@ const deleteCookie = (name: string) => {
   document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 };
 
-const getUserRole = (username?: string): 'admin' | 'user' => {
-  return username === 'emilys' ? 'admin' : 'user';
+const getUserRole = (email?: string): 'admin' | 'user' => {
+
+  console.log('email di getuserrole AuthContext adalah'+email);
+  return email === 'john@mail.com' ? 'admin' : 'user';
 };
 
+
+
 export function AuthProvider({ children }: AuthProviderProps) {
+  const [userRoleState,setUserRoleState] = useState<'admin' | 'user' | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const token = getCookie('auth-token');
-  const username = getCookie('username');
-  const userRole = getUserRole(username || undefined);
 
-  const isAuthenticated = !!token && !!username;
+  console.log('the token in AuthContext' + token);
+  const email = getCookie('email');
+  const userRole = getUserRole(email || undefined);
+  // setUserRoleState(userRole);
+
+  console.log('userRole di Authcontext adalah'+userRole);
+
+  const isAuthenticated = !!token && !!email;
 
   // Check authentication on mount
   useEffect(() => {
     const checkAuth = () => {
-      if (!token || !username) {
+      if (!token || !email) {
         setIsLoading(false);
         return;
       }
@@ -74,7 +86,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         } else {
           // No user data cached, clear authentication
           deleteCookie('auth-token');
-          deleteCookie('username');
+          deleteCookie('email');
           deleteCookie('user-role');
           deleteCookie('user-data');
         }
@@ -82,7 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         console.error('Auth check failed:', error);
         // Clear invalid authentication
         deleteCookie('auth-token');
-        deleteCookie('username');
+        deleteCookie('email');
         deleteCookie('user-role');
         deleteCookie('user-data');
       } finally {
@@ -91,12 +103,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     checkAuth();
-  }, [token, username]);
+  }, [token, email]);
 
   const logout = (): void => {
     // Clear all auth cookies
     deleteCookie('auth-token');
-    deleteCookie('username');
+    deleteCookie('email');
     deleteCookie('user-role');
     deleteCookie('user-data');
     setUser(null);
@@ -132,6 +144,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   );
 }
+
+
 
 export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);

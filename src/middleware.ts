@@ -3,14 +3,15 @@ import { jwtDecode } from 'jwt-decode';
 
 interface JWTPayload {
   id: number;
-  username: string;
+  email: string;
   exp: number;
 }
 
-// Helper function to determine user role from username
-function getUserRole(username?: string): 'admin' | 'user' {
-  return username === 'emilys' ? 'admin' : 'user';
-}
+// Helper function to determine user role from email
+function getUserRole(email?: string): 'admin' | 'user' {
+  return email === 'john@mail.com' ? 'admin' : 'user';
+} 
+console.log(getUserRole())
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -33,10 +34,10 @@ export function middleware(request: NextRequest) {
 
   // Get auth data from cookies
   const token = request.cookies.get("auth-token")?.value;
-  const username = request.cookies.get("username")?.value;
+  const email = request.cookies.get("email")?.value;
 
   // If no token, redirect to login
-  if (!token || !username) {
+  if (!token || !email) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     loginUrl.searchParams.set("error", "login-required");
@@ -45,23 +46,25 @@ export function middleware(request: NextRequest) {
 
   // Basic JWT validation (no API calls for performance)
   try {
-    const decoded = jwtDecode(token);
+  //   const decoded = jwtDecode(token);
 
-    // Check if token is expired
-    if (decoded.exp * 1000 < Date.now()) {
-      const loginUrl = new URL("/login", request.url);
-      loginUrl.searchParams.set("redirect", pathname);
-      loginUrl.searchParams.set("error", "session-expired");
 
-      // Clear expired tokens
-      const response = NextResponse.redirect(loginUrl);
-      response.cookies.delete("auth-token");
-      response.cookies.delete("username");
-      response.cookies.delete("user-role");
-      return response;
-    }
+  //   if (decoded.exp * 1000 < Date.now()) {
+  //     const loginUrl = new URL("/login", request.url);
+  //     loginUrl.searchParams.set("redirect", pathname);
+  //     loginUrl.searchParams.set("error", "session-expired");
 
-    const userRole = getUserRole(username);
+
+  //     const response = NextResponse.redirect(loginUrl);
+  //     response.cookies.delete("auth-token");
+  //     response.cookies.delete("email");
+  //     response.cookies.delete("user-role");
+  //     return response;
+  //   }
+
+    const userRole = getUserRole(email);
+
+    console.log('User role in middleware:', userRole);
 
     // Role-based access control
     if (pathname.startsWith("/admin") && userRole !== "admin") {
@@ -77,7 +80,7 @@ export function middleware(request: NextRequest) {
 
     // Add user info to headers for downstream use
     const response = NextResponse.next();
-    response.headers.set('x-user-username', username);
+    response.headers.set('x-user-email', email);
     response.headers.set('x-user-role', userRole);
 
     return response;
@@ -90,7 +93,7 @@ export function middleware(request: NextRequest) {
 
     const response = NextResponse.redirect(loginUrl);
     response.cookies.delete("auth-token");
-    response.cookies.delete("username");
+    response.cookies.delete("email");
     response.cookies.delete("user-role");
     return response;
   }

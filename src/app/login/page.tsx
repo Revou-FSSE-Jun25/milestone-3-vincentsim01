@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [steti, setSteti] = useState("");
   const searchParams = useSearchParams();
 
   // Simple cookie helper functions
@@ -47,6 +48,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setIsLoading(true);
+    setSteti("clicked");
 
     try {
       // Direct API call to DummyJSON
@@ -66,13 +68,18 @@ export default function LoginPage() {
       }
 
       const data = await response.json();
+      // console.log(data)
 
-      console.log('Login successful:', data.access_token);
+      // console.log('Login successful:', data.access_token);
 
       // Store authentication data in cookies
       setCookie('auth-token', data.access_token, 30);
+      setCookie('refresh-token', data.refresh_token, 30);
+      // console.log('this is auth token'+   getCookie('auth-token'));
+      // console.log('this is refresh token'+   getCookie('refresh-token'));
       // setCookie('username', username, 30);
       setCookie('email', email, 30);
+      // console.log(getCookie('email'));
       setCookie('user-role', getUserRole(email), 30);
 
       // Get and cache user data
@@ -88,8 +95,9 @@ export default function LoginPage() {
       }
 
       // Redirect based on role
-      const userRole = getUserRole(username);
+      const userRole = getUserRole(email);
       const redirect = userRole === "admin" ? "/admin" : "/user";
+      console.log('Redirecting to:', redirect);
       router.push(redirect);
 
     } catch (error) {
@@ -136,6 +144,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isLoading}
+          onClick={handleLogin}
           style={{
             padding: "10px 20px",
             backgroundColor: isLoading ? "#ccc" : "#0070f3",
