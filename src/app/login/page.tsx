@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("emilys");
-  const [password, setPassword] = useState("emilyspass");
+  // const [username, setUsername] = useState("emilys");
+  const [email, setEmail] = useState("john@mail.com");
+  const [password, setPassword] = useState("changeme");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -26,16 +27,16 @@ export default function LoginPage() {
   };
 
   // Simple role assignment
-  const getUserRole = (username: string): 'admin' | 'user' => {
-    return username === 'emilys' ? 'admin' : 'user';
+  const getUserRole = (email: string): 'admin' | 'user' => {
+    return email === 'john@mail.com' ? 'admin' : 'user';
   };
 
   // Check if already logged in
   useEffect(() => {
     const token = getCookie('auth-token');
-    const savedUsername = getCookie('username');
-    if (token && savedUsername) {
-      const userRole = getUserRole(savedUsername);
+    const savedEmail = getCookie('email');
+    if (token && savedEmail) {
+      const userRole = getUserRole(savedEmail);
       const redirect = userRole === "admin" ? "/admin" : "/user";
       router.push(redirect);
     }
@@ -49,11 +50,12 @@ export default function LoginPage() {
 
     try {
       // Direct API call to DummyJSON
-      const response = await fetch('https://dummyjson.com/auth/login', {
+      const response = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username,
+          email,
+          // username,
           password,
           expiresInMins: 30,
         }),
@@ -65,15 +67,18 @@ export default function LoginPage() {
 
       const data = await response.json();
 
+      console.log('Login successful:', data.access_token);
+
       // Store authentication data in cookies
-      setCookie('auth-token', data.token, 30);
-      setCookie('username', username, 30);
-      setCookie('user-role', getUserRole(username), 30);
+      setCookie('auth-token', data.access_token, 30);
+      // setCookie('username', username, 30);
+      setCookie('email', email, 30);
+      setCookie('user-role', getUserRole(email), 30);
 
       // Get and cache user data
-      const userResponse = await fetch('https://dummyjson.com/auth/me', {
+      const userResponse = await fetch('https://api.escuelajs.co/api/v1/auth/profile', {
         headers: {
-          'Authorization': `Bearer ${data.token}`,
+          'Authorization': `Bearer ${data.access_token}`,
         },
       });
 
@@ -105,12 +110,12 @@ export default function LoginPage() {
         style={{ maxWidth: "300px", margin: "0 auto" }}
       >
         <div style={{ marginBottom: "10px" }}>
-          <label>Username:</label>
+          <label>Email:</label>
           <br />
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             style={{ width: "100%", padding: "5px" }}
             required
           />
@@ -145,11 +150,11 @@ export default function LoginPage() {
       </form>
 
       <div style={{ marginTop: "20px", fontSize: "12px" }}>
-        <p><strong>DummyJSON Test Credentials:</strong></p>
-        <p>Username: <code>emilys</code></p>
-        <p>Password: <code>emilyspass</code></p>
+        <p><strong>Platzi Test Credentials:</strong></p>
+        <p>Email: <code>john@mail.com</code></p>
+        <p>Password: <code>changeme</code></p>
         <p style={{ marginTop: "10px", fontSize: "11px", color: "#666" }}>
-          Note: This will login as 'emilys' with admin privileges
+          Note: This will login as 'John' with admin privileges
         </p>
       </div>
     </div>

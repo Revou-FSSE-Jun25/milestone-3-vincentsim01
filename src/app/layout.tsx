@@ -52,14 +52,14 @@ export default function RootLayout({
             
           </div>
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
-            {/* <Link href='/User/'><span>User</span></Link> */}
+            <Link href='/login/'><span><i className="fa-solid fa-user"></i></span></Link>
             <Link href='/AddToCart/'><i className="fa-solid fa-cart-shopping"></i></Link>
           </div>
 
         </div>
                 <AuthProvider>
                   {children}
-                  </AuthProvider>
+                </AuthProvider>
         <div className='border border-t border-black bg-white z-50 h-[10vh] flex justify-center items-center mt-5'>
             &copy; Vincent 2025
         </div>
