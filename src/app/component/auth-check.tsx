@@ -22,15 +22,18 @@ export default function AuthCheck({
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.push("/login");
+      return;
     }
 
     if (!isAuthenticated) {
-    router.push('/login')
+    router.push('/login');
+    return;
 
   }
 
       if (requiredRole === 'admin' && userRole !== 'admin') {
     router.push('/login')
+    return;
 
   }
 
