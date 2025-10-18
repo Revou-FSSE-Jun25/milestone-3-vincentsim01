@@ -78,8 +78,9 @@ export default function RootLayout({
 
         </div> */}
 
-        <HeaderComponent />
+ 
                 <AuthProvider>
+                         <HeaderComponent />
                   {children}
                 </AuthProvider>
         <div className='border border-t border-black bg-white z-50 h-[10vh] flex justify-center items-center mt-5'>

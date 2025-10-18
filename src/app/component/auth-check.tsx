@@ -1,76 +1,135 @@
+// 'use client'
+
+// import {useState, useEffect} from "react";
+// import {useRouter} from "next/navigation";
+// import {useAuth} from '@/app/context/AuthContext';
+
+// interface AuthCheckProps {
+//   children: React.ReactNode
+//   requiredRole?: 'user' | 'admin'
+// }
+
+
+// export default function AuthCheck({
+//   children,
+//   requiredRole = 'user'
+// }: AuthCheckProps) {
+//   const router = useRouter()
+//   const { isAuthenticated, userRole, isLoading } = useAuth()
+
+//   // Show loading state
+//   if (isLoading) {
+//     return (
+//       <div style={{
+//         display: 'flex',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         minHeight: '200px'
+//       }}>
+//         Loading...
+//       </div>
+//     )
+//   }
+
+//   useEffect(() => {
+//     console.log('AuthCheck - isAuthenticated: ', isAuthenticated);
+//     console.log('AuthCheck - userRole: ', userRole);
+
+//       if (!isAuthenticated) {
+//     router.push('/login')
+//     return
+//   }
+
+//   // Wrong role - redirect to login
+//   if (requiredRole === 'admin' && userRole !== 'admin') {
+//     router.push('/login')
+//     return
+//   }
+//   }, [isAuthenticated, userRole, requiredRole, router]);
+
+//   // Not authenticated - redirect to login
+
+
+//   // Authenticated with correct role - render children
+//   return <>{children}</>
+// }
+
+
+
+
+
+
+
+
 'use client'
 
-import {useState, useEffect} from "react";
-import {useRouter} from "next/navigation";
-import {useAuth} from '@/app/context/AuthContext';
-
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from '@/app/context/AuthContext';
 
 interface AuthCheckProps {
-    children: React.ReactNode
+  children: React.ReactNode
   requiredRole?: 'user' | 'admin'
 }
 
 export default function AuthCheck({
-    children,
-    requiredRole = 'user'
-}: AuthCheckProps){
-     const router = useRouter()
+  children,
+  requiredRole = 'user'
+}: AuthCheckProps) {
+  const router = useRouter()
   const { isAuthenticated, userRole, isLoading } = useAuth()
 
-  console.log('the isAuthenticated in auth check is '+isAuthenticated)
-
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push("/login");
+    if (isLoading) {
+      console.log('⏳ AuthCheck waiting for auth to load...');
       return;
     }
 
+    console.log('🔐 AuthCheck - isAuthenticated:', isAuthenticated);
+    console.log('🔐 AuthCheck - userRole:', userRole);
+
     if (!isAuthenticated) {
-    router.push('/login');
-    return;
+      console.log('❌ Not authenticated, redirecting to login');
+      router.push('/login')
+      return
+    }
 
-  }
+    if (requiredRole === 'admin' && userRole !== 'admin') {
+      console.log('❌ Insufficient permissions, redirecting to login');
+      router.push('/login')
+      return
+    }
 
-      if (requiredRole === 'admin' && userRole !== 'admin') {
-    router.push('/login')
-    return;
+    console.log('✅ AuthCheck passed!');
+  }, [isLoading, isAuthenticated, userRole, requiredRole, router]);
 
-  }
-
-    //   if (isLoading) return; // Wait until loading finishes
-
-
-    // if (!isAuthenticated) {
-    //   router.replace("/login");
-    //   return;
-    // }
-
-    // if (requiredRole === 'admin' && userRole !== 'admin') {
-    //   router.replace("/login");
-    // }
-
-  }, [isAuthenticated, isLoading, router, userRole, requiredRole]);
-
-
-  // Show loading state
   if (isLoading) {
     return (
       <div style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '200px'
+        minHeight: '100vh',
+        fontSize: '18px'
       }}>
         Loading...
       </div>
     )
   }
 
-
-
-
-
+  if (!isAuthenticated || (requiredRole === 'admin' && userRole !== 'admin')) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        fontSize: '18px'
+      }}>
+        Redirecting...
+      </div>
+    )
+  }
 
   return <>{children}</>
-
 }
