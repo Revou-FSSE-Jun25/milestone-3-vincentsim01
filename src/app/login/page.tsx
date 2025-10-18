@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const [steti, setSteti] = useState("");
+  // const [steti, setSteti] = useState("");
   const searchParams = useSearchParams();
 
   // Simple cookie helper functions
@@ -48,7 +48,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setIsLoading(true);
-    setSteti("clicked");
+    // setSteti("clicked");
 
     try {
       // Direct API call to DummyJSON

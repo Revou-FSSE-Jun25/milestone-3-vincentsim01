@@ -22,20 +22,31 @@ export default function AuthCheck({
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.push("/login");
-      return;
     }
 
     if (!isAuthenticated) {
     router.push('/login')
-    return;
+
   }
 
-    if (requiredRole === 'admin' && userRole !== 'admin') {
+      if (requiredRole === 'admin' && userRole !== 'admin') {
     router.push('/login')
-    
+
   }
 
-  }, [isAuthenticated, isLoading, router]);
+    //   if (isLoading) return; // Wait until loading finishes
+
+
+    // if (!isAuthenticated) {
+    //   router.replace("/login");
+    //   return;
+    // }
+
+    // if (requiredRole === 'admin' && userRole !== 'admin') {
+    //   router.replace("/login");
+    // }
+
+  }, [isAuthenticated, isLoading, router, userRole, requiredRole]);
 
 
   // Show loading state

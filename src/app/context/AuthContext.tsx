@@ -60,12 +60,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const token = getCookie('auth-token');
 
-  // console.log('the token in AuthContext' + token);
+  console.log('the token in AuthContext' + token);
   const email = getCookie('email');
   const userRole = getUserRole(email || undefined);
   // setUserRoleState(userRole);
 
-  // console.log('userRole di Authcontext adalah'+userRole);
+  console.log('userRole di Authcontext adalah'+userRole);
 
   const isAuthenticated = !!token && !!email;
 

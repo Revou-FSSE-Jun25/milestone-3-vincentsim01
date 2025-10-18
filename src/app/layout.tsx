@@ -7,6 +7,7 @@ import ToggleButton from "./component/toggleButton";
 import Script from "next/script";
 import "./globals.css";
 import { AuthProvider} from '@/app/context/AuthContext';
+import HeaderComponent from "./component/header/headercomponent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,7 +55,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white z-50 relative'>
+        {/* <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white z-50 relative'>
           <div className='hidden md:flex md:justify-evenly md:items-center w-[40%]'>
             <Link href='/'><span className='hover:underline'>Home</span></Link>
             <Link href='/products/'><span className='hover:underline'>Products</span></Link>
@@ -72,11 +73,12 @@ export default function RootLayout({
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
             <Link href='/login/'> Login</Link>
             <Link href='/user/'> <span><i className="fa-solid fa-user"></i></span></Link>
-            {/* <Link href='/user'>{usernameCookie ? <span className='hidden md:inline'>Hello, {usernameCookie}</span> : <span className='hidden md:inline'>Hello, Guest</span>}</Link> */}
-            <Link href='/AddToCart/'><i className="fa-solid fa-cart-shopping"></i></Link>
+            
           </div>
 
-        </div>
+        </div> */}
+
+        <HeaderComponent />
                 <AuthProvider>
                   {children}
                 </AuthProvider>
