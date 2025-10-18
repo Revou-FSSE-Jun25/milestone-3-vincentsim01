@@ -26,11 +26,11 @@ export default function AdminPage() {
     // <div>
     //   Admin
     // </div>
-    // <AuthCheck requiredRole="admin">
+    <AuthCheck requiredRole="admin">
       <div style={{ padding: '20px', textAlign: 'center' }}>
         <h1>Admin Dashboard</h1>
 
-        {/* {user && (
+        {user && (
           <div style={{
             backgroundColor: '#f5f5f5',
             padding: '20px',
@@ -42,16 +42,14 @@ export default function AdminPage() {
           }}>
             <h3>Admin Profile</h3>
             <p><strong>ID:</strong> {user.id}</p>
-            <p><strong>Username:</strong> {user.username}</p>
             <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Name:</strong> {user.firstName} {user.lastName}</p>
-            <p><strong>Gender:</strong> {user.gender}</p>
-            <p><strong>Role:</strong> <span style={{ color: '#d97706', fontWeight: 'bold' }}>ADMIN</span></p>
+            <p><strong>Name:</strong> {user.name} </p>
+          <p><strong>Role:</strong> <span style={{ color: '#d97706', fontWeight: 'bold' }}>ADMIN</span></p>
 
-            {user.image && (
+            {user.avatar && (
               <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <img
-                  src={user.image}
+                  src={user.avatar}
                   alt="Profile"
                   style={{
                     width: '80px',
@@ -65,7 +63,7 @@ export default function AdminPage() {
           </div>
         )}
 
-        <div style={{ marginBottom: '20px' }}>
+        {/* <div style={{ marginBottom: '20px' }}>
           <p>This is a protected admin page.</p>
           <p>Only users with admin privileges can access this dashboard.</p>
         </div>
@@ -101,7 +99,7 @@ export default function AdminPage() {
         </div> */}
 
 
-
+{/* 
          {user2 && (
           <div style={{
             backgroundColor: '#f5f5f5',
@@ -114,10 +112,10 @@ export default function AdminPage() {
           }}>
             <h3>Admin Profile</h3>
             <p><strong>ID:</strong> {user2.id}</p>
-            {/* <p><strong>Username:</strong> {user2.username}</p> */}
+
             <p><strong>Email:</strong> {user2.email}</p>
-            <p><strong>Name:</strong> {user2.firstName} {user2.lastName}</p>
-            {/* <p><strong>Gender:</strong> {user2.gender}</p> */}
+            <p><strong>Name:</strong> {user2.name}</p>
+
             <p><strong>Role:</strong> <span style={{ color: '#d97706', fontWeight: 'bold' }}>ADMIN</span></p>
 
             {user2.avatar && (
@@ -135,7 +133,7 @@ export default function AdminPage() {
               </div>
             )}
           </div>
-        )}
+        )} */}
 
         <div style={{ marginBottom: '20px' }}>
           <p>This is a protected admin page.</p>
@@ -174,9 +172,9 @@ export default function AdminPage() {
 
         <div style={{ marginTop: '30px', fontSize: '14px', color: '#666' }}>
           <p>🔒 Protected Route - Admin Access Required</p>
-          <p>👤 Logged in as: {user?.username}</p>
+          <p>👤 Logged in as: {user?.name}</p>
         </div>
       </div>
-    // </AuthCheck>
+    </AuthCheck>
   )
 }

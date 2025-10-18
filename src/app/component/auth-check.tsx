@@ -12,10 +12,12 @@ interface AuthCheckProps {
 
 export default function AuthCheck({
     children,
-    requiredRole
+    requiredRole = 'user'
 }: AuthCheckProps){
      const router = useRouter()
   const { isAuthenticated, userRole, isLoading } = useAuth()
+
+  console.log('the isAuthenticated in auth check is '+isAuthenticated)
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {

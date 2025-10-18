@@ -23,11 +23,29 @@ export const metadata: Metadata = {
   description: "An ECommerce that revolutionize your shopping",
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+//   const getCookie = (name: string): string | null => {
+//   if (typeof document === 'undefined') return null;
+//   return document.cookie
+//     .split('; ')
+//     .find(row => row.startsWith(`${name}=`))
+//     ?.split('=')[1] || null;
+// };
+
+// const userdataCookie = getCookie('user-data');
+
+// console.log('userdataCookie di layout is'+userdataCookie)
+
+// const usernameCookie = userdataCookie ? JSON.parse(userdataCookie).name : null;
+
+// console.log('usernameCookie di layout is'+usernameCookie)
   return (
     <html lang="en">
       <head>
@@ -52,7 +70,9 @@ export default function RootLayout({
             
           </div>
           <div className='w-[40%] flex justify-evenly items-center w-[40%]'>
-            <Link href='/login/'><span><i className="fa-solid fa-user"></i></span></Link>
+            <Link href='/login/'> Login</Link>
+            <Link href='/user/'> <span><i className="fa-solid fa-user"></i></span></Link>
+            {/* <Link href='/user'>{usernameCookie ? <span className='hidden md:inline'>Hello, {usernameCookie}</span> : <span className='hidden md:inline'>Hello, Guest</span>}</Link> */}
             <Link href='/AddToCart/'><i className="fa-solid fa-cart-shopping"></i></Link>
           </div>
 
