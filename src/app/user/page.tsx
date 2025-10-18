@@ -1,6 +1,7 @@
 'use client'
 
 import { useAuth } from '@/app/context/AuthContext'
+import AuthCheck from '../component/auth-check';
 // import AuthCheck from '@/app/components/auth-check'
 
 export default function UserPage() {
@@ -16,15 +17,15 @@ export default function UserPage() {
 
   const userDataCookie = getCookie('user-data');
 
-  const user2 = JSON.parse(userDataCookie)
+  // const user2 = JSON.parse(userDataCookie)
 
 
   return (
-    // <AuthCheck requiredRole="user">
+    <AuthCheck requiredRole="user">
       <div style={{ padding: '20px', textAlign: 'center' }}>
         <h1>User Dashboard</h1>
 
-        {/* {user && (
+        {user && (
           <div style={{
             backgroundColor: '#f0f9ff',
             padding: '20px',
@@ -46,7 +47,7 @@ export default function UserPage() {
               {userRole?.toUpperCase()}
             </span></p>
 
-            {user.image && (
+            {user.avatar && (
               <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <img
                   src={user.avatar}
@@ -62,9 +63,9 @@ export default function UserPage() {
               </div>
             )}
           </div>
-        )} */}
+        )}
 
-                {user2 && (
+                {/* {user2 && (
           <div style={{
             backgroundColor: '#f0f9ff',
             padding: '20px',
@@ -76,11 +77,10 @@ export default function UserPage() {
           }}>
             <h3>User Profile</h3>
             <p><strong>ID:</strong> {user2.id}</p>
-            {/* <p><strong>Username:</strong> {user.username}</p> */}
+
             <p><strong>Email:</strong> {user2.email}</p>'            
             <p><strong>Name:</strong> {user2.name}</p>'
-            {/* <p><strong>Name:</strong> {user.firstName} {user.lastName}</p> */}
-            {/* <p><strong>Gender:</strong> {user.gender}</p> */}
+
             <p><strong>Role:</strong> <span style={{
               color: userRole === 'admin' ? '#d97706' : '#059669',
               fontWeight: 'bold'
@@ -104,7 +104,7 @@ export default function UserPage() {
               </div>
             )}
           </div>
-        )}
+        )} */}
 
         <div style={{ marginBottom: '20px' }}>
           <p>This is a protected user page.</p>
@@ -171,9 +171,9 @@ export default function UserPage() {
 
         <div style={{ marginTop: '30px', fontSize: '14px', color: '#666' }}>
           <p>🔒 Protected Route - User Authentication Required</p>
-          <p>👤 Logged in as: {user?.username} ({userRole})</p>
+          <p>👤 Logged in as: {user?.name} ({userRole})</p>
         </div>
       </div>
-    // </AuthCheck>
+    </AuthCheck>
   )
 }

@@ -17,7 +17,7 @@ export default function AdminPage() {
 
  const userDataCookie = getCookie('user-data');
 
- const user2 = JSON.parse(userDataCookie)
+//  const user2 = JSON.parse(userDataCookie)
 
 // const user2 = getCookie('email');
 

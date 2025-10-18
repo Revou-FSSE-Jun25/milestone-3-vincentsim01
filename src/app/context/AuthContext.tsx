@@ -6,14 +6,10 @@ import { useRouter } from 'next/navigation';
 // Simple user interface
 interface User {
   id: number;
-
   email: string;
   password: string;
   name: string;
   role: string;
-  // firstName: string;
-  // lastName: string;
-  // gender: string;
   avatar: string;
   creationAt: string;
   updatedAt: string;
@@ -51,15 +47,13 @@ const deleteCookie = (name: string) => {
 };
 
 const getUserRole = (email?: string): 'admin' | 'user' => {
-
-  // console.log('email di getuserrole AuthContext adalah'+email);
   return email === 'john@mail.com' ? 'admin' : 'user';
 };
 
 
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [userRoleState,setUserRoleState] = useState<'admin' | 'user' | null>(null);
+  // const [userRoleState,setUserRoleState] = useState<'admin' | 'user' | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
