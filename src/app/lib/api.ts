@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import {Product,ProductsResponse,ProductFormData} from '../types/product';
 import axios from 'axios';
 
