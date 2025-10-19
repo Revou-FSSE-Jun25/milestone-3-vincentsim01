@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -54,6 +55,11 @@ export default function CartPage() {
           </li>
         ))}
       </ul>
+      <Link href="/checkout">
+        <button className="mt-4 bg-blue-800 text-white p-4 rounded-lg">
+          Checkout
+        </button>
+      </Link>
     </div>
   );
 }
