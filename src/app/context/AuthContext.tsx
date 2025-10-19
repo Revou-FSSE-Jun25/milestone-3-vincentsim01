@@ -304,7 +304,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Small delay to ensure cookies are readable
       setTimeout(() => {
         checkAuth();
-      }, 50);
+      }, 100);
     }
   }, [pathname]);
 

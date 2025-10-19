@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import ProductList from '../component/productList';
 import { searchProducts } from '@/app/lib/api';
 import { Product } from '../types/product';
+import { useRouter } from "next/navigation";
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResults, setSearchResults] = useState<Product | null>(null);
   const [isSearching, setIsSearching] = useState<boolean>(false);
-  const [showAct, setshowAct] = useState<boolean>(true)
+  const [showAct, setshowAct] = useState<boolean>(true);
+  const router = useRouter();
 
   // TODO 14: Add search functionality
   // Handle search input changes and form submission
@@ -42,27 +44,48 @@ export default function ProductsPage() {
     setSearchResults(null);
   };
 
-  useEffect(()=>{
-    // givePrompt();
-    if(!localStorage.getItem("userType")){
-      givePrompt();
-    }
-    const userType =  JSON.parse(localStorage.getItem("userType") || "false");
+  // useEffect(()=>{
+  //   if(!localStorage.getItem("userType")){
+  //     givePrompt();
+  //   }
+  //   const userType =  JSON.parse(localStorage.getItem("userType") || "false");
     
-    setshowAct(userType);
-  },[])
+  //   setshowAct(userType);
+  // },[])
 
-  function givePrompt(){
-    const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
+  // function givePrompt(){
+  //   const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
 
-    if (answer === "admin") {
-    setshowAct(true);
-    } else if (answer === "customer") {
-    setshowAct(false);
+  //   if (answer === "admin") {
+  //   setshowAct(true);
+  //   } else if (answer === "customer") {
+  //   setshowAct(false);
+  //   } else {
+  //   alert("Please type either 'user' or 'customer'");
+  //   }
+  // }
+
+
+    useEffect(() => {
+    const cookies = document.cookie
+      .split(";")
+      .map((cookie) => cookie.trim().split("="))
+      .reduce((acc: Record<string, string>, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
+
+    const userRole = cookies["user-role"]; // assuming cookie name is user-role
+
+    if (userRole === "admin") {
+      setshowAct(true);
     } else {
-    alert("Please type either 'user' or 'customer'");
+      setshowAct(false);
+      // redirect if not admin
+      // router.push("/login"); 
+      // or any page you want (e.g. /login)
     }
-  }
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
