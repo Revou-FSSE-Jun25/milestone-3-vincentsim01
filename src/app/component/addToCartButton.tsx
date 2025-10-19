@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useCart } from "@/app/context/CartContext";
 
 interface Product {
   id: number;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function AddToCartButton({ product }: Props) {
+  const { addToCart } = useCart();
   const handleAddToCart = () => {
     // Get existing cart items or create empty array
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -25,6 +27,8 @@ export default function AddToCartButton({ product }: Props) {
       alert("Item is already in your cart!");
       return;
     }
+
+    addToCart(product);
 
     // Add new item
     const updatedCart = [...existingCart, product];

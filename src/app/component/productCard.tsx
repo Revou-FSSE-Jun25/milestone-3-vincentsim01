@@ -5,6 +5,7 @@ import Image from 'next/image';
 import AddToCartButton from './addToCartButton';
 import {useState} from 'react';
 
+
 interface ProductCardProps{
     product: Product;
     onDelete?: (id:number) => void;
@@ -12,6 +13,7 @@ interface ProductCardProps{
 }
 
 export default function ProductCard({product, onDelete, showActions = false}: ProductCardProps){
+
 
     const [imgIndex, setimgIndex] = useState<number>(0);
     function nextImgIndex(){

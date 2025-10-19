@@ -8,6 +8,7 @@ import Script from "next/script";
 import "./globals.css";
 import { AuthProvider} from '@/app/context/AuthContext';
 import HeaderComponent from "./component/header/headercomponent";
+import { CartProvider } from "@/app/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -80,8 +81,10 @@ export default function RootLayout({
 
  
                 <AuthProvider>
+                  <CartProvider>
                   <HeaderComponent />
                   {children}
+                  </CartProvider>
                 </AuthProvider>
         <div className='border border-t border-black bg-white z-50 h-[10vh] flex justify-center items-center mt-5'>
             &copy; Vincent 2025
