@@ -84,11 +84,11 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                             </div>
                             ) : 
                             
-                            (
-                            <Link href={`../products/${product.id}`} className="mt-3 bg-gray-700 hover:bg-gray-600 text-white px-2 py-2 rounded-md text-center text-sm font-medium block cursor-pointer hover:scale-110 active:scale-90 transition-transform">
-                                View Details
-                            </Link>
-                        )
+                            (null)
+                            // <Link href={`../products/${product.id}`} className=" bg-gray-700 hover:bg-gray-600 text-white py-1 rounded-md text-center text-sm font-medium block cursor-pointer hover:scale-110 active:scale-90 transition-transform">
+                            //     View Details
+                            // </Link>
+                    
                         }
                 </div>
             </div>

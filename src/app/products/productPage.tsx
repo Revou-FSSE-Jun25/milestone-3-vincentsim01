@@ -4,6 +4,8 @@ import ProductList from '../component/productList';
 import { searchProducts } from '@/app/lib/api';
 import { Product } from '../types/product';
 import { useRouter } from "next/navigation";
+import { useAuth } from '@/app/context/AuthContext';
+
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -11,6 +13,7 @@ export default function ProductsPage() {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [showAct, setshowAct] = useState<boolean>(true);
   const router = useRouter();
+  const { userRole, isAuthenticated } = useAuth();
 
   // TODO 14: Add search functionality
   // Handle search input changes and form submission
@@ -137,7 +140,9 @@ export default function ProductsPage() {
             {searchResults && !isSearching && `Found ${searchResults} results for "${searchQuery}"`}
             {searchResults === null && !isSearching && 'All Products'}
           </div>
-          <button
+
+          {userRole === 'admin' ? (
+                      <button
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors flex items-center"
             onClick={() => window.location.href = '/products/create'}
           >
@@ -146,6 +151,16 @@ export default function ProductsPage() {
             </svg>
             Create Product
           </button>
+          ):(null)}
+          {/* <button
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors flex items-center"
+            onClick={() => window.location.href = '/products/create'}
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Create Product
+          </button> */}
         </div>
 
         {/* TODO 15: Add ProductList component with proper props */}
