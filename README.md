@@ -1,158 +1,225 @@
-# 🛍️ Revoshop — E-commerce Web App (Next.js + TypeScript)
+🛍️ Revoshop — E-commerce Web App (Next.js + TypeScript)
 
-**Revoshop** is a simple yet functional e-commerce web application built with **Next.js** and **TypeScript**, following the **CRUD (Create, Read, Update, Delete)** principle.  
-It utilizes the [Platzi Fake Store API](https://fakeapi.platzi.com/) to handle product data and demonstrates modern React and Next.js concepts such as client-side rendering (CSR), server-side rendering (SSR), and static site generation (SSG).
+Revoshop is a modern Next.js + TypeScript e-commerce web application built to demonstrate CRUD operations, role-based access control, and dynamic rendering using Context API and Middleware.
+It connects to the Platzi Fake Store API
+ to simulate real-world product management and shopping workflows.
 
----
+🚀 Features
+🧭 Core Functionalities
 
-## 🚀 Features
+🛒 Product Listing – Displays products with pagination (12 per page)
 
-### 🧭 Core Functionalities
-- **Product Listing** – Fetches and displays products (limited to 10 per page).  
-- **Product Search** – Allows users to search for specific products.  
-- **Product Details Page** – Dynamic route using `[id]`, accessible via `localhost:3000/products/[id]`.  
-- **Add to Cart** – Stores selected items in **Session Storage**.  
-- **CRUD Operations** – 
-  - **Admin View:** Create, Update, Delete, and Add to Cart.  
-  - **Customer View:** View products and Add to Cart only.  
+🔍 Search Products – Dynamic filtering by name
 
-### ⚙️ Technical Highlights
-- Built with **Next.js** and **TypeScript**  
-- Uses **React Hooks**:
-  - `useState`, `useEffect`
-  - `useParams`
-  - `useRouter`, `Link`
-  - `react-hook-form` for form handling
-- Integrates **CSR**, **SSR**, and **SSG**
-- API integration with [Fake Store API (Platzi)](https://fakeapi.platzi.com/)
+📦 Product Details Page – Dynamic route /products/[id]
 
----
+🛍️ Add to Cart – Cart management via Context API and LocalStorage
 
-## 🧩 Architecture Overview
+🧰 CRUD Operations (Admin Only) – Create, Edit, and Delete products
 
-### Pages & Routing
-- **`/products`** – Displays product list (CSR/SSR/SSG).  
-- **`/products/[id]`** – Dynamic route showing details of a specific product.  
-- **`/admin`** – Admin panel to manage products.  
-- **`/create`** – Form page for adding new products (POST).  
-- **`/update/[id]`** – Form page for updating existing products (PUT).  
-- **`/cart`** – Session-based cart management page.
+👤 Customer View – View and add items to cart
 
-### Data Handling
-- All product data is fetched from: https://fakeapi.platzi.com/
+🧠 Role-Based Access Control (Context API + Middleware)
+🔐 Authentication Flow
 
-- Supports `GET`, `POST`, `PUT`, and `DELETE` methods.
+Context API manages user authentication and role (admin or customer) across all components.
 
----
+Middleware intercepts requests to protected routes like /admin and redirects unauthorized users to /login.
 
-## 👩‍💻 Tech Stack
+🧩 Example — Auth Context
+"use client";
+import { createContext, useState, useContext, useEffect } from "react";
+import Cookies from "js-cookie";
 
-| Technology | Purpose |
-|-------------|----------|
-| **Next.js** | Framework for SSR, CSR, and SSG |
-| **TypeScript** | Type-safe JavaScript development |
-| **React Hook Form** | Simplified form management |
-| **Session Storage** | Persistent cart storage |
-| **Platzi Fake API** | Mock data source |
-| **ChatGPT & Claude** | AI-assisted code and content development |
+type AuthContextType = {
+  userRole: string | null;
+  setUserRole: (role: string | null) => void;
+  isAuthenticated: boolean;
+};
 
----
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-## 🔐 User Roles
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [userRole, setUserRole] = useState<string | null>(null);
 
-### 👨‍💼 Administrator
-- Create new products  
-- Edit existing products  
-- Delete products  
-- Add to cart
+  useEffect(() => {
+    const role = Cookies.get("user-role");
+    if (role) setUserRole(role);
+  }, []);
 
-### 👤 Customer
-- View products  
-- Search products  
-- Add to cart
+  const isAuthenticated = !!userRole;
 
----
+  return (
+    <AuthContext.Provider value={{ userRole, setUserRole, isAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-## 📄 Current Limitations / To-Do
-- [ ] Image upload feature  
-- [ ] Mobile responsiveness  
-- [ ] Login / Logout system  
-- [ ] Checkout & payment integration  
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error("useAuth must be used inside AuthProvider");
+  return context;
+};
 
----
+🛡️ Middleware for Route Protection
+// middleware.ts
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-## 🌐 Live Preview
+export function middleware(req: NextRequest) {
+  const role = req.cookies.get("user-role")?.value;
+  const path = req.nextUrl.pathname;
 
-You can view the project deployment and status on Netlify here:  
-🔗 [Revoshop on Netlify](https://app.netlify.com/projects/revoshop/overview)
+  if (path.startsWith("/admin")) {
+    if (!role || role !== "admin") {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+  }
 
----
+  return NextResponse.next();
+}
 
-## 🧠 Learning Outcomes
+export const config = {
+  matcher: ["/admin/:path*", "/checkout/:path*"],
+};
+
+🧩 Folder Structure
+revoshop/
+├── app/
+│   ├── layout.tsx                # Global layout
+│   ├── page.tsx                  # Homepage
+│   ├── products/
+│   │   ├── page.tsx              # Product listing
+│   │   ├── [id]/page.tsx         # Product details (ISR + CSR)
+│   │   ├── create/page.tsx       # Create product form (Admin)
+│   │   └── [id]/edit/page.tsx    # Update product (Admin)
+│   ├── admin/page.tsx            # Admin dashboard
+│   ├── cart/page.tsx             # Cart management
+│   ├── login/page.tsx            # Login (set user role)
+│   ├── checkout/page.tsx         # Checkout page
+│   └── globals.css               # Tailwind global styles
+│
+├── components/
+│   ├── AddToCartButton.tsx
+│   ├── Navbar.tsx
+│   ├── ProductCard.tsx
+│   └── ProductForm.tsx
+│
+├── context/
+│   ├── AuthContext.tsx           # User authentication & roles
+│   └── CartContext.tsx           # Cart management
+│
+├── lib/
+│   └── api.ts                    # Axios API handlers (GET, POST, PUT, DELETE)
+│
+├── __tests__/                    # Jest unit tests
+│   ├── cart.test.ts
+│   └── product.test.ts
+│
+├── public/                       # Static assets
+│   └── placeholder.png
+│
+├── middleware.ts                 # Route protection logic
+├── next.config.mjs               # ISR & image configuration
+├── package.json
+└── tsconfig.json
+
+⚙️ Dynamic Rendering & ISR
+
+Revoshop uses Incremental Static Regeneration (ISR) to revalidate product pages automatically.
+
+// app/products/[id]/page.tsx
+export const revalidate = 60; // Revalidate every 60 seconds
+
+
+This ensures the product page updates dynamically when data changes — without needing a full rebuild.
+
+🧩 Admin vs Customer View (Ternary Operator)
+const { userRole } = useAuth();
+
+return (
+  <>
+    {userRole === "admin" ? (
+      <button onClick={() => router.push(`/products/${id}/edit`)}>Edit Product</button>
+    ) : (
+      <AddToCartButton product={product} />
+    )}
+  </>
+);
+
+
+One route — two roles — dynamic rendering based on role.
+
+🧪 Unit Testing (Jest + React Testing Library)
+
+Revoshop integrates Jest for functional testing.
+
+Example Test
+// __tests__/cart.test.ts
+import { renderHook, act } from "@testing-library/react";
+import { CartProvider, useCart } from "@/context/CartContext";
+
+describe("Cart Context", () => {
+  it("adds product to cart", () => {
+    const { result } = renderHook(() => useCart(), { wrapper: CartProvider });
+
+    act(() => {
+      result.current.addToCart({ id: 1, title: "Test", price: 10, totalItems: 1 });
+    });
+
+    expect(result.current.cart.length).toBe(1);
+  });
+});
+
+🧰 Tech Stack
+Technology	Purpose
+Next.js 14	App Router, SSR, CSR, ISR
+TypeScript	Type-safe React code
+React Context API	Global state & authentication
+Axios	API integration
+React Hook Form	Form validation
+Tailwind CSS	Styling
+Jest + RTL	Unit testing
+Platzi Fake API	Product data source
+🔐 User Roles
+Role	Permissions
+👨‍💼 Admin	Create, edit, delete, and view products
+👤 Customer	View products, add to cart, checkout
+📄 Future Enhancements
+
+ JWT authentication
+
+ Cloudinary image uploads
+
+ Stripe/PayPal integration
+
+ Mobile responsive UI
+
+ Enhanced admin analytics dashboard
+
+🌐 Deployment
+Platform	Recommended For
+Vercel	🥇 Best for Next.js apps — auto-optimizations
+Render.com	Free-tier hosting with server support
+Railway.app	Backend-friendly full-stack hosting
+
+Deployment command:
+
+npm run build && npm start
+
+🧠 Learning Outcomes
 
 This project demonstrates:
-- The use of **Next.js rendering modes** (CSR, SSR, SSG)
-- Understanding of **React hooks** and **state management**
-- CRUD operations using a RESTful API
-- Building reusable components with **TypeScript**
-- Handling routes and dynamic pages in Next.js
-- Use of **AI tools** (ChatGPT, Claude) to enhance development efficiency
 
----
+Authentication & role-based access using Context API + Middleware
 
-## 📦 Installation & Setup
+Integration of CSR, SSR, SSG, and ISR
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/revoshop.git
+API-driven CRUD operations
 
-# Navigate to project folder
-cd revoshop
+Reusable React components and TypeScript interfaces
 
-# Install dependencies
-npm install
+Jest unit testing for context and API logic
 
-# Run development server
-npm run dev
-
-# Open your browser at
-http://localhost:3000
-
-
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Secure route handling and conditional rendering
