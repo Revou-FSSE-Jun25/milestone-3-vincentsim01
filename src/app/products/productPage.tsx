@@ -135,11 +135,11 @@ export default function ProductsPage() {
             {searchResults === null && !isSearching && 'All Products'}
           </div>
           
-          <div className="text-gray-400">
+          {/* <div className="text-gray-400">
             {isSearching && `Searching for "${searchQuery}"...`}
             {searchResults && !isSearching && `Found ${searchResults} results for "${searchQuery}"`}
             {searchResults === null && !isSearching && 'All Products'}
-          </div>
+          </div> */}
 
           {userRole === 'admin' ? (
                       <button
