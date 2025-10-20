@@ -148,6 +148,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/app/context/AuthContext';
+import CartIcon from "@/app/component/cartIcon";
 
 const HeaderComponent = () => {
   const [username, setUsername] = useState<string | null>(null);
@@ -219,7 +220,8 @@ const HeaderComponent = () => {
         </Link>
         
         <Link href='/AddToCart/'>
-          <i className="fa-solid fa-cart-shopping"></i>
+          {/* <i className="fa-solid fa-cart-shopping"></i> */}
+          <CartIcon className="ml-2" />
         </Link>
       </div>
     </div>
