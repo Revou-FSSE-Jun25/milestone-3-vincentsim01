@@ -196,19 +196,13 @@ const HeaderComponent = () => {
         </Link>
       </div>
 
+      
+
       <div className='w-[40%] flex justify-evenly items-center'>
-        {!isAuthenticated ? (
-          <Link href='/login/'>Login</Link>
-        ) : (
-          <button onClick={handleLogout} className='hover:underline'>
-            Logout
-          </button>
-        )}
-        
-        <Link href='/user/'>
-          <span>
-            <i className="fa-solid fa-user"></i>
-          </span>
+
+                <Link href='/AddToCart/'>
+          {/* <i className="fa-solid fa-cart-shopping"></i> */}
+          <CartIcon className="ml-2" />
         </Link>
         
         <Link href='/user'>
@@ -218,11 +212,26 @@ const HeaderComponent = () => {
             <span className='hidden md:inline'>Hello, Guest</span>
           )}
         </Link>
+        {!isAuthenticated ? (
+          <Link href='/login/'>Login</Link>
+        ) : (
+          <div>
+                    {/* <Link href='/user/'>
+          <span className='mr-3'>
+            <i className="fa-solid fa-user"></i>
+          </span>
+        </Link> */}
+
+                  <button onClick={handleLogout} className='hover:underline'>
+            Logout
+          </button>
+          </div>
+
+        )}
         
-        <Link href='/AddToCart/'>
-          {/* <i className="fa-solid fa-cart-shopping"></i> */}
-          <CartIcon className="ml-2" />
-        </Link>
+
+        
+
       </div>
     </div>
   );
