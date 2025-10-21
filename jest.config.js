@@ -197,4 +197,20 @@ const config = {
   // watchman: true,
 };
 
-module.exports = config;
+// module.exports = config;
+
+const nextJest = require("next/jest");
+
+const createJestConfig = nextJest({
+  dir: "./", // Path to your Next.js app
+});
+
+const customJestConfig = {
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
+};
+
+module.exports = createJestConfig(customJestConfig);

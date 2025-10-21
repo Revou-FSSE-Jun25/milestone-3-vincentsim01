@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import AddToCartButton from './addToCartButton';
 import {useState} from 'react';
+import { useAuth } from '@/app/context/AuthContext'
 
 
 interface ProductCardProps{
@@ -13,6 +14,7 @@ interface ProductCardProps{
 }
 
 export default function ProductCard({product, onDelete, showActions = false}: ProductCardProps){
+      const { userRole} = useAuth();
 
 
     const [imgIndex, setimgIndex] = useState<number>(0);
@@ -70,11 +72,16 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                         </div>
                     </Link>
 
-                    <AddToCartButton product={product} />
+                    {userRole === null ? (
+                        <Link href={`/login`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center">
+                                Add To Cart
+                        </Link>):(<AddToCartButton product={product} />)} 
+                    {/* <AddToCartButton product={product} /> */}
 
 
                         {showActions ? (
                             <div className="flex gap-2 mt-3">
+              
                                 <Link href={`/products/${product.id}/edit`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Edit
                                 </Link>
@@ -84,7 +91,10 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                             </div>
                             ) : 
                             
-                            (null)
+                            (
+                                    null
+
+                            )
                             // <Link href={`../products/${product.id}`} className=" bg-gray-700 hover:bg-gray-600 text-white py-1 rounded-md text-center text-sm font-medium block cursor-pointer hover:scale-110 active:scale-90 transition-transform">
                             //     View Details
                             // </Link>
