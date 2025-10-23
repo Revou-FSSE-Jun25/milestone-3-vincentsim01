@@ -92,3 +92,21 @@ describe("ProductCard Component - not null", () => {
 
     });
 });
+
+
+describe("ProductCard Edit Delete", () => {});
+    test("show edit delete for admin", async () => {
+        mockUseAuth.mockReturnValue({
+        userRole: 'admin',
+        isAuthenticated: true,
+        });
+
+
+        render(
+            <ProductCard product={mockProduct} showActions={true}/>
+        )
+        const EditButton = screen.getByRole('link', { name: /edit/i });
+        expect(EditButton).toBeInTheDocument(); 
+        const DeleteButton = screen.getByRole('button', { name: /delete/i });
+        expect(DeleteButton).toBeInTheDocument();   
+    });
