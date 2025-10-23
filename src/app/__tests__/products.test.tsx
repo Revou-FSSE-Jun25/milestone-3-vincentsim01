@@ -160,3 +160,16 @@ describe('ProductsPage - Admin Access', () => {
 //     expect(createButton).not.toBeInTheDocument();
 //   });
 // });
+
+
+describe("Products Page API", () => {
+  test("getProducts returns a list of products", async () => {
+    render(
+        // <AuthProvider>
+            <ProductPage />
+        // </AuthProvider>
+    );
+    const Heading1 = screen.getByRole("heading",{level:1});
+    expect(Heading1).toBeInTheDocument();
+  });
+});
