@@ -47,28 +47,6 @@ export default function ProductsPage() {
     setSearchResults(null);
   };
 
-  // useEffect(()=>{
-  //   if(!localStorage.getItem("userType")){
-  //     givePrompt();
-  //   }
-  //   const userType =  JSON.parse(localStorage.getItem("userType") || "false");
-    
-  //   setshowAct(userType);
-  // },[])
-
-  // function givePrompt(){
-  //   const answer = prompt("Are you an admin or a customer?")?.toLowerCase();
-
-  //   if (answer === "admin") {
-  //   setshowAct(true);
-  //   } else if (answer === "customer") {
-  //   setshowAct(false);
-  //   } else {
-  //   alert("Please type either 'user' or 'customer'");
-  //   }
-  // }
-
-
     useEffect(() => {
     const cookies = document.cookie
       .split(";")
@@ -84,9 +62,7 @@ export default function ProductsPage() {
       setshowAct(true);
     } else {
       setshowAct(false);
-      // redirect if not admin
-      // router.push("/login"); 
-      // or any page you want (e.g. /login)
+
     }
   }, []);
 
@@ -135,11 +111,7 @@ export default function ProductsPage() {
             {searchResults === null && !isSearching && 'All Products'}
           </div>
           
-          {/* <div className="text-gray-400">
-            {isSearching && `Searching for "${searchQuery}"...`}
-            {searchResults && !isSearching && `Found ${searchResults} results for "${searchQuery}"`}
-            {searchResults === null && !isSearching && 'All Products'}
-          </div> */}
+
 
           {userRole === 'admin' ? (
                       <button
@@ -152,15 +124,7 @@ export default function ProductsPage() {
             Create Product
           </button>
           ):(null)}
-          {/* <button
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors flex items-center"
-            onClick={() => window.location.href = '/products/create'}
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Create Product
-          </button> */}
+
         </div>
 
         {/* TODO 15: Add ProductList component with proper props */}
