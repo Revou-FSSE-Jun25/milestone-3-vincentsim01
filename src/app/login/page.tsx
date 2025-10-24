@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { cookies } from 'next/headers';
 
+
+
+
 export default function LoginPage() {
   const [email, setEmail] = useState("john@mail.com");
   const [password, setPassword] = useState("changeme");
@@ -12,14 +15,15 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const setCookie = (name: string, value: string, minutes: number = 30) => {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (minutes * 60 * 1000));
-    document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}`;
-    console.log(`🍪 Cookie set: ${name}`);
-  };
 
-  hahahah
+  
+  // const setCookie = (name: string, value: string, minutes: number = 30) => {
+  //   const expires = new Date();
+  //   expires.setTime(expires.getTime() + (minutes * 60 * 1000));
+  //   document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}`;
+  //   console.log(`🍪 Cookie set: ${name}`);
+  // };
+
 
   const getCookie = (name: string): string | null => {
     return document.cookie

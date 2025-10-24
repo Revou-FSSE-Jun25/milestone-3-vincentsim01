@@ -14,7 +14,17 @@ function getUserRole(email?: string): 'admin' | 'user' {
 console.log(getUserRole())
 
 export function middleware(request: NextRequest) {
+    const response = NextResponse.next();
   const { pathname } = request.nextUrl;
+
+   response.cookies.set({
+    name: 'auth',
+    value: 'abc123',
+    httpOnly: true,
+    secure: true,
+    sameSite: 'lax',
+    path: '/',
+  });
 
   // Define public routes that don't require authentication
   const publicRoutes = ["/login", "/", "/products", "/FAQ", "/Promotion"];
