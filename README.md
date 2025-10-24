@@ -1,32 +1,42 @@
-🛍️ Revoshop — E-commerce Web App (Next.js + TypeScript)
 
-Revoshop is a modern Next.js + TypeScript e-commerce web application built to demonstrate CRUD operations, role-based access control, and dynamic rendering using Context API and Middleware.
-It connects to the Platzi Fake Store API
- to simulate real-world product management and shopping workflows.
 
-🚀 Features
+🛍️ Revoshop — E-Commerce Web Application (Next.js + TypeScript + Jest)
+
+Revoshop is a modern Next.js + TypeScript e-commerce web application built to demonstrate full-stack functionality, including CRUD operations, authentication, role-based access control, middleware protection, and automated testing using Jest and React Testing Library.
+
+The app connects to the Platzi Fake Store API to simulate real-world product management, shopping, and user authentication workflows.
+
+🚀 Key Features
 🧭 Core Functionalities
 
-🛒 Product Listing – Displays products with pagination (12 per page)
+🛒 Product Listing – Displays products with pagination (12 items per page).
 
-🔍 Search Products – Dynamic filtering by name
+🔍 Search Products – Filter dynamically by product name.
 
-📦 Product Details Page – Dynamic route /products/[id]
+📦 Product Details – Dynamic routing under /products/[id].
 
-🛍️ Add to Cart – Cart management via Context API and LocalStorage
+🛍️ Add to Cart – Manage shopping cart using Context API and local storage.
 
-🧰 CRUD Operations (Admin Only) – Create, Edit, and Delete products
+🧰 CRUD Operations (Admin) – Create, update, and delete products via admin dashboard.
 
-👤 Customer View – View and add items to cart
+👤 Customer View – Browse, view details, and add products to cart.
 
-🧠 Role-Based Access Control (Context API + Middleware)
-🔐 Authentication Flow
+🧠 Authentication & Role-Based Access
 
-Context API manages user authentication and role (admin or customer) across all components.
+Authentication and role management are implemented through the Context API and Next.js Middleware.
 
-Middleware intercepts requests to protected routes like /admin and redirects unauthorized users to /login.
+🔐 Login Flow
 
-🧩 Example — Auth Context
+Users authenticate via Platzi Fake Store API.
+
+The app assigns roles (admin or user) and stores credentials in cookies.
+
+Middleware protects admin routes and redirects unauthorized users to /login.
+
+
+
+
+🧩 Auth Context
 "use client";
 import { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
@@ -62,6 +72,8 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
+
+
 🛡️ Middleware for Route Protection
 // middleware.ts
 import { NextResponse } from "next/server";
@@ -71,10 +83,8 @@ export function middleware(req: NextRequest) {
   const role = req.cookies.get("user-role")?.value;
   const path = req.nextUrl.pathname;
 
-  if (path.startsWith("/admin")) {
-    if (!role || role !== "admin") {
-      return NextResponse.redirect(new URL("/login", req.url));
-    }
+  if (path.startsWith("/admin") && role !== "admin") {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   return NextResponse.next();
@@ -84,142 +94,164 @@ export const config = {
   matcher: ["/admin/:path*", "/checkout/:path*"],
 };
 
-🧩 Folder Structure
-revoshop/
-├── app/
-│   ├── layout.tsx                # Global layout
-│   ├── page.tsx                  # Homepage
-│   ├── products/
-│   │   ├── page.tsx              # Product listing
-│   │   ├── [id]/page.tsx         # Product details (ISR + CSR)
-│   │   ├── create/page.tsx       # Create product form (Admin)
-│   │   └── [id]/edit/page.tsx    # Update product (Admin)
-│   ├── admin/page.tsx            # Admin dashboard
-│   ├── cart/page.tsx             # Cart management
-│   ├── login/page.tsx            # Login (set user role)
-│   ├── checkout/page.tsx         # Checkout page
-│   └── globals.css               # Tailwind global styles
-│
-├── components/
-│   ├── AddToCartButton.tsx
-│   ├── Navbar.tsx
-│   ├── ProductCard.tsx
-│   └── ProductForm.tsx
-│
-├── context/
-│   ├── AuthContext.tsx           # User authentication & roles
-│   └── CartContext.tsx           # Cart management
-│
-├── lib/
-│   └── api.ts                    # Axios API handlers (GET, POST, PUT, DELETE)
-│
-├── __tests__/                    # Jest unit tests
-│   ├── cart.test.ts
-│   └── product.test.ts
-│
-├── public/                       # Static assets
-│   └── placeholder.png
-│
-├── middleware.ts                 # Route protection logic
-├── next.config.mjs               # ISR & image configuration
-├── package.json
-└── tsconfig.json
+
+
+💳 Cart Management (Context API)
+
+Shopping cart functionality is handled globally via React Context and local storage.
+
+const [cart, setCart] = useState<Product[]>([]);
+
+const addToCart = (product: Product) => {
+  setCart(prev => {
+    const existing = prev.find(item => item.id === product.id);
+    return existing
+      ? prev.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: (item.quantity || 1) + 1 }
+            : item
+        )
+      : [...prev, { ...product, quantity: 1 }];
+  });
+};
+
+
 
 ⚙️ Dynamic Rendering & ISR
 
-Revoshop uses Incremental Static Regeneration (ISR) to revalidate product pages automatically.
+Revoshop uses Incremental Static Regeneration (ISR) to keep product pages fresh without full rebuilds.
 
-// app/products/[id]/page.tsx
 export const revalidate = 60; // Revalidate every 60 seconds
 
 
-This ensures the product page updates dynamically when data changes — without needing a full rebuild.
+This allows automatic background regeneration when products are updated.
 
-🧩 Admin vs Customer View (Ternary Operator)
+🧩 Admin vs Customer Rendering
 const { userRole } = useAuth();
 
-return (
-  <>
-    {userRole === "admin" ? (
-      <button onClick={() => router.push(`/products/${id}/edit`)}>Edit Product</button>
-    ) : (
-      <AddToCartButton product={product} />
-    )}
-  </>
+return userRole === "admin" ? (
+  <button onClick={() => router.push(`/products/${id}/edit`)}>Edit Product</button>
+) : (
+  <AddToCartButton product={product} />
 );
 
 
-One route — two roles — dynamic rendering based on role.
+Single route — two views — context-driven rendering.
 
-🧪 Unit Testing (Jest + React Testing Library)
+🧪 Testing (Next.js + Jest + React Testing Library)
 
-Revoshop integrates Jest for functional testing.
+Revoshop includes comprehensive testing for contexts, components, and forms.
 
-Example Test
-// __tests__/cart.test.ts
+✅ Test Coverage
+Component	Test Type	Description
+CartContext	Unit Test	Adds/removes products, calculates totals.
+AuthContext	Unit Test	Validates authentication and role persistence.
+ProductForm	Integration	Tests input handling, form submission, and validation.
+ProductList	Unit Test	Renders product cards or “No products available”.
+Login Page	Mock Test	Simulates API login success/failure and redirect behavior.
+Banner Component	Render Test	Verifies dynamic banner visibility and text display.
+Example — CartContext Test
 import { renderHook, act } from "@testing-library/react";
 import { CartProvider, useCart } from "@/context/CartContext";
 
 describe("Cart Context", () => {
-  it("adds product to cart", () => {
+  it("adds a product to the cart", () => {
     const { result } = renderHook(() => useCart(), { wrapper: CartProvider });
 
     act(() => {
-      result.current.addToCart({ id: 1, title: "Test", price: 10, totalItems: 1 });
+      result.current.addToCart({ id: 1, title: "Sample", price: 50, totalItems: 1 });
     });
 
     expect(result.current.cart.length).toBe(1);
   });
 });
 
+Example — Login Page Mock Test
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import LoginPage from "@/app/login/page";
+import { useRouter } from "next/navigation";
+
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+
+test("redirects to user dashboard on successful login", async () => {
+  const push = jest.fn();
+  (useRouter as jest.Mock).mockReturnValue({ push });
+
+  render(<LoginPage />);
+  fireEvent.click(screen.getByRole("button", { name: /login/i }));
+
+  await waitFor(() => expect(push).toHaveBeenCalledWith("/user"));
+});
+
 🧰 Tech Stack
 Technology	Purpose
-Next.js 14	App Router, SSR, CSR, ISR
-TypeScript	Type-safe React code
-React Context API	Global state & authentication
-Axios	API integration
+Next.js 14	App Router, ISR, SSR, and Middleware
+TypeScript	Strongly-typed React code
+React Context API	Global state management
+Axios / Fetch API	API communication
 React Hook Form	Form validation
-Tailwind CSS	Styling
-Jest + RTL	Unit testing
-Platzi Fake API	Product data source
-🔐 User Roles
-Role	Permissions
-👨‍💼 Admin	Create, edit, delete, and view products
-👤 Customer	View products, add to cart, checkout
-📄 Future Enhancements
+Tailwind CSS	Modern UI styling
+Jest + React Testing Library	Unit and integration testing
+MSW (Mock Service Worker)	Mocking API responses
+🧩 Folder Structure
+revoshop/
+├── app/
+│   ├── login/page.tsx
+│   ├── products/[id]/page.tsx
+│   ├── admin/page.tsx
+│   └── checkout/page.tsx
+├── components/
+│   ├── AddToCartButton.tsx
+│   ├── ProductCard.tsx
+│   ├── Banner.tsx
+│   └── ProductForm.tsx
+├── context/
+│   ├── AuthContext.tsx
+│   └── CartContext.tsx
+├── __tests__/
+│   ├── cart.test.ts
+│   ├── auth.test.ts
+│   ├── productForm.test.ts
+│   ├── productList.test.ts
+│   ├── login.test.ts
+│   └── banner.test.ts
+├── middleware.ts
+└── next.config.mjs
 
- JWT authentication
+🔮 Future Enhancements
 
- Cloudinary image uploads
+✅ JWT Authentication
 
- Stripe/PayPal integration
+☁️ Cloudinary Product Image Uploads
 
- Mobile responsive UI
+💳 Stripe / PayPal Integration
 
- Enhanced admin analytics dashboard
+📱 Responsive Mobile UI
+
+📊 Admin Analytics Dashboard
 
 🌐 Deployment
-Platform	Recommended For
-Vercel	🥇 Best for Next.js apps — auto-optimizations
-Render.com	Free-tier hosting with server support
-Railway.app	Backend-friendly full-stack hosting
+Platform	Notes
+Vercel	⚡️ Optimized for Next.js
+Render.com	Free-tier full-stack hosting
+Railway.app	Ideal for backend integration
 
-Deployment command:
+Build & Deploy:
 
 npm run build && npm start
 
 🧠 Learning Outcomes
 
-This project demonstrates:
+Revoshop demonstrates how to:
 
-Authentication & role-based access using Context API + Middleware
+Implement authentication & authorization with Context + Middleware
 
-Integration of CSR, SSR, SSG, and ISR
+Combine SSR, CSR, and ISR rendering strategies
 
-API-driven CRUD operations
+Perform CRUD operations via REST API
 
-Reusable React components and TypeScript interfaces
+Write unit and mock tests for React components
 
-Jest unit testing for context and API logic
-
-Secure route handling and conditional rendering
+Build scalable, type-safe Next.js applications
