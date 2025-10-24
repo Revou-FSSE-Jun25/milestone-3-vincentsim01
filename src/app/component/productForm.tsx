@@ -80,12 +80,13 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Product Title *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor='Title'>Product Title *</label>
             <input
               {...register('title', {
                 // required: 'Title is required',
                 minLength: { value: 3, message: 'Title must be at least 3 characters' }
               })}
+              id='Title'
               className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter product title" 
             />
@@ -93,12 +94,13 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Description *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="Description">Description *</label>
             <textarea
               {...register('description', {
                 // required: 'description is required',
                 minLength: { value: 10, message: 'Description must be at least 10 characters' }
               })}
+              id='Description'
               rows={4}
               className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter product description"
@@ -107,7 +109,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Price ($) *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor='Price'>Price ($) *</label>
             <input
               type="number"
               step="0.01"
@@ -115,6 +117,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
                 // required: 'Price is required',
                 min: { value: 0, message: 'Price must be positive' }
               })}
+              id='Price'
               className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="0.00"
             />
@@ -124,7 +127,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         </div>
 
                             <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">CategoryId *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor='categoryId'>CategoryId *</label>
             <input
               type="number"
        
@@ -132,6 +135,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
                 // required: 'categoryId is required',
                 min: { value: 0, message: 'id must be positive' }
               })}
+              id='categoryId'
               className="w-full px-3 py-2 bg-white border border-gray-600 rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="0"
             />
