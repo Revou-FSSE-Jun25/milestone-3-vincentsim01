@@ -2,6 +2,12 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent, waitFor} from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import ProductForm from '../productForm';
+import { createProduct, updateProduct } from '@/app/lib/api';
+
+jest.mock('@/app/lib/api', () => ({
+  createProduct: jest.fn(),
+  updateProduct: jest.fn(),
+}));
 
 
 describe("product form testing", () =>{
@@ -24,10 +30,14 @@ describe('SubmitButton', () =>{
                 await user.type(screen.getByLabelText(/Description/i), 'Product description');
                 await user.type(screen.getByLabelText(/Price/i), '100');
                 await user.type(screen.getByLabelText(/categoryId/i), '1');
+                const updatecreate = await screen.findByTestId('updatecreate')
+                await user.click(updatecreate);
+                const banner = await screen.findByTestId('status');
+                // await waitFor( ()=>{
 
-                await user.click(screen.getByRole('button', { name: /(Create|Update) Product/i }));
-                const banner = await screen.findByRole('status');
-                expect(banner).toHaveTextContent(/product (created|updated) successfully/i);
+                        expect(banner).toHaveTextContent(/product (created|updated) successfully/i);
+                // })
+
 
         //   fireEvent.change(screen.getByLabelText(/Title/i), {
         //         target: { value: "Computer" },

@@ -74,7 +74,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         <div className="bg-red-600 text-black p-4 rounded-md mb-4">{error}</div>
       )}
       {successMessage && (
-        <div role='status' className="bg-green-600 text-black p-4 rounded-md mb-4">{successMessage}</div>
+        <div data-testid='status' className="bg-green-600 text-black p-4 rounded-md mb-4">{successMessage}</div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -153,6 +153,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
             </button>
           )}
           <button
+            data-testid='updatecreate'
             type="submit"
             disabled={isSubmitting || loading}
             className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white rounded-md transition-colors disabled:cursor-not-allowed"

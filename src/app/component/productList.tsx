@@ -142,6 +142,7 @@ export default function ProductList(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                     <div className="flex justify-between col-span-full mt-4">
                         <button
+                            data-testid='status'
                             onClick={previousTwelve}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
                         >
@@ -157,7 +158,9 @@ export default function ProductList(
                     {displayProducts.map((item)=>{
                         return(
                                 <div key={item.id} className='inline'>
-                                    <ProductCard key={item.id}
+                                    <ProductCard 
+                          
+                                    key={item.id}
                                     product={item}
                                     onDelete={handleDelete}
                                     showActions={showActions}
