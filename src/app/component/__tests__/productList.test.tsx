@@ -2,38 +2,64 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { mockProduct } from '@/app/mocks/mockProduct';
 import ProductList from '../productList';
 import { useAuth } from '@/app/context/AuthContext';
+import {mockProductList} from '@/app/mocks/mockProductList';
+import { getProducts } from "@/app/lib/api";
 
 const mockUseAuth = jest.fn();
 jest.mock('@/app/context/AuthContext', () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-describe("successful render", () => {
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    refresh: jest.fn(),
+    prefetch: jest.fn(),
+  }),
+}));
+
+jest.mock("@/app/lib/api", () => ({
+  getProducts: jest.fn(),
+}));
+
+describe("Failed render", () => {
   beforeEach(() => {
     jest.restoreAllMocks(); // reset between tests
   });
-    test("success", async () => {
-        // render(<ProductList />);
-        // const Heading3 = screen.getByRole('heading', { level: 3 });
-        // expect(Heading3).toBeInTheDocument();
-            // global.fetch = jest.fn(() =>
-            //   Promise.resolve({
-            //     json: () =>
-            //       Promise.resolve([mockProduct]),
-            //   })
-            // ) as jest.Mock;
-    
+
+
+    test("Failure", async () => {
+
+
+
+        (getProducts as jest.Mock).mockResolvedValueOnce([]);
 
             render(<ProductList />);
 
-            
-            // await waitFor(() => {
 
-              // expect(screen.getByText("Loading...")).toBeInTheDocument();
-        //               const ClassicDiv = screen.getByRole('div', { name: /shirt/i });
-        // expect(ClassicDiv).toBeInTheDocument();
+                await waitFor(() => {
+      expect(screen.getByText("No products")).toBeInTheDocument();
+    });
 
-            // });
+          
 
       });
+
+
+    //       test("Success", async () => {
+
+    //           (getProducts as jest.Mock).mockResolvedValueOnce(mockProduct);
+
+ 
+    //         render(<ProductList />);
+
+
+    //             await waitFor(() => {
+    //   expect(screen.getByText("Bluetooth")).toBeInTheDocument();
+    // });
+
+          
+
+    //   });
 });
