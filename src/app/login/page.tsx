@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { cookies } from 'next/headers';
 
 export default function LoginPage() {
   const [email, setEmail] = useState("john@mail.com");
@@ -17,6 +18,8 @@ export default function LoginPage() {
     document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}`;
     console.log(`🍪 Cookie set: ${name}`);
   };
+
+  hahahah
 
   const getCookie = (name: string): string | null => {
     return document.cookie
