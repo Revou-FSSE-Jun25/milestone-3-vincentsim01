@@ -44,23 +44,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Basic JWT validation (no API calls for performance)
   try {
-  //   const decoded = jwtDecode(token);
-
-
-  //   if (decoded.exp * 1000 < Date.now()) {
-  //     const loginUrl = new URL("/login", request.url);
-  //     loginUrl.searchParams.set("redirect", pathname);
-  //     loginUrl.searchParams.set("error", "session-expired");
-
-
-  //     const response = NextResponse.redirect(loginUrl);
-  //     response.cookies.delete("auth-token");
-  //     response.cookies.delete("email");
-  //     response.cookies.delete("user-role");
-  //     return response;
-  //   }
 
     const userRole = getUserRole(email);
 
@@ -75,6 +59,7 @@ export function middleware(request: NextRequest) {
 
     // Redirect admin away from user routes
     if (pathname.startsWith("/user") && userRole === "admin") {
+      console.log('this path')
       return NextResponse.redirect(new URL("/admin", request.url));
     }
 

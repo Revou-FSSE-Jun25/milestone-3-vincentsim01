@@ -9,6 +9,7 @@ import { useAuth } from '@/app/context/AuthContext'
 
 interface ProductCardProps{
     product: Product;
+    // totalItems?:number;
     onDelete?: (id:number) => void;
     showActions?: boolean;
 }
@@ -76,7 +77,7 @@ export default function ProductCard({product, onDelete, showActions = false}: Pr
                         <Link href={`/login`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center">
                                 Add To Cart
                         </Link>):(<AddToCartButton product={product} />)} 
-                    {/* <AddToCartButton product={product} /> */}
+    
 
 
                         {showActions ? (

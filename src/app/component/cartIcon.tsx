@@ -11,11 +11,12 @@ interface CartIconProps {
 
 
 export default function CartIcon({ onClick, className = "", showLabel = false }: CartIconProps) {
-  const { totalItems } = useCart();
+  const { getTotalItems } = useCart();
+  let totalItems=getTotalItems();
   const prevItemsRef = useRef(totalItems);
   const badgeRef = useRef<HTMLSpanElement>(null);
 
-  console.log('totalItem is '+totalItems)
+
 
   // Animate badge when count changes
   useEffect(() => {
@@ -61,13 +62,13 @@ export default function CartIcon({ onClick, className = "", showLabel = false }:
         </svg>
 
         {/* Item Count Badge */}
-        {totalItems > 0 &&
+        {(totalItems??0) > 0 &&
           <span
             ref={badgeRef}
             className="absolute -top-1 -right-1 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transition-all duration-200 hover:scale-110 cart-count-transition animate-pulse-once"
             aria-label={totalItems + ' items in cart'}
           >
-            {totalItems > 99 ? '99+' : totalItems}
+            {(totalItems??0) > 99 ? '99+' : totalItems}
           </span>
         }
       </div>
@@ -75,7 +76,7 @@ export default function CartIcon({ onClick, className = "", showLabel = false }:
       {/* Optional Label */}
       {showLabel &&
         <span className="ml-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-          Cart {totalItems > 0 && '(' + (totalItems > 99 ? '99+' : totalItems) + ')'}
+          Cart {(totalItems??0) > 0 && '(' + ((totalItems??0) > 99 ? '99+' : totalItems) + ')'}
         </span>
       }
     </button>

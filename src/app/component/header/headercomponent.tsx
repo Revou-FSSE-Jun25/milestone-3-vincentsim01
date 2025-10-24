@@ -169,6 +169,8 @@ const HeaderComponent = () => {
     logout();
   };
 
+  console.log(user);
+
   return (
     <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white z-50 relative'>
       <div className='hidden md:flex md:justify-evenly md:items-center w-[40%]'>
@@ -200,8 +202,7 @@ const HeaderComponent = () => {
 
       <div className='w-[40%] flex justify-evenly items-center'>
 
-                <Link href='/AddToCart/'>
-          {/* <i className="fa-solid fa-cart-shopping"></i> */}
+        <Link href='/AddToCart/'>
           <CartIcon className="ml-2" />
         </Link>
         
@@ -216,11 +217,6 @@ const HeaderComponent = () => {
           <Link href='/login/'>Login</Link>
         ) : (
           <div>
-                    {/* <Link href='/user/'>
-          <span className='mr-3'>
-            <i className="fa-solid fa-user"></i>
-          </span>
-        </Link> */}
 
                   <button onClick={handleLogout} className='hover:underline'>
             Logout

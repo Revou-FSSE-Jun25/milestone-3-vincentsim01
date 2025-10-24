@@ -11,12 +11,6 @@ describe("Login Page", () => {
 
 
   });
-  // test("email label exists", () =>{
-  //   render(<Page />);
-
-  //   const emailLabel = screen.getByText(/email/i);
-  //   expect(emailLabel).toBeInTheDocument();
-  // });
 
   test('renders Platzi Test Credentials text', () => {
     render(<Page />);

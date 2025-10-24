@@ -8,6 +8,7 @@ interface Product {
   title: string;
   price: number;
   images: string[];
+  // totalItems: number;
 }
 
 interface Props {

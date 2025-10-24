@@ -3,10 +3,10 @@ import ProductCard from '../productCard';
 import { useAuth } from '@/app/context/AuthContext';
 import { AuthProvider} from '@/app/context/AuthContext';
 import { Product } from '@/app/types/product';
-import { mockProduct } from '@/app/mocks/mockProduct';
+import { mockProduct } from '@/app/__mocks__/mockProduct';
 import { useCart } from "@/app/context/CartContext";
 import {CartProvider} from "@/app/context/CartContext";
-import {mockProductCard} from "@/app/mocks/mockProductCard";
+import {mockProductCard} from "@/app/__mocks__/mockProductCard";
 
 
 jest.mock('next/navigation', () => ({

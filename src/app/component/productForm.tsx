@@ -74,7 +74,7 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         <div className="bg-red-600 text-black p-4 rounded-md mb-4">{error}</div>
       )}
       {successMessage && (
-        <div className="bg-green-600 text-black p-4 rounded-md mb-4">{successMessage}</div>
+        <div role='status' className="bg-green-600 text-black p-4 rounded-md mb-4">{successMessage}</div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

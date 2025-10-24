@@ -18,24 +18,35 @@ describe('SubmitButton', () =>{
         const handleSubmit = jest.fn();
         render(<ProductForm/>)
 
-          fireEvent.change(screen.getByLabelText(/Title/i), {
-                target: { value: "Computer" },
-            });
-            fireEvent.change(screen.getByLabelText(/Description/i), {
-                target: { value: "This is a description" },
-            });
-            fireEvent.change(screen.getByLabelText(/Price/i), {
-                target: { value: 20 },
-            });
-            fireEvent.change(screen.getByLabelText(/categoryId/i), {
-                target: { value: 1 },
-            });
+                const user = userEvent.setup();
 
-        const button = screen.getByRole('button', { name: /Create Product/i });
-        fireEvent.click(button);
+                await user.type(screen.getByLabelText(/Title/i), 'Test Product');
+                await user.type(screen.getByLabelText(/Description/i), 'Product description');
+                await user.type(screen.getByLabelText(/Price/i), '100');
+                await user.type(screen.getByLabelText(/categoryId/i), '1');
+
+                await user.click(screen.getByRole('button', { name: /(Create|Update) Product/i }));
+                const banner = await screen.findByRole('status');
+                expect(banner).toHaveTextContent(/product (created|updated) successfully/i);
+
+        //   fireEvent.change(screen.getByLabelText(/Title/i), {
+        //         target: { value: "Computer" },
+        //     });
+        //     fireEvent.change(screen.getByLabelText(/Description/i), {
+        //         target: { value: "This is a description" },
+        //     });
+        //     fireEvent.change(screen.getByLabelText(/Price/i), {
+        //         target: { value: 20 },
+        //     });
+        //     fireEvent.change(screen.getByLabelText(/categoryId/i), {
+        //         target: { value: 1 },
+        //     });
+
+        // const button = screen.getByRole('button', { name: /Create Product/i });
+        // fireEvent.click(button);
         // await waitFor(() => {
-        //     expect(screen.getByText(/Successfully/i)).toBeInTheDocument();
+        //     expect( screen.getByText(/successfully/i)).toBeInTheDocument();
         // });
-            expect(handleSubmit).toHaveBeenCalledTimes(0);
+            // expect(handleSubmit).toHaveBeenCalledTimes(0);
     })
 })

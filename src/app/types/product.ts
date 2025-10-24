@@ -6,6 +6,7 @@ export interface Product{
     description:string;
     categoryId:number ;
     images:string[];
+    totalItems?:number;
 }
 
 export interface ProductsResponse {
