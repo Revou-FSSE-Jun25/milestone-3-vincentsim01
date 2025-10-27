@@ -6,19 +6,26 @@ const DUMMY_URL = 'https://api.escuelajs.co/api/v1/'
 
 export interface User {
   id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  image: string;
+    email: string;
+  password: string;
+  name: string;
+  role: string;
+  avatar: string;
 }
 
-export interface UsersResponse {
-  users: User[];
-  total: number;
-  skip: number;
-  limit: number;
-}
+// export interface UsersResponse {
+//   users: User[];
+//   total: number;
+//   skip: number;
+//   limit: number;
+// }
+
+  const getCookie = (name: string): string | null => {
+    return document.cookie
+      .split('; ')
+      .find(row => row.startsWith(`${name}=`))
+      ?.split('=')[1] || null;
+  };
 
 export async function getProducts(offset: number):Promise<Product[]>{
     try{
@@ -114,7 +121,7 @@ export async function searchProducts(query:string):Promise<ProductsResponse>{
 export const api = {
   // Authentication
   login: async (username: string, password: string) => {
-    const response = await fetch(`${DUMMY_URL}/auth/login`, {
+    const response = await fetch(`${DUMMY_URL}auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -137,7 +144,7 @@ export const api = {
   getCurrentUser: async () => {
     const token = getCookie('accessToken');
 
-    const response = await fetch(`${DUMMY_URL}/auth/me`, {
+    const response = await fetch(`${DUMMY_URL}auth/me`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -154,7 +161,7 @@ export const api = {
 
   // Users - NEW: For async testing examples
   getUsers: async (): Promise<UsersResponse> => {
-    const response = await fetch(`${DUMMY_URL}/users`);
+    const response = await fetch(`${DUMMY_URL}users`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch users');
@@ -164,7 +171,7 @@ export const api = {
   },
 
   getUserById: async (id: number): Promise<User> => {
-    const response = await fetch(`${DUMMY_URL}/users/${id}`);
+    const response = await fetch(`${DUMMY_URL}users/${id}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch user with ID ${id}`);
@@ -175,7 +182,7 @@ export const api = {
 
   // Products (existing)
   getProducts: async (limit: number = 10): Promise<Product[]> => {
-    const response = await fetch(`${DUMMY_URL}/products?limit=${limit}`);
+    const response = await fetch(`${DUMMY_URL}products?limit=${limit}`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch products');
@@ -186,7 +193,7 @@ export const api = {
   },
 
   getProduct: async (id: number): Promise<Product> => {
-    const response = await fetch(`${DUMMY_URL}/products/${id}`);
+    const response = await fetch(`${DUMMY_URL}products/${id}`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch product');
@@ -197,7 +204,7 @@ export const api = {
 
   // Search products (enhanced)
   searchProducts: async (query: string): Promise<ProductsResponse> => {
-    const response = await fetch(`${DUMMY_URL}/products/search?q=${encodeURIComponent(query)}`);
+    const response = await fetch(`${DUMMY_URL}products/search?q=${encodeURIComponent(query)}`);
 
     if (!response.ok) {
       throw new Error('Failed to search products');
@@ -208,7 +215,7 @@ export const api = {
 
   // NEW: Error simulation for testing error states
   triggerError: async (): Promise<void> => {
-    const response = await fetch(`${DUMMY_URL}/error`);
+    const response = await fetch(`${DUMMY_URL}error`);
 
     if (!response.ok) {
       throw new Error('Simulated API error for testing');
