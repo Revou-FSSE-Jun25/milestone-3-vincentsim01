@@ -17,12 +17,12 @@ export default function LoginPage() {
 
 
   
-  // const setCookie = (name: string, value: string, minutes: number = 30) => {
-  //   const expires = new Date();
-  //   expires.setTime(expires.getTime() + (minutes * 60 * 1000));
-  //   document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}`;
-  //   console.log(`🍪 Cookie set: ${name}`);
-  // };
+  const setCookie = (name: string, value: string, minutes: number = 30) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (minutes * 60 * 1000));
+    document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}`;
+    console.log(`🍪 Cookie set: ${name}`);
+  };
 
 
   const getCookie = (name: string): string | null => {
