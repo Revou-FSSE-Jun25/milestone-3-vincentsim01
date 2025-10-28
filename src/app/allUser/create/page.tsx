@@ -18,6 +18,7 @@ const Page = () => {
     password:"arthur",
     avatar:"https://commons.wikimedia.org/wiki/Main_Page#/media/File:Wiewi%C3%B3rka_w_Parku_Bednarskiego_w_Krakowie,_20241117_0903_2741.jpg"
   }
+
   const [userData, setuserData] = useState(initialValue)
 
 
@@ -54,15 +55,19 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       console.log('🔑 Attempting Signup...');
       
-      const response = await fetch('https://api.escuelajs.co/api/v1/users/  ', {
+      const response = await fetch('https://api.escuelajs.co/api/v1/users/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            name,
-          email,
-          password,
-          avatar:"https://commons.wikimedia.org/wiki/Main_Page#/media/File:Wiewi%C3%B3rka_w_Parku_Bednarskiego_w_Krakowie,_20241117_0903_2741.jpg"
-            })
+        body: JSON.stringify(
+            userData
+            // {
+        //     name,
+        //   email,
+        //   password,
+        //   avatar:"https://commons.wikimedia.org/wiki/Main_Page#/media/File:Wiewi%C3%B3rka_w_Parku_Bednarskiego_w_Krakowie,_20241117_0903_2741.jpg"
+        
+            // }
+        )
         })
         if (!response.ok) {
         throw new Error('Invalid credentials');
@@ -71,6 +76,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         
       const data = await response.json();
       console.log('✅ Signup successful');
+      alert('✅ Signup successful');
       }
 
       catch (err) {
@@ -98,19 +104,19 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
   return (
-    <div>
+    <div className='m-3 p-3'>
 
         Create New User
         Please Fill Up The Form
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSignup} className='flex flex-col items-center'>
             <label htmlFor='name'>Name</label>
-            <input type='text' id='name' name='name' value={userData.name} onChange={handleChange}></input>
+            <input type='text' id='name' name='name' value={userData.name} onChange={handleChange} className=' border-b-2 border-black'></input>
             <label htmlFor='Email'>Email</label>
-            <input type='email' id='email' name='email' value={userData.email} onChange={handleChange}></input>
+            <input type='email' id='email' name='email' value={userData.email} onChange={handleChange} className=' border-b-2 border-black'></input>
             <label htmlFor='password'>Password</label>
-            <input type='password' id='password' name='password' value={userData.password} onChange={handleChange}></input>
+            <input type='password' id='password' name='password' value={userData.password} onChange={handleChange} className=' border-b-2 border-black'></input>
             <label htmlFor='avatar'>Avatar</label>
-            <input type='test' id='avatar' name='avatar' value={userData.avatar} onChange={handleChange}></input>
+            <input type='test' id='avatar' name='avatar' value={userData.avatar} onChange={handleChange} className=' border-b-2 border-black'></input>
             <button type='submit' onSubmit={handleSignup}>SignUp</button>
             <button type='reset' onClick={() => window.location.href = '/'}>Cancel</button>
         </form>
