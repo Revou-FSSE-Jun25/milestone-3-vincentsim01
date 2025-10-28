@@ -62,8 +62,9 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         
       const data = await response.json();
       console.log('✅ Signup successful');
+       router.push('/login')
       alert('✅ Signup successful');
-        redirect('/login')
+
       
       }
 
@@ -93,8 +94,11 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             <input type='password' id='password' name='password' value={userData.password} onChange={handleChange} className=' border-b-2 border-black'></input>
             <label htmlFor='avatar'>Avatar</label>
             <input type='test' id='avatar' name='avatar' value={userData.avatar} onChange={handleChange} className=' border-b-2 border-black'></input>
-            <button type='submit' onSubmit={handleSignup}>SignUp</button>
-            <button type='reset' onClick={() => window.location.href = '/'}>Cancel</button>
+            <div className='flex justify-center gap-4 mt-4'>
+                <button type='submit' onSubmit={handleSignup} className='flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center'>SignUp</button>
+                <button type='reset' onClick={() => window.location.href = '/'} className='flex-1 bg-red-600 hover:bg-blue-700 text-white cursor-pointer hover:scale-110 active:scale-90 px-3 py-2 rounded-md text-sm font-medium text-center'>Cancel</button>
+            </div>
+
         </form>
 
         <span className="text-xs">Have an account ?<Link href="/login">Login here</Link></span>
