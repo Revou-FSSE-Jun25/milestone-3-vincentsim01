@@ -213,7 +213,7 @@ const HeaderComponent = () => {
             <span className='hidden md:inline'>Hello, Guest</span>
           )}
         </Link>
-        {userRole === 'admin' ? (<button onClick={() => window.location.href = '/products/create'}>All Products</button>) : null}
+        {userRole === 'admin' ? (<button onClick={() => window.location.href = '/allUser'}>All Users</button>) : null}
         {!isAuthenticated ? (
           <Link href='/login/'>Login</Link>
         ) : (
