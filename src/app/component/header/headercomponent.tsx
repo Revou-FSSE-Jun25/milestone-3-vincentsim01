@@ -208,20 +208,23 @@ const HeaderComponent = () => {
         
         <Link href='/user'>
           {username ? (
-            <span className='hidden md:inline'>Hello, {username}</span>
+            <span className='hidden md:inline hover:underline'>Hello, {username}</span>
           ) : (
-            <span className='hidden md:inline'>Hello, Guest</span>
+            <span className='hidden md:inline hover:underline'>Hello, Guest</span>
           )}
         </Link>
         {userRole === 'admin' ? (<button onClick={() => window.location.href = '/allUser'}>All Users</button>) : null}
         {!isAuthenticated ? (
-          <Link href='/login/'>Login</Link>
+          <div className='flex justify-center gap-4'>          
+                <Link href='/login/' className='hover:underline'>Login</Link>
+                <Link href='/signup/' className='hover:underline'>Signup</Link>
+           </div>
+
         ) : (
           <div>
-
-                  <button onClick={handleLogout} className='hover:underline'>
-            Logout
-          </button>
+            <button onClick={handleLogout} className='hover:underline'>
+              Logout
+            </button>
           </div>
 
         )}

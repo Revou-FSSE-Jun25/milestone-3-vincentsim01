@@ -1,6 +1,7 @@
 
 
 import type { Metadata } from "next";
+import { Lato } from 'next/font/google'
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from 'next/link';
 import ToggleButton from "./component/toggleButton";
@@ -25,7 +26,12 @@ export const metadata: Metadata = {
   description: "An ECommerce that revolutionize your shopping",
 };
 
-
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['400', '700'], // optional: add other weights if needed
+  variable: '--font-lato',
+  display: 'swap',
+})
 
 export default function RootLayout({
   children,
@@ -40,7 +46,7 @@ export default function RootLayout({
         <script src="https://kit.fontawesome.com/b7f46329c5.js"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${lato.variable}`}
       >
 
  

@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
   });
 
   // Define public routes that don't require authentication
-  const publicRoutes = ["/login", "/", "/products", "/FAQ", "/Promotion"];
+  const publicRoutes = ["/login", "/", "/products", "/FAQ", "/Promotion", "/signup"];
 
   // Check if the route is public
   if (publicRoutes.includes(pathname)) {
