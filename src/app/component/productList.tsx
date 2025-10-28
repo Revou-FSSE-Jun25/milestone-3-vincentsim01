@@ -1,8 +1,10 @@
 "use client"
 import {useState,useEffect} from 'react';
 import { Product } from '@/app/types/product';
-import { deleteProduct, getProducts } from '@/app/lib/api';
-// import { getProducts } from '@/app/products/route'
+// import { getProducts, deleteProduct } from '@/app/lib/api';
+// import { deleteProduct } from '@/app/lib/api';
+import {deleteProduct} from '@/app/api/products/[id]/route'
+import {getProducts} from '@/app/api/products/route'
 import React from 'react';
 import ProductCard from './productCard';
 
@@ -113,12 +115,12 @@ export default function ProductList(
                 );
             }
 
-            // console.log('Search Results:', searchResults);
+            console.log('Search Results:', searchResults);
 
             // Determine which products to displaysults);
             const displayProducts:Product[] = searchResults && searchResults.length > 0  ? searchResults : products;
 
-            // console.log('Displaying products:', displayProducts);
+            console.log('Displaying products:', displayProducts);
     
 
             //   Show no results message for search
@@ -143,6 +145,7 @@ export default function ProductList(
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                     <div className="flex justify-between col-span-full mt-4">
                         <button
+                            data-testid='status'
                             onClick={previousTwelve}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
                         >
@@ -158,7 +161,9 @@ export default function ProductList(
                     {displayProducts.map((item)=>{
                         return(
                                 <div key={item.id} className='inline'>
-                                    <ProductCard key={item.id}
+                                    <ProductCard 
+                          
+                                    key={item.id}
                                     product={item}
                                     onDelete={handleDelete}
                                     showActions={showActions}
