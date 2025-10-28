@@ -152,7 +152,7 @@ import CartIcon from "@/app/component/cartIcon";
 
 const HeaderComponent = () => {
   const [username, setUsername] = useState<string | null>(null);
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, userRole } = useAuth();
 
   // Update username whenever user changes
   useEffect(() => {
@@ -213,6 +213,7 @@ const HeaderComponent = () => {
             <span className='hidden md:inline'>Hello, Guest</span>
           )}
         </Link>
+        {userRole === 'admin' ? (<button onClick={() => window.location.href = '/products/create'}>All Products</button>) : null}
         {!isAuthenticated ? (
           <Link href='/login/'>Login</Link>
         ) : (
