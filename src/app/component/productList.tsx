@@ -1,7 +1,8 @@
 "use client"
 import {useState,useEffect} from 'react';
 import { Product } from '@/app/types/product';
-import { getProducts, deleteProduct } from '@/app/lib/api';
+import { deleteProduct, getProducts } from '@/app/lib/api';
+// import { getProducts } from '@/app/products/route'
 import React from 'react';
 import ProductCard from './productCard';
 
@@ -112,12 +113,12 @@ export default function ProductList(
                 );
             }
 
-            console.log('Search Results:', searchResults);
+            // console.log('Search Results:', searchResults);
 
             // Determine which products to displaysults);
             const displayProducts:Product[] = searchResults && searchResults.length > 0  ? searchResults : products;
 
-            console.log('Displaying products:', displayProducts);
+            // console.log('Displaying products:', displayProducts);
     
 
             //   Show no results message for search
