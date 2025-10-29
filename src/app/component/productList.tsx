@@ -115,12 +115,12 @@ export default function ProductList(
                 );
             }
 
-            console.log('Search Results:', searchResults);
+            // console.log('Search Results:', searchResults);
 
             // Determine which products to displaysults);
             const displayProducts:Product[] = searchResults && searchResults.length > 0  ? searchResults : products;
 
-            console.log('Displaying products:', displayProducts);
+            // console.log('Displaying products:', displayProducts);
     
 
             //   Show no results message for search
