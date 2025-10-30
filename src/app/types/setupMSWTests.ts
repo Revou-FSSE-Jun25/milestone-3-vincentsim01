@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
 // MSW setup for async testing
-import { worker } from '../mocks/browser';
+import { worker } from '@/__mocks__/browser';
 
 // Start MSW worker before all tests
 beforeAll(() => {

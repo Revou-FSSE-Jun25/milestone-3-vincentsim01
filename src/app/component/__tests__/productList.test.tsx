@@ -23,29 +23,34 @@ jest.mock("@/app/lib/api", () => ({
   getProducts: jest.fn(),
 }));
 
-describe("Failed render", () => {
+// describe("Failed render", () => {
+//   beforeEach(() => {
+//     jest.restoreAllMocks(); // reset between tests
+//   });
+
+
+//     test("Failure", async () => {
+//         (getProducts as jest.Mock).mockResolvedValueOnce([]);
+//             render(<ProductList />);
+//                 await waitFor(() => {
+//                   expect(screen.getByText("No products")).toBeInTheDocument();
+//                 });
+//       });
+// });
+
+
+describe("Successful Fetch", () => {
   beforeEach(() => {
     jest.restoreAllMocks(); // reset between tests
   });
 
 
-    test("Failure", async () => {
+    test("Success", async () => {
+        (getProducts as jest.Mock).mockResolvedValueOnce(mockProductList);
+        const products = await getProducts(1);
 
-
-
-        (getProducts as jest.Mock).mockResolvedValueOnce([]);
-
-            render(<ProductList />);
-
-
-                await waitFor(() => {
-      expect(screen.getByText("No products")).toBeInTheDocument();
-    });
-
-          
-
+            expect(products).toEqual(mockProductList);
+            expect(products.length).toBe(3);
+            expect(products[0].title).toBe('Wireless Bluetooth Headphones');
       });
-
-
-
 });

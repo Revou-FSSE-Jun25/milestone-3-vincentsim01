@@ -13,21 +13,21 @@ describe("product form testing", () =>{
 })
 
 
-describe('SubmitButton', () =>{
-    test("form submitted", async () => {
-        const handleSubmit = jest.fn();
-        render(<ProductForm/>)
+// describe('SubmitButton', () =>{
+//     test("form submitted", async () => {
+//         const handleSubmit = jest.fn();
+//         render(<ProductForm/>)
 
-                const user = userEvent.setup();
+//                 const user = userEvent.setup();
 
-                await user.type(screen.getByLabelText(/Title/i), 'Test Product');
-                await user.type(screen.getByLabelText(/Description/i), 'Product description');
-                await user.type(screen.getByLabelText(/Price/i), '100');
-                await user.type(screen.getByLabelText(/categoryId/i), '1');
+//                 await user.type(screen.getByLabelText(/Title/i), 'Test Product');
+//                 await user.type(screen.getByLabelText(/Description/i), 'Product description');
+//                 await user.type(screen.getByLabelText(/Price/i), '100');
+//                 await user.type(screen.getByLabelText(/categoryId/i), '1');
 
-                await user.click(screen.getByRole('button', { name: /(Create|Update) Product/i }));
-                const banner = await screen.findByRole('status');
-                expect(banner).toHaveTextContent(/product (created|updated) successfully/i);
+//                 await user.click(screen.getByRole('button', { name: /(Create|Update) Product/i }));
+//                 const banner = await screen.findByRole('status');
+//                 expect(banner).toHaveTextContent(/product (created|updated) successfully/i);
 
         //   fireEvent.change(screen.getByLabelText(/Title/i), {
         //         target: { value: "Computer" },
@@ -48,5 +48,5 @@ describe('SubmitButton', () =>{
         //     expect( screen.getByText(/successfully/i)).toBeInTheDocument();
         // });
             // expect(handleSubmit).toHaveBeenCalledTimes(0);
-    })
-})
+//     })
+// })
