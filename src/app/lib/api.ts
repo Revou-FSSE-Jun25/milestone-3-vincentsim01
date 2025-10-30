@@ -13,12 +13,12 @@ export interface User {
   avatar: string;
 }
 
-// export interface UsersResponse {
-//   users: User[];
-//   total: number;
-//   skip: number;
-//   limit: number;
-// }
+export interface UsersResponse {
+  users: User[];
+  total: number;
+  skip: number;
+  limit: number;
+}
 
   const getCookie = (name: string): string | null => {
     return document.cookie
@@ -160,13 +160,13 @@ export const api = {
   },
 
   // Users - NEW: For async testing examples
-  getUsers: async (): Promise<UsersResponse> => {
+  getUsers: async (): Promise<UsersResponse[]> => {
     const response = await fetch(`${DUMMY_URL}users`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch users');
     }
-
+    
     return response.json();
   },
 

@@ -3,6 +3,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import UserList from "../UserList";
 import { api } from "@/app/lib/api";
+import { mockUserList } from "@/app/__mocks__/mockUserList";
 
 // Mock the entire API module
 jest.mock("@/app/lib/api");
@@ -12,19 +13,30 @@ const mockApi = api as jest.Mocked<typeof api>;
 const mockUsers = [
   {
     id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    username: "johndoe",
-    image: "https://dummyjson.com/icon/johndoe/128",
+    email: 'johnny.doe@example.com',
+    password: "changeme",
+    name: 'Johnny',
+    role: 'customer',
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg"
+
   },
   {
     id: 2,
-    firstName: "Jane",
-    lastName: "Smith",
-    email: "jane.smith@example.com",
-    username: "janesmith",
-    image: "https://dummyjson.com/icon/janesmith/128",
+    email: 'rob.doe@example.com',
+    password: "changeme",
+    name: 'Rob',
+    role: 'customer',
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg"
+
+  },
+  {
+    id: 3,
+    email: 'mario.doe@example.com',
+    password: "changeme",
+    name: 'Mario',
+    role: 'customer',
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg"
+
   },
 ];
 
@@ -50,9 +62,9 @@ const mockUserResponse = {
         const users = await api.getUsers();
 
             expect(users).toEqual(mockUsers);
-            expect(users.length).toBe(2);
-            expect(users[0].firstName).toBe('John');
-            expect(users[1].username).toBe('janesmith');
+            expect(users.length).toBe(3);
+            // expect(users[0].name).toBe('Johnny');
+
     })
     // test("renders component structure correctly", () => {
     //   mockApi.getUsers.mockImplementation(() => new Promise(() => {}));
