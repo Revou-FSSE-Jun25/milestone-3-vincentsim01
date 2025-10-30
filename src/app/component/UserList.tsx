@@ -17,13 +17,13 @@ export default function UserList() {
       setError(null);
 
       const response: UsersResponse = await api.getUsers();
-      console.log('this is response'+response)
+      // console.log('this is response'+response)
       setUsers(response);
-      console.log('fetchusers successful'+users);
+      // console.log('fetchusers successful'+users);
       setLoadingState("success");
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Failed to fetch users";
-        console.log('fetchusers failed'+users);
+        // console.log('fetchusers failed'+users);
       setError(errorMessage);
       setLoadingState("error");
     }
