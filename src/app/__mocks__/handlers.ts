@@ -1,66 +1,146 @@
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
-// DummyJSON API base URL
-const API_BASE = 'https://dummyjson.com';
+const API_BASE = 'https://api.escuelajs.co/api/v1';
 
-// Mock users data
 const mockUsers = [
   {
     id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    username: 'johndoe',
-    image: 'https://dummyjson.com/icon/johndoe/128',
+    email: 'johnny.doe@example.com',
+    password: "changeme",
+    name: 'Johnny',
+    role: 'customer',
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg"
+
   },
   {
     id: 2,
-    firstName: 'Jane',
-    lastName: 'Smith',
-    email: 'jane.smith@example.com',
-    username: 'janesmith',
-    image: 'https://dummyjson.com/icon/janesmith/128',
+    email: 'rob.doe@example.com',
+    password: "changeme",
+    name: 'Rob',
+    role: 'customer',
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg"
+
   },
   {
     id: 3,
-    firstName: 'Bob',
-    lastName: 'Johnson',
-    email: 'bob.johnson@example.com',
-    username: 'bobjohnson',
-    image: 'https://dummyjson.com/icon/bobjohnson/128',
+    email: 'mario.doe@example.com',
+    password: "changeme",
+    name: 'Mario',
+    role: 'customer',
+    avatar: "https://i.imgur.com/LDOO4Qs.jpg"
+
   },
 ];
 
-// Mock products data
 const mockProducts = [
   {
     id: 1,
     title: 'iPhone 15 Pro',
+    slug: 'iPhone 15 Pro',
+    price: 2000,
     description: 'Latest iPhone with advanced features',
-    price: 999,
-    brand: 'Apple',
-    category: 'smartphones',
-    thumbnail: 'https://dummyjson.com/image/300',
+    category: {
+      id:1,
+      name:'smartphones',
+      image:'www.wikimedia.com',
+      slug:'others'
+    },
+    images: ['https://dummyjson.com/image/300']
   },
   {
     id: 2,
-    title: 'Samsung Galaxy S24',
-    description: 'Premium Android smartphone',
-    price: 899,
-    brand: 'Samsung',
-    category: 'smartphones',
-    thumbnail: 'https://dummyjson.com/image/300',
+    title: 'Samsung Galaxy',
+    slug: 'Samsung Galaxy',
+    price: 1000,
+    description: 'Latest Samsung with advanced features',
+    category: {
+      id:1,
+      name:'smartphones',
+      image:'www.wikimedia.com',
+      slug:'others'
+    },
+    images: ['https://dummyjson.com/image/300']
   },
   {
     id: 3,
-    title: 'MacBook Pro',
-    description: 'Powerful laptop for professionals',
-    price: 1999,
-    brand: 'Apple',
-    category: 'laptops',
-    thumbnail: 'https://dummyjson.com/image/300',
+    title: 'Oppo Reno',
+    slug: 'Oppo Reno',
+    price: 900,
+    description: 'Latest Oppo with advanced features',
+    category: {
+      id:1,
+      name:'smartphones',
+      image:'www.wikimedia.com',
+      slug:'others'
+    },
+    images: ['https://dummyjson.com/image/300']
   },
 ];
 
+export const handlers = [
+  // GET /users
+  http.get(`${API_BASE}/users`, async () => {
+    await delay(1000);
+    return HttpResponse.json({
+      users: mockUsers,
+      total: mockUsers.length,
+      skip: 0,
+      limit: mockUsers.length,
+    });
+  }),
 
-export const handlers = [];
+  // GET /users/:id
+  // http.get(`${API_BASE}/users/:id`, ({ params }) => {
+  //   const user = mockUsers.find((u) => u.id === Number(params.id));
+  //   if (!user) {
+  //     return HttpResponse.json({ message: 'User not found' }, { status: 404 });
+  //   }
+  //   return HttpResponse.json(user);
+  // }),
+
+  // GET /products/search
+  // http.get(`${API_BASE}/products/search`, ({ request }) => {
+  //   const url = new URL(request.url);
+  //   const query = url.searchParams.get('q') || '';
+  //   const filtered = mockProducts.filter(
+  //     (p) =>
+  //       p.title.toLowerCase().includes(query.toLowerCase()) ||
+  //       p.description.toLowerCase().includes(query.toLowerCase()) ||
+  //       p.category.toLowerCase().includes(query.toLowerCase())
+  //   );
+
+  //   return HttpResponse.json({
+  //     products: filtered,
+  //     total: filtered.length,
+  //     skip: 0,
+  //     limit: filtered.length,
+  //   });
+  // }),
+
+  // GET /products
+  http.get(`${API_BASE}/products`, ({ request }) => {
+    const url = new URL(request.url);
+    const limit = Number(url.searchParams.get('limit')) || 10;
+    const skip = Number(url.searchParams.get('skip')) || 0;
+
+    const paginated = mockProducts.slice(skip, skip + limit);
+
+    return HttpResponse.json({
+      products: paginated,
+      total: mockProducts.length,
+      skip,
+      limit,
+    });
+  }),
+
+  // Simulate error
+  http.get(`${API_BASE}/error`, () => {
+    return HttpResponse.json(
+      { message: 'Internal Server Error' },
+      { status: 500 }
+    );
+  }),
+];
+
+// helper to simulate delay
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
