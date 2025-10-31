@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/15</span>
+                <span class='fraction'>12/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.71% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/14</span>
+                <span class='fraction'>12/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -116,8 +116,8 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,29 +131,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -184,27 +184,27 @@ interface Props {
 &nbsp;
 export default function AddToCartButton({ product }: Props) {
   const { addToCart } = useCart();
-  const handleAddToCart = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
+  const handleAddToCart = () =&gt; {
     // Get existing cart items or create empty array
-    const existingCart = <span class="cstat-no" title="statement not covered" >JSON.parse(localStorage.getItem("cart") || "[]");</span>
+    const existingCart = JSON.parse(localStorage.getItem("cart") || <span class="branch-1 cbranch-no" title="branch not covered" >"[]");</span>
 &nbsp;
     // Check if item already exists
-    const isExisting = <span class="cstat-no" title="statement not covered" >existingCart.some(<span class="fstat-no" title="function not covered" >(i</span>tem: Product) =&gt; <span class="cstat-no" title="statement not covered" >item.id === product.id)</span>;</span>
+    const isExisting = existingCart.some(<span class="fstat-no" title="function not covered" >(i</span>tem: Product) =&gt; <span class="cstat-no" title="statement not covered" >item.id === product.id)</span>;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (isExisting) {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (isExisting) {
 <span class="cstat-no" title="statement not covered" >      alert("Item is already in your cart!");</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    addToCart(product);</span>
+    addToCart(product);
 &nbsp;
     // Add new item
-    const updatedCart = <span class="cstat-no" title="statement not covered" >[...existingCart, product];</span>
+    const updatedCart = [...existingCart, product];
 &nbsp;
     // Save back to localStorage
-<span class="cstat-no" title="statement not covered" >    localStorage.setItem("cart", JSON.stringify(updatedCart));</span>
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    alert(`${product.title} added to cart!`);</span>
+    alert(`${product.title} added to cart!`);
   };
 &nbsp;
   return (
@@ -223,7 +223,7 @@ export default function AddToCartButton({ product }: Props) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-31T07:55:04.992Z
+                at 2025-10-31T08:11:45.804Z
             </div>
         <script src="../prettify.js"></script>
         <script>
