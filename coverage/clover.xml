@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1761898305856" clover="3.2.0">
-  <project timestamp="1761898305856" name="All files">
-    <metrics statements="468" coveredstatements="242" conditionals="198" coveredconditionals="99" methods="98" coveredmethods="39" elements="764" coveredelements="380" complexity="0" loc="468" ncloc="468" packages="6" files="13" classes="13"/>
+<coverage generated="1761899855819" clover="3.2.0">
+  <project timestamp="1761899855820" name="All files">
+    <metrics statements="468" coveredstatements="252" conditionals="198" coveredconditionals="99" methods="98" coveredmethods="40" elements="764" coveredelements="391" complexity="0" loc="468" ncloc="468" packages="6" files="13" classes="13"/>
     <package name="component">
       <metrics statements="140" coveredstatements="93" conditionals="85" coveredconditionals="56" methods="29" coveredmethods="14"/>
       <file name="UserList.tsx" path="C:\Users\ADMIN\Documents\Coding\revou third assignment 2\milestone-3-vincentsim01\src\app\component\UserList.tsx">
@@ -304,27 +304,27 @@
       </file>
     </package>
     <package name="lib">
-      <metrics statements="79" coveredstatements="11" conditionals="23" coveredconditionals="0" methods="16" coveredmethods="2"/>
+      <metrics statements="79" coveredstatements="21" conditionals="23" coveredconditionals="0" methods="16" coveredmethods="3"/>
       <file name="api.ts" path="C:\Users\ADMIN\Documents\Coding\revou third assignment 2\milestone-3-vincentsim01\src\app\lib\api.ts">
-        <metrics statements="79" coveredstatements="11" conditionals="23" coveredconditionals="0" methods="16" coveredmethods="2"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
+        <metrics statements="79" coveredstatements="21" conditionals="23" coveredconditionals="0" methods="16" coveredmethods="3"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
         <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="32" count="5" type="stmt"/>
+        <line num="33" count="5" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
@@ -351,7 +351,7 @@
         <line num="113" count="0" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
         <line num="117" count="0" type="stmt"/>
-        <line num="123" count="2" type="stmt"/>
+        <line num="123" count="3" type="stmt"/>
         <line num="126" count="0" type="stmt"/>
         <line num="138" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="139" count="0" type="stmt"/>
