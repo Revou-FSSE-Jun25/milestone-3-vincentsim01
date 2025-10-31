@@ -1,6 +1,6 @@
 import { Product } from '@/app/types/product';
 
-export const mockProductList: Product {}= [{
+export const mockProductList: Product[] = [{
   id: 1,
   title: "Wireless Bluetooth Headphones",
   slug: "wireless-bluetooth-headphones",
