@@ -9,6 +9,8 @@ import "./globals.css";
 import { AuthProvider} from '@/app/context/AuthContext';
 import HeaderComponent from "./component/header/headercomponent";
 import { CartProvider } from "@/app/context/CartContext";
+import { ThemeProvider } from "@/app/context/ThemeContext";
+import ThemeBody from "./ThemeBody";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,8 +48,12 @@ export default function RootLayout({
  
                 <AuthProvider>
                   <CartProvider>
+                  <ThemeProvider>
+
                   <HeaderComponent />
-                  {children}
+                      {children}
+
+                  </ThemeProvider>
                   </CartProvider>
                 </AuthProvider>
         <div className='border border-t border-black bg-white z-50 h-[10vh] flex justify-center items-center mt-5'>

@@ -149,6 +149,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/app/context/AuthContext';
 import CartIcon from "@/app/component/cartIcon";
+import ThemeToggle from "@/app/component/themeToggle";
 
 const HeaderComponent = () => {
   const [username, setUsername] = useState<string | null>(null);
@@ -201,6 +202,7 @@ const HeaderComponent = () => {
       
 
       <div className='w-[40%] flex justify-evenly items-center'>
+        <ThemeToggle></ThemeToggle>
 
         <Link href='/AddToCart/'>
           <CartIcon className="ml-2" />
