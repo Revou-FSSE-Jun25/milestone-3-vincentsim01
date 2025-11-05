@@ -15,16 +15,18 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
     const [theme, setTheme] = useState<Theme>('light');
 
     useEffect(() =>{
+        const body = document.body;
         const storedTheme = localStorage.getItem('theme') as Theme;
         if(storedTheme){
             setTheme(storedTheme);
-            document.body.classList.add(storedTheme);
+            body.classList.add(storedTheme);
         }
     }, []);
 
     useEffect(() =>{
-        document.documentElement.classList.remove(theme === "light" ? "dark" : "light");
-        document.documentElement.classList.add(theme);
+        const body = document.body;
+        body.classList.remove(theme === "light" ? "dark" : "light");
+        body.classList.add(theme);
         localStorage.setItem('theme', theme);
     },[theme]);
 

@@ -42,7 +42,7 @@ export default function RootLayout({
         <script src="https://kit.fontawesome.com/b7f46329c5.js"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased light bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
       >
 
  
