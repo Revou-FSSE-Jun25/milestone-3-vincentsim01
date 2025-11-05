@@ -150,6 +150,7 @@ import Link from 'next/link';
 import { useAuth } from '@/app/context/AuthContext';
 import CartIcon from "@/app/component/cartIcon";
 import ThemeToggle from "@/app/component/themeToggle";
+import "../../globals.css";
 
 const HeaderComponent = () => {
   const [username, setUsername] = useState<string | null>(null);
@@ -170,10 +171,10 @@ const HeaderComponent = () => {
     logout();
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
-    <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white z-50 relative'>
+    <div className='flex justify-between items-center h-[10vh] sticky top-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 z-50 relative' id='headerId'>
       <div className='hidden md:flex md:justify-evenly md:items-center w-[40%]'>
         <Link href='/'>
           <span className='hover:underline'>Home</span>

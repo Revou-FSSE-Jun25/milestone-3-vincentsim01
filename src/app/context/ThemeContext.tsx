@@ -16,17 +16,23 @@ export const ThemeProvider = ({children}:{children: ReactNode}) => {
 
     useEffect(() =>{
         const body = document.body;
+        const header = document.getElementById('headerId');
         const storedTheme = localStorage.getItem('theme') as Theme;
         if(storedTheme){
             setTheme(storedTheme);
             body.classList.add(storedTheme);
+            header?.classList.add(storedTheme);
         }
     }, []);
 
     useEffect(() =>{
         const body = document.body;
+        const header = document.getElementById('headerId');
         body.classList.remove(theme === "light" ? "dark" : "light");
         body.classList.add(theme);
+        header?.classList.remove(theme === "light" ? "dark" : "light");
+        header?.classList.add(theme);
+        
         localStorage.setItem('theme', theme);
     },[theme]);
 

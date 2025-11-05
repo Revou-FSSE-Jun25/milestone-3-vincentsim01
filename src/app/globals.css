@@ -26,8 +26,16 @@ body {
 }
 
 body.light {
-  @apply bg-white;
+  @apply bg-white text-gray-900;
 }
 body.dark {
-  @apply bg-gray-900;
+  @apply bg-gray-900 text-gray-100;
+}
+
+#headerId.light{
+    @apply bg-white text-gray-900;
+}
+
+#headerId.dark{
+  @apply bg-gray-900 text-gray-100;
 }
