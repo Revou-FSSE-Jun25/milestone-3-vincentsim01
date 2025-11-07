@@ -6,7 +6,7 @@ const DUMMY_URL = 'https://api.escuelajs.co/api/v1/'
 
 export interface User {
   id: number;
-    email: string;
+  email: string;
   password: string;
   name: string;
   role: string;
@@ -43,7 +43,7 @@ export async function getProducts(offset: number):Promise<Product[]>{
 export async function getProduct(id:number):Promise<Product>{
     try{
         const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
-        console.log("from getproductid"+response)
+        // console.log("from getproductid"+response)
         return response.data;
     }catch(error){
         console.error("Error Fetching Product", error);
@@ -61,8 +61,6 @@ export async function createProduct(data:ProductFormData):Promise<Product>{
             description: data.description,
             categoryId: data.categoryId,
             images: ["https://i.ibb.co/zh3Wx2Lj/revoshop-logo-cropped.png"],
-
-
         }
 
         const response = await axios.post(`https://api.escuelajs.co/api/v1/products/`, productData);

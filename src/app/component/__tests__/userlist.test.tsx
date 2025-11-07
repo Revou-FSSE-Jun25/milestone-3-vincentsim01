@@ -61,8 +61,8 @@ const mockUserResponse = {
   describe("Initial Rendering", () => {
     // disini testing awal masih kosong, cmn mengecheck structure
       afterEach(() => {
-    jest.clearAllMocks();
-  });
+          jest.clearAllMocks();
+      });
 
     test("getuser succesfully", async() =>{
          jest.spyOn(api, 'getUsers').mockResolvedValue(mockUsers as any);

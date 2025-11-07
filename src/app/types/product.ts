@@ -18,9 +18,7 @@ export interface ProductsResponse {
 
 
 export interface ProductFormData {
-    // id:number;
     title:string;
-    // slug:string;
     price:number;
     description:string;
     categoryId:number;
